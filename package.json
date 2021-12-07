@@ -5,7 +5,17 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postinstall": "npm run clientapp:install",
+    "\n# MONOREPO -------- ": "",
+    "clientapp:install": "cd ./GBS_MyPerformance/ClientApp ; npm install",
+    "\n# ENV: MAC -------- ": "",
+    "mac:vs": "open \"/Applications/Visual Studio.app\" ; open \"./GBS_MyPerformance.sln\"",
+    "\n# ENV: WINDOWS -------- ": "",
+    "win:vs": "start \"./GBS_MyPerformance.sln\"",
+    "\n# DOCKER -------- ": "",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down"
   },
   "repository": {
     "type": "git",
