@@ -1,11 +1,11 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
 
-import { AuthorizeService } from './authorize.service';
+import {AuthorizeService} from './authorize.service';
 
 describe('AuthorizeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AuthorizeService]
+      providers: [AuthorizeService],
     });
   });
 

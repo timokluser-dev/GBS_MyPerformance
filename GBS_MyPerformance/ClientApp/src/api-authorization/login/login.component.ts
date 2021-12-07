@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthorizeService, AuthenticationResultStatus } from '../authorize.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
-import { LoginActions, QueryParameterNames, ApplicationPaths, ReturnUrlType } from '../api-authorization.constants';
+import {Component, OnInit} from '@angular/core';
+import {AuthorizeService, AuthenticationResultStatus} from '../authorize.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {BehaviorSubject} from 'rxjs';
+import {
+  LoginActions,
+  QueryParameterNames,
+  ApplicationPaths,
+  ReturnUrlType,
+} from '../api-authorization.constants';
 
 // The main responsibility of this component is to handle the user's login process.
 // This is the starting point for the login process. Any component that needs to authenticate
@@ -11,7 +16,7 @@ import { LoginActions, QueryParameterNames, ApplicationPaths, ReturnUrlType } fr
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
   public message = new BehaviorSubject<string>(null);
@@ -19,7 +24,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authorizeService: AuthorizeService,
     private activatedRoute: ActivatedRoute,
-    private router: Router) { }
+    private router: Router
+  ) {}
 
   async ngOnInit() {
     const action = this.activatedRoute.snapshot.url[1];
@@ -45,9 +51,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
-
   private async login(returnUrl: string): Promise<void> {
-    const state: INavigationState = { returnUrl };
+    const state: INavigationState = {returnUrl};
     const result = await this.authorizeService.signIn(state);
     this.message.next(undefined);
     switch (result.status) {
@@ -58,7 +63,7 @@ export class LoginComponent implements OnInit {
         break;
       case AuthenticationResultStatus.Fail:
         await this.router.navigate(ApplicationPaths.LoginFailedPathComponents, {
-          queryParams: { [QueryParameterNames.Message]: result.message }
+          queryParams: {[QueryParameterNames.Message]: result.message},
         });
         break;
       default:
@@ -84,7 +89,10 @@ export class LoginComponent implements OnInit {
 
   private redirectToRegister(): any {
     this.redirectToApiAuthorizationPath(
-      `${ApplicationPaths.IdentityRegisterPath}?returnUrl=${encodeURI('/' + ApplicationPaths.Login)}`);
+      `${ApplicationPaths.IdentityRegisterPath}?returnUrl=${encodeURI(
+        '/' + ApplicationPaths.Login
+      )}`
+    );
   }
 
   private redirectToProfile(): void {
@@ -95,7 +103,7 @@ export class LoginComponent implements OnInit {
     // It's important that we do a replace here so that we remove the callback uri with the
     // fragment containing the tokens from the browser history.
     await this.router.navigateByUrl(returnUrl, {
-      replaceUrl: true
+      replaceUrl: true,
     });
   }
 
@@ -103,15 +111,16 @@ export class LoginComponent implements OnInit {
     const fromQuery = (this.activatedRoute.snapshot.queryParams as INavigationState).returnUrl;
     // If the url is comming from the query string, check that is either
     // a relative url or an absolute url
-    if (fromQuery &&
-      !(fromQuery.startsWith(`${window.location.origin}/`) ||
-        /\/[^\/].*/.test(fromQuery))) {
+    if (
+      fromQuery &&
+      !(fromQuery.startsWith(`${window.location.origin}/`) || /\/[^\/].*/.test(fromQuery))
+    ) {
       // This is an extra check to prevent open redirects.
-      throw new Error('Invalid return url. The return url needs to have the same origin as the current page.');
+      throw new Error(
+        'Invalid return url. The return url needs to have the same origin as the current page.'
+      );
     }
-    return (state && state.returnUrl) ||
-      fromQuery ||
-      ApplicationPaths.DefaultLoginRedirectPath;
+    return (state && state.returnUrl) || fromQuery || ApplicationPaths.DefaultLoginRedirectPath;
   }
 
   private redirectToApiAuthorizationPath(apiAuthorizationPath: string) {
