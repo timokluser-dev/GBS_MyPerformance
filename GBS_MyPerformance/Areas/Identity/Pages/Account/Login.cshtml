@@ -1,0 +1,74 @@
+@page
+@model LoginModel
+
+@{ ViewData["Title"] = "Log in"; }
+
+<div class="row login__row">
+    <div class="col d-none d-md-block login__img">
+    </div>
+    <div class="col login__form align-self-center">
+        <form id="account" method="post" class="p-4">
+            <div class="mb-3">
+                <span>Wilkommen</span>
+                <h2>Login</h2>
+            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.Email">Email</label>
+                <input asp-for="Input.Email" class="form-control" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Password">Passwort</label>
+                <input asp-for="Input.Password" class="form-control" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                    <div class="checkbox">
+                        <label asp-for="Input.RememberMe">
+                            <input asp-for="Input.RememberMe" />
+                            Angemeldet bleiben
+                        </label>
+                    </div>
+                </div>*@
+            <div class="form-group">
+                <a id="forgot-password" asp-page="./ForgotPassword">Passwort vergessen?</a>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+
+            </div>
+            <div class="form-group">
+                <p class="d-inline">Sie haben keinen Account?</p>
+                <a class="d-inline" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Registrieren</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    .login__row {
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        z-index: -1;
+    }
+
+    .login__img {
+        background-image: url("/img/login_bg.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: left;
+    }
+
+    .login__form {
+    }
+</style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
