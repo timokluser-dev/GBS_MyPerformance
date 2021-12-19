@@ -50,6 +50,8 @@ namespace GBS_MyPerformance
 
             // Oidc Profile Populator
             services.AddTransient<IProfileService, ProfileService>();
+            // Email Sender
+            services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
