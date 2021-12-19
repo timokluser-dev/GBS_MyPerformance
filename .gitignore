@@ -851,3 +851,7 @@ FodyWeavers.xsd
 
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
+
+### Project Specific ###
+appsettings*.json
+!appsettings*sample.json
