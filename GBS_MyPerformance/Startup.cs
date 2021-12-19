@@ -48,6 +48,9 @@ namespace GBS_MyPerformance
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
+            // Oidc Profile Populator
+            services.AddTransient<IProfileService, ProfileService>();
+
             services.AddAuthentication()
                 .AddIdentityServerJwt();
 
