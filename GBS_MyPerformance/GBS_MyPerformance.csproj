@@ -40,11 +40,15 @@
     <None Remove="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
     <Content Remove="wwwroot\js\" />
     <None Remove="Identity\" />
+    <None Remove="Identity\Models\" />
+    <None Remove="Identity\Services\" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\js\" />
     <Folder Include="Identity\" />
+    <Folder Include="Identity\Models\" />
+    <Folder Include="Identity\Services\" />
   </ItemGroup>
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
