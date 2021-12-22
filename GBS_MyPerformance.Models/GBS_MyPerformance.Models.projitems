@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{6EA7CA07-92DC-4FB6-8CA9-532279BA0229}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>GBS_MyPerformance.Models</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)SchoolClass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Teacher.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Student.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mark.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Subject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RoundingType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Profession.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ProfessionArea.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RatingCategory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Rating.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SemesterRating.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ApprenticeTrainer.cs" />
+  </ItemGroup>
+</Project>

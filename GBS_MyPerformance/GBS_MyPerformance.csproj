@@ -78,4 +78,5 @@
     </ItemGroup>
   </Target>
 
+  <Import Project="..\GBS_MyPerformance.Models\GBS_MyPerformance.Models.projitems" Label="Shared" Condition="Exists('..\GBS_MyPerformance.Models\GBS_MyPerformance.Models.projitems')" />
 </Project>
