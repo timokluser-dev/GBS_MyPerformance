@@ -7,7 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppComponent} from './app.component';
 import {NavMenuComponent} from './nav-menu/nav-menu.component';
-import {HomeComponent} from './home/home.component';
+import {HomePageComponent} from './pages/home/home.component';
 import {CounterComponent} from './counter/counter.component';
 import {FetchDataComponent} from './fetch-data/fetch-data.component';
 import {ApiAuthorizationModule} from 'src/api-authorization/api-authorization.module';
@@ -20,7 +20,7 @@ import {RoleGuard} from './guards/role.guard';
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
+    HomePageComponent,
     CounterComponent,
     FetchDataComponent,
   ],
@@ -44,7 +44,7 @@ import {RoleGuard} from './guards/role.guard';
           {path: '', redirectTo: 'home', pathMatch: 'full'},
           {
             path: 'home',
-            component: HomeComponent,
+            component: HomePageComponent,
           },
           {
             path: 'counter',
@@ -54,7 +54,6 @@ import {RoleGuard} from './guards/role.guard';
             path: 'fetch-data',
             component: FetchDataComponent,
           },
-          // students
           {
             path: 'student',
             canActivate: [RoleGuard],
@@ -63,11 +62,28 @@ import {RoleGuard} from './guards/role.guard';
               {path: '', redirectTo: 'home', pathMatch: 'full'},
               {
                 path: 'home',
-                component: HomeComponent,
+                component: HomePageComponent,
+                data: {
+                  edit: true,
+                },
               },
             ],
           },
-          // teachers
+          {
+            path: 'trainer',
+            canActivate: [RoleGuard],
+            data: {role: 'Trainer'},
+            children: [
+              {path: '', redirectTo: 'home', pathMatch: 'full'},
+              {
+                path: 'home',
+                component: HomePageComponent,
+                data: {
+                  edit: true,
+                },
+              },
+            ],
+          },
           {
             path: 'teacher',
             canActivate: [RoleGuard],
@@ -76,20 +92,19 @@ import {RoleGuard} from './guards/role.guard';
               {path: '', redirectTo: 'home', pathMatch: 'full'},
               {
                 path: 'home',
-                component: HomeComponent,
+                component: HomePageComponent,
               },
             ],
           },
-          // admin
           {
             path: 'admin',
             canActivate: [RoleGuard],
-            data: {role: 'Admin'},
+            data: {role: 'Administrator'},
             children: [
               {path: '', redirectTo: 'home', pathMatch: 'full'},
               {
                 path: 'home',
-                component: HomeComponent,
+                component: HomePageComponent,
               },
             ],
           },
