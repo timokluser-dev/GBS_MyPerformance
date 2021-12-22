@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.810.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GBS_MyPerformance", "GBS_MyPerformance.csproj", "{CBC96FAE-DE1B-4B2B-925C-FE8A8EDE5B61}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GBS_MyPerformance.Tests", "..\GBS_MyPerformance.Tests\GBS_MyPerformance.Tests.csproj", "{3867C001-A5CF-4DC3-976A-B5D77361B618}"
+EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "GBS_MyPerformance.Models", "..\GBS_MyPerformance.Models\GBS_MyPerformance.Models.shproj", "{6EA7CA07-92DC-4FB6-8CA9-532279BA0229}"
 EndProject
 Global
