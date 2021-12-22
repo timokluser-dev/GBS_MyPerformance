@@ -16,5 +16,8 @@
   <ItemGroup>
     <None Remove=".DS_Store" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GBS_MyPerformance\GBS_MyPerformance.csproj" />
+  </ItemGroup>
   <Import Project="..\GBS_MyPerformance.Models\GBS_MyPerformance.Models.projitems" Label="Shared" Condition="Exists('..\GBS_MyPerformance.Models\GBS_MyPerformance.Models.projitems')" />
 </Project>
