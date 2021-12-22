@@ -31,6 +31,9 @@ namespace GBS_MyPerformance.Identity.Services
                 roleClaims.Add(new Claim(JwtClaimTypes.Role, role));
             }
 
+            if (roleClaims.Count == 0)
+                roleClaims.Add(new Claim(JwtClaimTypes.Role, ""));
+
             context.IssuedClaims.AddRange(roleClaims);
 
             var name = new Claim(JwtClaimTypes.Name, (user.Name != null) ? user.Name : user.Email);
