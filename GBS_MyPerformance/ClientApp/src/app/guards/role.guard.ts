@@ -18,8 +18,11 @@ export class RoleGuard implements CanActivate {
 
     return this.authorize.getUser().pipe(
       map(user => {
+        if (!user.role) return false;
+
         const userHasRole = user.role.includes(role);
-        !userHasRole && this.router.navigate(['/']);
+        !userHasRole && this.router.createUrlTree(['/']);
+
         return userHasRole;
       })
     );
