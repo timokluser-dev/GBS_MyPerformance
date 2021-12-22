@@ -1,4 +1,4 @@
-﻿using GBS_MyPerformance.Models;
+﻿using GBS_MyPerformance.Identity.Models;
 using IdentityServer4.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;

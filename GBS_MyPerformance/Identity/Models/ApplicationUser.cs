@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GBS_MyPerformance.Models
+namespace GBS_MyPerformance.Identity.Models
 {
     public class ApplicationUser : IdentityUser
     {

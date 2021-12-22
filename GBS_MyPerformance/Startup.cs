@@ -13,8 +13,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Westwind.AspNetCore.LiveReload;
 using IdentityServer4.Services;
-using GBS_MyPerformance.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using GBS_MyPerformance.Identity.Models;
+using GBS_MyPerformance.Identity.Services;
 
 namespace GBS_MyPerformance
 {

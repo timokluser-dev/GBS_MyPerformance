@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 
-namespace GBS_MyPerformance.Identity
+namespace GBS_MyPerformance.Identity.Services
 {
     public class EmailSender : IEmailSender
     {

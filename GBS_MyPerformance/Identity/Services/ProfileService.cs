@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using GBS_MyPerformance.Models;
+using GBS_MyPerformance.Identity.Models;
 using IdentityModel;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Identity;
 
-namespace GBS_MyPerformance.Identity
+namespace GBS_MyPerformance.Identity.Services
 {
     public class ProfileService : IProfileService
     {

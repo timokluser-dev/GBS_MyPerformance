@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using GBS_MyPerformance.Models;
+using GBS_MyPerformance.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
