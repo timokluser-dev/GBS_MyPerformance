@@ -42,6 +42,7 @@
     <None Remove="Identity\" />
     <None Remove="Identity\Models\" />
     <None Remove="Identity\Services\" />
+    <None Remove="Data\Migrations\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,6 +50,7 @@
     <Folder Include="Identity\" />
     <Folder Include="Identity\Models\" />
     <Folder Include="Identity\Services\" />
+    <Folder Include="Data\Migrations\" />
   </ItemGroup>
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
