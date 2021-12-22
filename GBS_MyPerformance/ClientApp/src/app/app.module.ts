@@ -15,6 +15,7 @@ import {AuthorizeGuard} from 'src/api-authorization/authorize.guard';
 import {AuthorizeInterceptor} from 'src/api-authorization/authorize.interceptor';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {RoleGuard} from './guards/role.guard';
+import {MfaGuard} from './guards/mfa.guard';
 
 @NgModule({
   declarations: [
