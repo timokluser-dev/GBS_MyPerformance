@@ -16,6 +16,8 @@ import {AuthorizeInterceptor} from 'src/api-authorization/authorize.interceptor'
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {RoleGuard} from './guards/role.guard';
 import {MfaGuard} from './guards/mfa.guard';
+import {ErrorPageComponent, Errors} from './pages/error-page/error-page.component';
+import {ClickCursorDirective} from './directives/click-cursor.directive';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import {MfaGuard} from './guards/mfa.guard';
     HomePageComponent,
     CounterComponent,
     FetchDataComponent,
+    ErrorPageComponent,
+    ClickCursorDirective,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
