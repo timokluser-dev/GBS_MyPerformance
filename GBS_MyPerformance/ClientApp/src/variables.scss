@@ -1,0 +1,15 @@
+$font-family-base: 'Roboto', sans-serif;
+$font-family-sans-serif: $font-family-base;
+
+$primary: #6ea644;
+$secondary: #414141;
+$body-color: #1A202C;
+$body-bg: #ffffff;
+
+$card-border-radius: 0px;
+$card-bg: none;
+
+$navbar-toggler-border-radius: 0px;
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
