@@ -25,7 +25,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": ["src/assets"],
-            "styles": ["node_modules/bootstrap/dist/css/bootstrap.min.css", "src/styles.scss"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           },
           "configurations": {

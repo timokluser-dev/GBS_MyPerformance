@@ -1,16 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+// Variables
+$font-family-base: 'Roboto', sans-serif;
+$font-family-sans-serif: $font-family-base;
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
-}
+$primary: #6ea644;
+$secondary: #414141;
+$body-color: #1A202C;
+$body-bg: #ffffff;
 
-code {
-  color: #e01a76;
-}
+$card-border-radius: 0px;
+$card-bg: none;
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+$navbar-toggler-border-radius: 0px;
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+
+// Global Style
+*[ng-reflect-router-link] {
+  cursor: pointer;
 }
