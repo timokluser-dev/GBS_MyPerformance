@@ -36,7 +36,7 @@ export interface IUser {
 
 export interface IUserExtended {
   name?: string;
-  amr: 'pwd' | 'mfa';
+  amr: string[]; // 'pwd' | 'mfa'
   role?: string[];
 }
 

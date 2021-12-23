@@ -24,7 +24,7 @@ export class MfaGuard implements CanActivate {
 
     return this.authorize.getUser().pipe(
       map(user => {
-        const mfaEnabled = (user as IUserExtended).amr === 'mfa';
+        const mfaEnabled = (user as IUserExtended).amr.includes('mfa');
         return mfaEnabled ? mfaEnabled : this.router.createUrlTree(['error/mfa-required']);
       })
     );
