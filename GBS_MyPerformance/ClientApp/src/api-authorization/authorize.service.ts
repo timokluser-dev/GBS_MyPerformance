@@ -31,6 +31,11 @@ export enum AuthenticationResultStatus {
 
 export interface IUser {
   name?: string;
+  role?: string[];
+}
+
+export interface IUserExtended {
+  name?: string;
   amr: 'pwd' | 'mfa';
   role?: string[];
 }

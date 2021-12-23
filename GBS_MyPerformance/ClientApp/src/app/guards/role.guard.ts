@@ -30,3 +30,10 @@ export class RoleGuard implements CanActivate {
     );
   }
 }
+
+export enum AppRoles {
+  STUDENT = 'Student',
+  TRAINER = 'Trainer',
+  TEACHER = 'Teacher',
+  ADMIN = 'Administrator',
+}

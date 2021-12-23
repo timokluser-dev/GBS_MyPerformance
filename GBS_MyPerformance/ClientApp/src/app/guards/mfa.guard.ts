@@ -8,7 +8,7 @@ import {
 } from '@angular/router';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {AuthorizeService} from 'src/api-authorization/authorize.service';
+import {AuthorizeService, IUserExtended} from 'src/api-authorization/authorize.service';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +24,7 @@ export class MfaGuard implements CanActivate {
 
     return this.authorize.getUser().pipe(
       map(user => {
-        const mfaEnabled = user.amr == 'mfa';
+        const mfaEnabled = (user as IUserExtended).amr === 'mfa';
         return mfaEnabled ? mfaEnabled : this.router.createUrlTree(['error/mfa-required']);
       })
     );
