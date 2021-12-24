@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using GBS_MyPerformance.Identity;
 
 namespace GBS_MyPerformance.Areas.Identity.Pages.Account
 {
@@ -48,18 +49,28 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account
         {
             [Required]
             [EmailAddress]
-            [Display(Name = "Email")]
+            [Display(Name = "E-Mail")]
             public string Email { get; set; }
+
+            [Required]
+            [EmailAddress]
+            [Display(Name = "E-Mail Ausbildner")]
+            public string EmailApprenticeTrainer { get; set; }
+
+            [Required]
+            [StringLength(10, ErrorMessage = "Die {0} muss mindestens {2} und darf höchstens {1} Zeichen lang sein.", MinimumLength = 5)]
+            [Display(Name = "Klasse")]
+            public string SchoolClass { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Passwort")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Passwort wiederholen")]
+            [Compare("Password", ErrorMessage = "Die Passwörter stimmen nicht überein.")]
             public string ConfirmPassword { get; set; }
         }
 
@@ -75,22 +86,21 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                if (!IsValidEmailForRegistration(Input.Email))
+                {
+                    ModelState.AddModelError(string.Empty, "Diese Domain ist leider nicht für die Registrierung zugelassen");
+                    return Page();
+                }
+
                 var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
+                    await CreateAccountForTrainer();
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    await SendEmailConfirmation(user, returnUrl);
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
@@ -110,6 +120,52 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+
+        private bool IsValidEmailForRegistration(string email)
+        {
+            string[] validStudentEmailDomains = { "edu.gbssg.ch", "ksb-sg.ch" };
+
+            bool isValid = validStudentEmailDomains.Contains(email[(email.IndexOf('@') + 1)..]);
+
+            return isValid;
+        }
+
+        private async Task SendEmailConfirmation(ApplicationUser user, string returnUrl = "/")
+        {
+            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+            var callbackUrl = Url.Page(
+                "/Account/ConfirmEmail",
+                pageHandler: null,
+                values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+                protocol: Request.Scheme);
+
+            await _emailSender.SendEmailAsync(user.Email, "E-Mail Bestätigen",
+                $"Bitte bestätigen Sie Ihr Konto, indem Sie <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>hier klicken</a>.");
+        }
+
+        private async Task CreateAccountForTrainer()
+        {
+            var userApprenticeTrainer = new ApplicationUser { UserName = Input.EmailApprenticeTrainer, Email = Input.EmailApprenticeTrainer };
+            var result = await _userManager.CreateAsync(userApprenticeTrainer);
+
+            if (result.Succeeded)
+            {
+                await SendEmailConfirmation(userApprenticeTrainer);
+                await _userManager.AddToRoleAsync(userApprenticeTrainer, AppRoles.TRAINER);
+            }
+            else
+            {
+                // user already exists
+
+                if (!await _userManager.IsInRoleAsync(await _userManager.FindByEmailAsync(userApprenticeTrainer.Email),AppRoles.TRAINER))
+                {
+                    var resRole = await _userManager.AddToRoleAsync(await _userManager.FindByEmailAsync(userApprenticeTrainer.Email), AppRoles.TRAINER);
+                }
+
+                // TODO: add apprentice reference
+            }
         }
     }
 }

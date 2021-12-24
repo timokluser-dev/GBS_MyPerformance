@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
 
 namespace GBS_MyPerformance.Areas.Identity.Pages.Account
 {
@@ -21,14 +22,17 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly IConfiguration _configuration;
 
         public LoginModel(SignInManager<ApplicationUser> signInManager,
             ILogger<LoginModel> logger,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _configuration = configuration;
         }
 
         [BindProperty]
@@ -51,7 +55,7 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-            [Display(Name = "Remember me?")]
+            [Display(Name = "Angemeldet bleiben")]
             public bool RememberMe { get; set; } = true;
         }
 
@@ -83,10 +87,16 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    // DEV ONLY: Bypass
+                    if (_configuration.GetValue<bool>("Dev:BypassMfa"))
+                    {
+                        _logger.LogInformation("DEV: User bypassed 2FA.");
+                        return LocalRedirect(returnUrl);
+                    }
+
                     _logger.LogInformation("User logged in without 2FA.");
                     // Enforce MFA after every login
                     return RedirectToPage("./Manage/EnableAuthenticator", new { ReturnUrl = returnUrl });
-                    //return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -99,7 +109,7 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Anmeldung fehlgeschlagen.");
                     return Page();
                 }
             }

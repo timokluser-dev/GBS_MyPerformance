@@ -1,10 +1,12 @@
 ﻿@page
 @model LogoutModel
 @{
-    ViewData["Title"] = "Log out";
+    ViewData["Title"] = "Logout";
 }
 
 <header>
     <h1>@ViewData["Title"]</h1>
-    <p>You have successfully logged out of the application.</p>
+    <p>Sie haben sich erfolgreich bei der Anwendung abgemeldet.</p>
 </header>
+
+<a asp-page="./Login">Anmelden</a>
