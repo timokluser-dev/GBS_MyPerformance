@@ -61,6 +61,9 @@ namespace GBS_MyPerformance.Data.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("PasswordInitialSetPending")
+                        .HasColumnType("bit");
+
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 

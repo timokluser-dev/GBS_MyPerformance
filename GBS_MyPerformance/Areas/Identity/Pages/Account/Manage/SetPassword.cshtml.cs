@@ -32,14 +32,14 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "Das {0} muss mindestens {2} und darf höchstens {1} Zeichen lang sein.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "New password")]
+            [Display(Name = "Neues Passwort")]
             public string NewPassword { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm new password")]
-            [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+            [Display(Name = "Passwort wiederholen")]
+            [Compare("NewPassword", ErrorMessage = "Die Passwörter stimmen nicht überein.")]
             public string ConfirmPassword { get; set; }
         }
 
@@ -85,7 +85,7 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account.Manage
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your password has been set.";
+            StatusMessage = "Ihr Passwort wurde erfolgreich erstellt.";
 
             return RedirectToPage();
         }

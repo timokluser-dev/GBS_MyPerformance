@@ -10,6 +10,7 @@ namespace GBS_MyPerformance.Identity.Models
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
+        public bool PasswordInitialSetPending { get; set; } = false;
 
         public string Name
         {

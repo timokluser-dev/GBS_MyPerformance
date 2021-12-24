@@ -59,12 +59,12 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account.Manage
             var result = await _userManager.RemoveLoginAsync(user, loginProvider, providerKey);
             if (!result.Succeeded)
             {
-                StatusMessage = "The external login was not removed.";
+                StatusMessage = "Das externe Login wurde nicht entfernt.";
                 return RedirectToPage();
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "The external login was removed.";
+            StatusMessage = "Das externe Login wurde entfernt.";
             return RedirectToPage();
         }
 
@@ -96,14 +96,14 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account.Manage
             var result = await _userManager.AddLoginAsync(user, info);
             if (!result.Succeeded)
             {
-                StatusMessage = "The external login was not added. External logins can only be associated with one account.";
+                StatusMessage = "Das externe Login wurde nicht hinzugefügt. Externe Logins können nur mit einem Konto verknüpft werden.";
                 return RedirectToPage();
             }
 
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-            StatusMessage = "The external login was added.";
+            StatusMessage = "Das externe Login wurde hinzugefügt.";
             return RedirectToPage();
         }
     }
