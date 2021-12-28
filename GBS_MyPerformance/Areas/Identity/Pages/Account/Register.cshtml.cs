@@ -58,8 +58,8 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account
             public string EmailApprenticeTrainer { get; set; }
 
             [Required]
-            [StringLength(10, ErrorMessage = "Die {0} muss mindestens {2} und darf höchstens {1} Zeichen lang sein.", MinimumLength = 5)]
-            [Display(Name = "Klasse")]
+            [StringLength(10, ErrorMessage = "Der {0} muss mindestens {2} und darf höchstens {1} Zeichen lang sein.", MinimumLength = 5)]
+            [Display(Name = "Einschreibeschlüssel")]
             public string SchoolClass { get; set; }
 
             [Required]

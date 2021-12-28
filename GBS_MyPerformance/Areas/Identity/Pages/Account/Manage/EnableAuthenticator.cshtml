@@ -36,7 +36,11 @@
                             <span asp-validation-for="Input.Code" class="text-danger"></span>
                         </div>
                         <button type="submit" class="btn btn-primary d-block mb-2">Überprüfen</button>
+
+                        @if (Model.ReturnUrl != null)
+                        {
                         <a href="@Html.Raw(@Model.ReturnUrl)" class="btn btn-link pl-0 text-muted">Vorerst Überspringen</a>
+                        }
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     </form>
                 </div>
