@@ -38,15 +38,14 @@
     <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
     <None Remove="Westwind.AspNetCore.LiveReload" />
     <None Remove="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
-    <Content Remove="wwwroot\js\" />
     <None Remove="Identity\" />
     <None Remove="Identity\Models\" />
     <None Remove="Identity\Services\" />
     <None Remove="Data\Migrations\" />
+    <Content Remove="wwwroot\js\qrcodejs.js" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\js\" />
     <Folder Include="Identity\" />
     <Folder Include="Identity\Models\" />
     <Folder Include="Identity\Services\" />

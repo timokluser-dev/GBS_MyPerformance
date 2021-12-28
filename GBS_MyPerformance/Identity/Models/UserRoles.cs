@@ -1,5 +1,5 @@
 ﻿using System;
-namespace GBS_MyPerformance.Models
+namespace GBS_MyPerformance.Identity.Models
 {
     public enum UserRoles
     {

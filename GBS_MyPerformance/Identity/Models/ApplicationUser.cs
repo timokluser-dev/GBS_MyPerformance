@@ -12,7 +12,7 @@ namespace GBS_MyPerformance.Identity.Models
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public bool PasswordInitialSetPending { get; set; } = false;
-        public UserRoles? MainRole { get; set; }
+        public UserRoles? MainRole { get; set; } = null;
 
         public string Name
         {
