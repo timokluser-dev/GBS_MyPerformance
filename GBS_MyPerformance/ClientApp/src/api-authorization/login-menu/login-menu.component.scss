@@ -1,0 +1,5 @@
+@import "../../variables";
+
+.nav-item .nav-link:not(.disabled) {
+  color: $white
+}

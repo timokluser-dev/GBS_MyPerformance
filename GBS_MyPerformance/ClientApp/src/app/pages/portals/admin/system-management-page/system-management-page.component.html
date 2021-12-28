@@ -1,0 +1,55 @@
+<app-page-title title="Verwaltung" [showEdit]="true" (editClick)="onEditClick($event)"
+                [editActive]="editActive"></app-page-title>
+
+<app-tabs [tabs]="tabs" (tabChange)="onTabChange($event)"></app-tabs>
+
+<ng-container *ngIf="activeTab === 'Lehrgänge'">
+    <app-table [data]="professions" [rawData]="professions" [mapping]="professionsMapping"
+               [actions]="professionsActions"
+               (actionClick)="onProfessionsTableAction($event)"
+               [edit]="editActive" [create]="true"></app-table>
+</ng-container>
+
+<ng-container *ngIf="activeTab === 'Klassen'">
+    <app-table [data]="classes" [rawData]="classes" [mapping]="classesMapping" [actions]="classesActions"
+               (actionClick)="onClassesTableAction($event)"
+               [edit]="editActive" [create]="true"></app-table>
+</ng-container>
+
+<ng-container *ngIf="activeTab === 'Registrierung'">
+
+    <section class="mb-4">
+        <h4>Domains Schüler</h4>
+
+        <app-table [data]="getDomainsForRole(appRoles.STUDENT)" [rawData]="domains" [mapping]="domainsMapping"
+                   [actions]="domainsActions"
+                   (actionClick)="onDomainsTableAction($event)"
+                   [edit]="editActive" [create]="true"
+                   [createAdditionalParams]="{forRole:appRoles.STUDENT}"></app-table>
+
+        <p class="text-muted">
+            Die Schüler werden ihre Ausbildner selber erfassen.
+            Eine Zulassung für Domain der Ausbilder ist somit nicht nötig.
+        </p>
+    </section>
+
+    <section class="mb-4">
+        <h4>Domains Lehrer</h4>
+
+        <app-table [data]="getDomainsForRole(appRoles.TEACHER)" [mapping]="domainsMapping" [actions]="domainsActions"
+                   (actionClick)="onDomainsTableAction($event)"
+                   [rawData]="domains" [edit]="editActive" [create]="true"
+                   [createAdditionalParams]="{forRole:appRoles.TEACHER}"></app-table>
+    </section>
+
+    <section>
+        <h4>Domains Administratoren</h4>
+
+        <app-table [data]="getDomainsForRole(appRoles.ADMIN)" [mapping]="domainsMapping" [actions]="domainsActions"
+                   (actionClick)="onDomainsTableAction($event)"
+                   [rawData]="domains" [edit]="editActive" [create]="true"
+                   [createAdditionalParams]="{forRole:appRoles.ADMIN}"></app-table>
+    </section>
+
+
+</ng-container>

@@ -1,0 +1,20 @@
+<app-page-title title="Benutzer" editTitle="{{ (this.editActive) ? this.activeFilter?.name + ' bearbeiten' : null }}"
+                [showEdit]="true"
+                (editClick)="onEditClick($event)"></app-page-title>
+
+<app-tabs [tabs]="tabs" (tabChange)="onTabChange($event)"></app-tabs>
+
+<section>
+    <div class="row">
+        <div class="col-12 col-md-8">
+            <app-table [mapping]="userMapping" [data]="users" [rawData]="_users" [actions]="tableActions"
+                       (actionClick)="onTableAction($event)" [edit]="editActive"
+                       [createAdditionalParams]="{role:this.activeFilter.filter}"></app-table>
+        </div>
+    </div>
+</section>
+
+<app-confirmation *ngIf="modal.data" [show]="modal.show"
+                  text="{{this.activeFilter.nameSingular}} '{{this.modal.data.lastName}} {{this.modal.data.firstName}}' wird entfernt. Dieser Schritt kann nicht rückgängig gemacht werden."
+                  buttonClass="btn-danger" buttonText="löschen" (close)="modal.show = false"
+                  (confirm)="onDeleteConfirm()"></app-confirmation>

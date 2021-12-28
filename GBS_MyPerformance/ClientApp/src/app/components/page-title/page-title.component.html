@@ -1,0 +1,31 @@
+<div class="page-title__container row mb-4">
+    <div class="page-title__title col-auto align-self-center" *ngIf="showBack">
+        <i class="bi bi-arrow-left fs-1 lh-1" (click)="onBackClick()"></i>
+    </div>
+
+    <div class="page-title__title col align-self-center">
+        <h1 class="page-title mb-0">{{ (editTitle && editActive) ? editTitle : title}}</h1>
+    </div>
+
+    <div class="page-title__edit col-auto align-self-center" *ngIf="showEdit">
+        <div class="d-none d-md-block">
+            <button type="button" class="btn btn-light" *ngIf="!editActive" (click)="onEditClick()">
+                <i class="bi bi-pencil-square"></i>
+                editieren
+            </button>
+            <button type="button" class="btn btn-success" *ngIf="editActive" (click)="onEditClick()">
+                fertig
+            </button>
+        </div>
+        <div class="d-block d-md-none">
+            <button type="button" class="btn btn-light" *ngIf="!editActive" (click)="onEditClick()">
+                <i class="bi bi-pencil-square"></i>
+            </button>
+            <button type="button" class="btn btn-success" *ngIf="editActive" (click)="onEditClick()">
+                <i class="bi bi-check-circle"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+

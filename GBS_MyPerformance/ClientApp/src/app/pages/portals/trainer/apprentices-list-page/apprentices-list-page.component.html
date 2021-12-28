@@ -1,0 +1,12 @@
+<app-page-title [title]="'Lernende'" [showEdit]="false"></app-page-title>
+
+<div class="profession-select mb-4 row">
+    <div class="col-12 col-md-6">
+        <p class="mb-1">Beruf:</p>
+        <select class="form-select" (change)="onProfessionSelected($event)">
+            <option [selected]="profession.name === selectedProfession.name" *ngFor="let profession of apprenticesProfessions">{{profession.name}}</option>
+        </select>
+    </div>
+</div>
+
+<app-students-mark-table [data]="studentsMarkTableData" (detail)="onDetail($event)"></app-students-mark-table>

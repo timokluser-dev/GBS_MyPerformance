@@ -1,0 +1,9 @@
+<app-page-title title="Rückerfassungsgrenze" [showEdit]="true" (editClick)="onEdit($event)"></app-page-title>
+
+<section>
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <app-table [mapping]="editPeriodMapping" [data]="editPeriodData" [edit]="isEditMode" [create]="false"></app-table>
+        </div>
+    </div>
+</section>

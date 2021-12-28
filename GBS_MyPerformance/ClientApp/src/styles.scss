@@ -12,3 +12,40 @@
 *[ng-reflect-router-link] {
   cursor: pointer;
 }
+
+.btn-success {
+  color: #ffffff !important;
+}
+
+html,
+body {
+  height: 100vh;
+  margin: 0;
+}
+
+app-root {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+table {
+  td {
+    p {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// Dark Mode Overrides
+@media (prefers-color-scheme: dark) {
+  @import "../node_modules/@timokluser-dev/bootstrap-dark-5/scss/bootstrap-nightfall";
+
+  .help-modal {
+    background-color: $color-contrast-dark !important;
+
+    .title {
+      padding-top: 0 !important;
+    }
+  }
+}
