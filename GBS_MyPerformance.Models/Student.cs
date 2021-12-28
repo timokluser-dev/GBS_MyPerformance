@@ -55,6 +55,7 @@ namespace GBS_MyPerformance.Models
 
         public Student()
         {
+            MainRole = UserRoles.Student;
         }
     }
 }

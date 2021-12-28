@@ -10,6 +10,7 @@ namespace GBS_MyPerformance.Models
 
         public ApprenticeTrainer()
         {
+            MainRole = UserRoles.Trainer;
         }
     }
 }
