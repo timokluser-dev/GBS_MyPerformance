@@ -1,1 +1,7 @@
-<p>students-mark-table works!</p>
+<app-table [data]="tableData" [mapping]="tableMapping"
+           [actions]="tableActions" (actionClick)="onTableAction($event)"
+           [edit]="false" [create]="false"></app-table>
+
+<p>Abbrev & Full name</p>
+
+<p>Calculation formula</p>

@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prettier": "prettier -w .",
-    "google-font": "get-google-fonts -w -i 'https://fonts.googleapis.com/css2?family=Roboto&display=swap' -o ./src/assets/fonts/"
+    "google-font": "get-google-fonts -w -o ./src/assets/fonts/ -i https://fonts.googleapis.com/css?family=Roboto%7CRoboto:bold,italic,bolditalic&display=swap"
   },
   "private": true,
   "dependencies": {
@@ -24,11 +24,14 @@
     "@angular/platform-server": "8.2.12",
     "@angular/router": "8.2.12",
     "@nguniversal/module-map-ngfactory-loader": "8.1.1",
+    "@timokluser-dev/bootstrap-dark-5": "1.1.3",
     "aspnet-prerendering": "^3.0.1",
     "bootstrap": "5.1.3",
     "bootstrap-icons": "1.7.2",
     "core-js": "^3.8.3",
     "jquery": "^3.6.0",
+    "moment": "2.29.1",
+    "ng-keyboard-shortcuts": "8.2.6",
     "ngx-spinner": "8.1.0",
     "oidc-client": "^1.11.5",
     "popper.js": "^1.16.0",

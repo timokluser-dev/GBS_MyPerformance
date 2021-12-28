@@ -1,4 +1,4 @@
-import {enableProdMode} from '@angular/core';
+import {enableProductionMode} from './helpers/production-mode';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 import {AppModule} from './app/app.module';
@@ -12,7 +12,7 @@ export function getBaseUrl() {
 const providers = [{provide: 'BASE_URL', useFactory: getBaseUrl, deps: []}];
 
 if (environment.production) {
-  enableProdMode();
+  enableProductionMode();
 }
 
 platformBrowserDynamic(providers)

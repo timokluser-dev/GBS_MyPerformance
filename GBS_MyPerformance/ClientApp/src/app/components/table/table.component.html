@@ -1,1 +1,50 @@
-<p>table works!</p>
+<div class="table-container">
+    <table class="table">
+        <thead class="sticky-top table-light">
+        <tr>
+            <th scope="col" *ngFor="let col of tableHeaderRow" class="width__{{mappingKeys.length}}">{{col.header}}</th>
+
+            <ng-container *ngFor="let action of actions">
+                <th *ngIf="action.display || edit">{{action.name}}</th>
+            </ng-container>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let row of data">
+            <td class="width__{{mappingKeys.length}} align-self-center" *ngFor="let col of mappingKeys"
+                [class.fw-bolder]="row['textBold'] || col['textBold']">
+                <p *ngIf="!isEditable(col,row)">{{getValue(col, row, false)}}</p>
+
+                <div *ngIf="isEditable(col,row)" class="input-group">
+                    <input *ngIf="!col.lookup" type="{{(col.type) ? col.type : 'text'}}" class="form-control"
+                           value="{{getValue(col, row, true)}}" (change)="onInputChange(row,col.valueKey,$event)">
+
+                    <select *ngIf="col.lookup" class="form-select" (change)="onSelectChange(row,col.valueKey,$event)">
+                        <option *ngFor="let option of col.lookup" [selected]="option.value === getValue(col, row, true)"
+                                value="{{option.value}}">{{option.name}}</option>
+                    </select>
+                </div>
+            </td>
+
+            <ng-container *ngFor="let action of visibleActions">
+                <td class="text-center align-self-center">
+                    <i class="{{action.icon.colorClass}} {{action.icon.iconClass}}"
+                       (click)="onActionClick(action.event,row)"></i>
+                </td>
+            </ng-container>
+        </tr>
+
+        <tr *ngIf="data.length === 0">
+            <td [attr.colspan]="tableHeaderRow.length + visibleActions.length">
+                <p class="fst-italic">Keine Einträge</p>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+
+    <button type="button" *ngIf="edit && create && rawData" class="btn btn-light mb-3" (click)="onNewClick()">
+        <i class="bi bi-plus-circle"></i>
+    </button>
+</div>
+

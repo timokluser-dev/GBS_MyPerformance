@@ -1,0 +1,28 @@
+@import "../../../variables";
+
+.nav-link {
+  &, &.active {
+    color: $dark;
+  }
+
+  &.active {
+    font-weight: 900;
+    border-bottom: $dark 2px solid;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &, &.active {
+      color: $white;
+    }
+
+    &.active {
+      border-bottom-color: $white;
+    }
+  }
+
+
+  &:not(.active) {
+    // to keep the same space as active
+    margin-bottom: 2px;
+  }
+}

@@ -1,0 +1,37 @@
+<app-page-title title="Anfragen"></app-page-title>
+
+<section>
+    <div class="row">
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <span class="input-group-text">
+                    <i class="bi bi-search"></i>
+                </span>
+                <input type="text" class="form-control ps-0" placeholder="Suchen" [(ngModel)]="search">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-12 col-md-8">
+            <app-table [mapping]="requestsMapping" [data]="requestsResult" [actions]="tableActions"
+                       (actionClick)="onTableAction($event)"></app-table>
+        </div>
+    </div>
+</section>
+
+<!-- reject confirmation -->
+<app-confirmation *ngIf="modalReject.data" [show]="modalReject.show"
+                  text="Die Person '{{modalReject.data.user.email}}' wird somit abgelehnt. Dieser Schritt kann nicht rückgängig gemacht werden."
+                  buttonClass="btn-danger" buttonText="löschen" (close)="modalReject.show = false"
+                  (confirm)="onRejectConfirm()"
+></app-confirmation>
+
+<!-- accept confirmation -->
+<app-confirmation *ngIf="modalAccept.data" [show]="modalAccept.show"
+                  header="Person wird angenommen"
+                  text="Die Anfrage von '{{modalAccept.data.user.email}}' wird angenommen."
+                  buttonClass="btn-success" buttonText="fertig" (close)="modalAccept.show = false"
+                  (confirm)="onAcceptConfirm()"
+></app-confirmation>
