@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using GBS_MyPerformance.Models;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace GBS_MyPerformance.Identity.Models
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
+        public bool PasswordInitialSetPending { get; set; } = false;
+        public UserRoles? MainRole { get; set; }
 
         public string Name
         {

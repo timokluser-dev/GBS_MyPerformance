@@ -1,0 +1,14 @@
+// Font
+@import url('./assets/fonts/fonts.css');
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+
+// Global Style
+*[ng-reflect-router-link] {
+  cursor: pointer;
+}

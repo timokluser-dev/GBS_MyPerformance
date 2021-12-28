@@ -1,14 +1,14 @@
 ﻿@page
 @model ExternalLoginsModel
 @{
-    ViewData["Title"] = "Manage your external logins";
+    ViewData["Title"] = "Externe Logins";
     ViewData["ActivePage"] = ManageNavPages.ExternalLogins;
 }
 
 <partial name="_StatusMessage" for="StatusMessage" />
 @if (Model.CurrentLogins?.Count > 0)
 {
-    <h4>Registered Logins</h4>
+    <h4>Registrierte Logins</h4>
     <table class="table">
         <tbody>
             @foreach (var login in Model.CurrentLogins)
@@ -38,7 +38,7 @@
 }
 @if (Model.OtherLogins?.Count > 0)
 {
-    <h4>Add another service to log in.</h4>
+    <h4>Fügen Sie einen weiteren Dienst hinzu, um sich anzumelden.</h4>
     <hr />
     <form id="link-login-form" asp-page-handler="LinkLogin" method="post" class="form-horizontal">
         <div id="socialLoginList">

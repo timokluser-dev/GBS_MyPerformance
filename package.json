@@ -14,8 +14,11 @@
     "\n# ENV: WINDOWS -------- ": "",
     "win:vs": "start \"./GBS_MyPerformance/GBS_MyPerformance.sln\"",
     "\n# DOCKER -------- ": "",
-    "docker:up": "docker-compose up -d",
-    "docker:down": "docker-compose down"
+    "docker:up": "docker-compose -f ./GBS_MyPerformance.Containers.Dev/docker-compose.yml up -d",
+    "docker:down": "docker-compose -f ./GBS_MyPerformance.Containers.Dev/docker-compose.yml down",
+    "\n# BACKEND (for FE dev) -------- ": "",
+    "backend:start": "dotnet run -p GBS_MyPerformance",
+    "backend:start-dev": "dotnet watch -p GBS_MyPerformance run"
   },
   "repository": {
     "type": "git",

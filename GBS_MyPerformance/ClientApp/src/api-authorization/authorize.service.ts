@@ -34,6 +34,12 @@ export interface IUser {
   role?: string[];
 }
 
+export interface IUserExtended {
+  name?: string;
+  amr: string[]; // 'pwd' | 'mfa'
+  role?: string[];
+}
+
 @Injectable({
   providedIn: 'root',
 })

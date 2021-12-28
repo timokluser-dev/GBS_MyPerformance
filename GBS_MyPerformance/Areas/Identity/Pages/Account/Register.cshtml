@@ -1,7 +1,7 @@
 @page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Registrieren";
 }
 
 <div class="row login__row">
@@ -10,8 +10,9 @@
     <div class="col login__form align-self-center">
         <form id="account" method="post" class="p-4">
             <div class="mb-3">
-                <span>Wilkommen</span>
+                <span>Willkommen bei MyPerformance</span>
                 <h2>Registrieren</h2>
+                <p class="text-muted">Die Registrierung ist nur für Schüler*innen möglich.</p>
             </div>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -19,6 +20,16 @@
                 <label asp-for="Input.Email"></label>
                 <input asp-for="Input.Email" class="form-control" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.SchoolClass"></label>
+                <input asp-for="Input.SchoolClass" class="form-control" />
+                <span asp-validation-for="Input.SchoolClass" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.EmailApprenticeTrainer"></label>
+                <input asp-for="Input.EmailApprenticeTrainer" class="form-control" />
+                <span asp-validation-for="Input.EmailApprenticeTrainer" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.Password">Passwort</label>

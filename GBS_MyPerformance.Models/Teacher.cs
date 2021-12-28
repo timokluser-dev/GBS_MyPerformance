@@ -13,6 +13,7 @@ namespace GBS_MyPerformance.Models
 
         public Teacher()
         {
+            MainRole = UserRoles.Teacher;
         }
     }
 }

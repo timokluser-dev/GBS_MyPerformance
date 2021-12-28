@@ -1,7 +1,7 @@
 ﻿@page
 @model TwoFactorAuthenticationModel
 @{
-    ViewData["Title"] = "Two-factor authentication (2FA)";
+    ViewData["Title"] = "2-Faktor-Authentifizierung (2FA)";
     ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
 }
 
@@ -12,44 +12,44 @@
     if (Model.RecoveryCodesLeft == 0)
     {
         <div class="alert alert-danger">
-            <strong>You have no recovery codes left.</strong>
-            <p>You must <a asp-page="./GenerateRecoveryCodes">generate a new set of recovery codes</a> before you can log in with a recovery code.</p>
+            <strong>Sie haben keine Wiederherstellungscodes mehr.</strong>
+            <p>Neue <a asp-page="./GenerateRecoveryCodes">Wiederherstellungscode</a> generieren.</p>
         </div>
     }
     else if (Model.RecoveryCodesLeft == 1)
     {
         <div class="alert alert-danger">
-            <strong>You have 1 recovery code left.</strong>
-            <p>You can <a asp-page="./GenerateRecoveryCodes">generate a new set of recovery codes</a>.</p>
+            <strong>Sie haben noch 1 Wiederherstellungscode übrig.</strong>
+            <p>Neue <a asp-page="./GenerateRecoveryCodes">Wiederherstellungscode</a> generieren.</p>
         </div>
     }
     else if (Model.RecoveryCodesLeft <= 3)
     {
         <div class="alert alert-warning">
-            <strong>You have @Model.RecoveryCodesLeft recovery codes left.</strong>
-            <p>You should <a asp-page="./GenerateRecoveryCodes">generate a new set of recovery codes</a>.</p>
+            <strong>Sie haben noch @Model.RecoveryCodesLeft Wiederherstellungscode übrig.</strong>
+            <p>Neue <a asp-page="./GenerateRecoveryCodes">Wiederherstellungscode</a> generieren.</p>
         </div>
     }
 
     if (Model.IsMachineRemembered)
     {
         <form method="post" style="display: inline-block">
-            <button type="submit" class="btn btn-default">Forget this browser</button>
+            <button type="submit" class="btn btn-light">Dieses Gerät vergessen</button>
         </form>
     }
-    <a asp-page="./Disable2fa" class="btn btn-default">Disable 2FA</a>
-    <a asp-page="./GenerateRecoveryCodes" class="btn btn-default">Reset recovery codes</a>
+    <a asp-page="./Disable2fa" class="btn btn-light">2FA deaktivieren</a>
+    <a asp-page="./GenerateRecoveryCodes" class="btn btn-light">Wiederherstellungscodes zurücksetzen</a>
 }
 
-<h5>Authenticator app</h5>
+<h5 class="mt-3">App</h5>
 @if (!Model.HasAuthenticator)
 {
-    <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-default">Add authenticator app</a>
+    <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-light">Neue App hinzufügen</a>
 }
 else
 {
-    <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-default">Setup authenticator app</a>
-    <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="btn btn-default">Reset authenticator app</a>
+    <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-light">Weitere App hinzufügen</a>
+    <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="btn btn-light">Apps entfernen</a>
 }
 
 @section Scripts {

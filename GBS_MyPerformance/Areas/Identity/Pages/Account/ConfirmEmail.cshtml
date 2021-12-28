@@ -1,9 +1,12 @@
 @page
 @model ConfirmEmailModel
 @{
-    ViewData["Title"] = "Confirm email";
+    ViewData["Title"] = "E-Mail Bestätigen";
 }
 
 <h1>@ViewData["Title"]</h1>
 
-<a asp-page="./Login">Login</a>
+<p>@Model.StatusMessage</p>
+<p>@Model.StatusMessageAdditional</p>
+
+<a asp-page="./Login">Anmelden</a>
