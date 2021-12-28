@@ -1,0 +1,39 @@
+version: "3.3"
+services:
+    mssql:
+        image: mcr.microsoft.com/mssql/server:2017-latest
+        environment:
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=DEV_1234
+            - MSSQL_PID=Developer
+        volumes:
+            - sql-data:/var/opt/mssql
+        ports:
+            - "1433:1433"
+        networks:
+            - public
+            - local
+        hostname: mssql
+        restart: "no"
+    smtp:
+        image: maildev/maildev:latest
+        environment:
+            - MAILDEV_SMTP_PORT=25
+            - MAILDEV_WEB_PORT=80
+        ports:
+            - "25:25"
+            - "8080:80"
+        networks:
+            - public
+            - local
+        hostname: smtp
+        restart: "no"
+
+volumes:
+    sql-data: null
+
+networks:
+    public:
+        internal: false
+    local:
+        internal: true
