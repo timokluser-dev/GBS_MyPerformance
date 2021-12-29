@@ -13,6 +13,8 @@ export class PageTitleComponent implements OnInit {
   @Output() editClick: EventEmitter<EditClickEvent> = new EventEmitter<EditClickEvent>();
   @Input() editActive = false;
   @Input() showBack = false;
+  @Input() showBreadcrumb = false;
+  @Input() breadcrumbItems: {name: string; link: string}[];
 
   constructor(private location: Location) {}
 
