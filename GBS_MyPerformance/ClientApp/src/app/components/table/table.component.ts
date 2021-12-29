@@ -1,6 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {v4 as guid} from 'uuid';
 import {override as overrideDate} from '../../../helpers/date-overrides';
-import {TableDataType} from './table.component.constants';
+import {
+  TableAction,
+  TableActionEvent,
+  TableDataType,
+  TableMapping,
+} from './table.component.constants';
 
 @Component({
   selector: 'app-table',
@@ -11,7 +17,7 @@ export class TableComponent implements OnInit {
   /**
    * if not provided, the table will get rendered using an object array
    */
-  @Input() mapping: any[] | null = null;
+  @Input() mapping: TableMapping[] | null = null;
   @Input() data!: any[];
   /**
    * the raw array to append new objects to
@@ -32,9 +38,13 @@ export class TableComponent implements OnInit {
   @Input() actions: TableAction[] = null;
   @Output() actionClick: EventEmitter<TableActionEvent> = new EventEmitter<TableActionEvent>();
 
+  /**
+   * special props to remove when using calculated mapping
+   */
   public specialProperties = [
     // bold text
     'textBold',
+    'editable',
   ];
 
   constructor() {
@@ -85,7 +95,9 @@ export class TableComponent implements OnInit {
     }
     // get in edit all, except those with explicit no display
     // if not in edit, get all with explicit display
-    return this.edit ? this.actions.filter(a => !(a.display !== undefined && !a.display)) : this.actions.filter(a => a.display);
+    return this.edit
+      ? this.actions.filter(a => !(a.display !== undefined && !a.display))
+      : this.actions.filter(a => a.display);
   }
 
   filterSpecialProperties(data: any[]): any[] {
@@ -116,9 +128,12 @@ export class TableComponent implements OnInit {
   isEditable(col: any, row: any) {
     return (
       this.edit &&
-      col.editable &&
-      this.editConditionEval(row) &&
-      (row.editable === undefined || row.editable)
+      (col.editable === undefined || col.editable) &&
+      (typeof this.editConditionEval !== 'function' || this.editConditionEval(row)) &&
+      // (typeof this.editConditionEval !== 'function' ||
+      //     (typeof this.editConditionEval === 'function' && this.editConditionEval(row))) &&
+      (row.editable === undefined || row.editable) &&
+      (row.calculated === undefined || !row.calculated)
     );
   }
 
@@ -133,7 +148,7 @@ export class TableComponent implements OnInit {
   }
 
   onNewClick() {
-    this.rawData.push(this.cloneObject());
+    this.rawData.push({...this.cloneObject(), id: guid()});
   }
 
   cloneObject(): any {
@@ -167,22 +182,4 @@ export class TableComponent implements OnInit {
     }
     return originalObject;
   }
-}
-
-export interface TableAction {
-  name: string;
-  icon: {
-    iconClass: string;
-    colorClass: string;
-  };
-  event: string;
-  /**
-   * if not set to true, it will only be display when edit is active
-   */
-  display?: boolean;
-}
-
-export interface TableActionEvent {
-  event: string;
-  object: any;
 }
