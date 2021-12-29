@@ -4,14 +4,14 @@
 <app-tabs [tabs]="tabs" (tabChange)="onTabChange($event)"></app-tabs>
 
 <ng-container *ngIf="activeTab === 'Lehrgänge'">
-    <app-table [data]="professions" [rawData]="professions" [mapping]="professionsMapping"
+    <app-table [data]="professionsData" [rawData]="professionsData" [mapping]="professionsMapping"
                [actions]="professionsActions"
                (actionClick)="onProfessionsTableAction($event)"
                [edit]="editActive" [create]="true"></app-table>
 </ng-container>
 
 <ng-container *ngIf="activeTab === 'Klassen'">
-    <app-table [data]="classes" [rawData]="classes" [mapping]="classesMapping" [actions]="classesActions"
+    <app-table [data]="classesData" [rawData]="classesData" [mapping]="classesMapping" [actions]="classesActions"
                (actionClick)="onClassesTableAction($event)"
                [edit]="editActive" [create]="true"></app-table>
 </ng-container>
@@ -21,7 +21,7 @@
     <section class="mb-4">
         <h4>Domains Schüler</h4>
 
-        <app-table [data]="getDomainsForRole(appRoles.STUDENT)" [rawData]="domains" [mapping]="domainsMapping"
+        <app-table [data]="getDomainsForRole(appRoles.STUDENT)" [rawData]="domainsData" [mapping]="domainsMapping"
                    [actions]="domainsActions"
                    (actionClick)="onDomainsTableAction($event)"
                    [edit]="editActive" [create]="true"
@@ -38,7 +38,7 @@
 
         <app-table [data]="getDomainsForRole(appRoles.TEACHER)" [mapping]="domainsMapping" [actions]="domainsActions"
                    (actionClick)="onDomainsTableAction($event)"
-                   [rawData]="domains" [edit]="editActive" [create]="true"
+                   [rawData]="domainsData" [edit]="editActive" [create]="true"
                    [createAdditionalParams]="{forRole:appRoles.TEACHER}"></app-table>
     </section>
 
@@ -47,7 +47,7 @@
 
         <app-table [data]="getDomainsForRole(appRoles.ADMIN)" [mapping]="domainsMapping" [actions]="domainsActions"
                    (actionClick)="onDomainsTableAction($event)"
-                   [rawData]="domains" [edit]="editActive" [create]="true"
+                   [rawData]="domainsData" [edit]="editActive" [create]="true"
                    [createAdditionalParams]="{forRole:appRoles.ADMIN}"></app-table>
     </section>
 
