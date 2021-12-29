@@ -42,16 +42,19 @@
     <li class="nav-item mx-3 align-self-md-center">
         <a class="nav-link" [routerLink]="['/authentication/profile']" title="Profil">
             <!-- Profil -->
-            <i class="bi bi-person-circle fs-3"></i>
+            <i class="bi bi-person-circle fs-3 d-none d-md-block"></i>
+            <p class="d-inline-block d-md-none m-0">Profil</p>
         </a>
     </li>
     <li class="nav-item mx-3 mx-md-0 align-self-md-center">
         <a class="nav-link" title="Abmelden" [routerLink]="['/authentication/logout']" [state]="{local: true}">
             <!-- Abmelden -->
-            <i class="bi bi-box-arrow-right fs-3"></i>
+            <i class="bi bi-box-arrow-right fs-3 d-none d-md-block"></i>
+            <p class="d-inline-block d-md-none m-0">Abmelden</p>
         </a>
     </li>
 </ul>
+
 <ul class="navbar-nav not-authenticated" *ngIf="!(isAuthenticated | async)">
     <li class="nav-item mx-3 mx-md-0 align-self-md-center">
         <a class="nav-link" [routerLink]="['/authentication/login']">

@@ -23,7 +23,6 @@ export class StudentsMarkTableComponent implements OnInit {
     // remapping for every student
     for (const student of this.data) {
       const studentClone = {...student};
-      // TODO better name ratingCategoriesDefinition
       for (const ratingCategory of this.ratingCategoriesDefinition) {
         studentClone[ratingCategory.abbreviation] = {
           ...student.ratingCategories.filter(
