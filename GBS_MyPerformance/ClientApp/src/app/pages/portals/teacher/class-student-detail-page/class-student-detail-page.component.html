@@ -1,0 +1,13 @@
+<app-page-title [title]="studentFullName" [showBack]="true" [showEdit]="this.student !== null"
+                [editActive]="editActive" (editClick)="onEditClick($event)"
+                [showBreadcrumb]="true" [breadcrumbItems]="breadcrumbs"></app-page-title>
+
+<ng-container *ngIf="student !== null">
+    <app-mark-overview-container *ngIf="student" [editActive]="editActive" [editMode]="editModes.ALL"
+                                 [data]="student"></app-mark-overview-container>
+</ng-container>
+
+<ng-container *ngIf="student === null">
+    <p class="text-muted mt-4">Dieser Schüler ist in der Klasse '{{schoolClass}}' nicht vorhanden. Versuchen Sie es später noch einmal.</p>
+</ng-container>
+
