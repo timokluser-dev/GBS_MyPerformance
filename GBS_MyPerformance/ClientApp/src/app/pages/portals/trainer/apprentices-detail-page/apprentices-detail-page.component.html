@@ -1,3 +1,5 @@
-<app-page-title [title]="'todo '" [showBack]="true" [showEdit]="false"></app-page-title>
+<app-page-title [title]="apprentice.student.firstName + ' ' + apprentice.student.lastName" [showBack]="true"
+                [showEdit]="false"></app-page-title>
 
-<app-mark-overview-container [editActive]="false" [editMode]="editModes.READ_ONLY" [studentId]="studentId"></app-mark-overview-container>
+<app-mark-overview-container *ngIf="apprentice" [editActive]="false" [editMode]="editModes.READ_ONLY"
+                             [data]="apprentice"></app-mark-overview-container>

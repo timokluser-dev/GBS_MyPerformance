@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {EditClickEvent} from '../../../../components/page-title/page-title.component';
 import {EditModes} from '../../../../containers/mark-overview-container/mark-overview-container.component';
+import {data as mockData} from '../mock';
 
 @Component({
   selector: 'app-mark-overview-page',
@@ -9,6 +10,7 @@ import {EditModes} from '../../../../containers/mark-overview-container/mark-ove
 })
 export class MarkOverviewPageComponent implements OnInit {
   public editActive = false;
+  public data = mockData;
 
   // enum mapping
   public editModes = EditModes;

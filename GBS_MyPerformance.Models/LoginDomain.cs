@@ -1,4 +1,6 @@
 ﻿using System;
+using GBS_MyPerformance.Identity.Models;
+
 namespace GBS_MyPerformance.Models
 {
     public class LoginDomain

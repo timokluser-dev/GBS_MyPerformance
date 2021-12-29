@@ -19,8 +19,12 @@
                     <input *ngIf="!col.lookup" type="{{(col.type) ? col.type : 'text'}}" class="form-control"
                            value="{{getValue(col, row, true)}}" (change)="onInputChange(row,col.valueKey,$event)">
 
-                    <select *ngIf="col.lookup" class="form-select" (change)="onSelectChange(row,col.valueKey,$event)">
-                        <option *ngFor="let option of col.lookup" [selected]="option.value === getValue(col, row, true)"
+                    <select *ngIf="col.lookup" class="form-select"
+                            (click)="onSelectChange(row,col.valueKey,$event)"
+                            (selectionchange)="onSelectChange(row,col.valueKey,$event)"
+                            (change)="onSelectChange(row,col.valueKey,$event)">
+                        <option *ngFor="let option of col.lookup; first as isFirst;"
+                                [selected]="option.value === getValue(col, row, true) || (getValue(col, row, true) === null && isFirst)"
                                 value="{{option.value}}">{{option.name}}</option>
                     </select>
                 </div>

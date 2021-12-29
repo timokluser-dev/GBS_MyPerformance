@@ -25,13 +25,13 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
 
   get error(): string {
     switch (this.errorType) {
-      case Errors.NO_PERMISSION:
+      case Errors.NO_PERMISSION: // tslint:disable-line
         return 'Leider haben Sie keinen Zugriff auf die gewünschte Seite.';
-      case Errors.NOT_FOUND:
+      case Errors.NOT_FOUND: // tslint:disable-line
         return 'Die gewünschte Seite wurde leider nicht gefunden.';
-      case Errors.MFA_REQUIRED:
+      case Errors.MFA_REQUIRED: // tslint:disable-line
         return 'Sie müssen die 2 Faktor Authentifizierung aktiviert haben, um auf die gewünschte Seite zu gelangen.';
-      case Errors.NO_ROLE:
+      case Errors.NO_ROLE: // tslint:disable-line
         return 'Sie haben (noch) keine Rolle im System. Kontaktieren Sie bitte den Administrator.';
       default:
         return 'Leider ist ein Fehler aufgetreten. Wir arbeiten schon daran.';
@@ -39,7 +39,7 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
   }
 
   get showHomeLink(): boolean {
-    return this.errorType !== Errors.NO_ROLE;
+    return this.errorType !== Errors.NO_ROLE; // tslint:disable-line
   }
 }
 

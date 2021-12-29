@@ -11,6 +11,7 @@ namespace GBS_MyPerformance.Data.Migrations
 
             migrationBuilder.Sql("INSERT INTO dbo.AspNetUserRoles(UserId, RoleId) SELECT (SELECT Id FROM dbo.AspNetUsers WHERE NormalizedEmail = 'STUDENT@GBSSG.CH'), (SELECT Id FROM dbo.AspNetRoles WHERE NormalizedName = 'STUDENT')");
             migrationBuilder.Sql("INSERT INTO dbo.AspNetUserRoles(UserId, RoleId) SELECT (SELECT Id FROM dbo.AspNetUsers WHERE NormalizedEmail = 'TRAINER@GBSSG.CH'), (SELECT Id FROM dbo.AspNetRoles WHERE NormalizedName = 'TRAINER')");
+            migrationBuilder.Sql("INSERT INTO dbo.AspNetUserRoles(UserId, RoleId) SELECT (SELECT Id FROM dbo.AspNetUsers WHERE NormalizedEmail = 'TEACHER@GBSSG.CH'), (SELECT Id FROM dbo.AspNetRoles WHERE NormalizedName = 'TEACHER')");
             migrationBuilder.Sql("INSERT INTO dbo.AspNetUserRoles(UserId, RoleId) SELECT (SELECT Id FROM dbo.AspNetUsers WHERE NormalizedEmail = 'ADMINISTRATOR@GBSSG.CH'), (SELECT Id FROM dbo.AspNetRoles WHERE NormalizedName = 'ADMINISTRATOR')");
 
             migrationBuilder.Sql("INSERT INTO dbo.AspNetUserRoles(UserId, RoleId) SELECT (SELECT Id FROM dbo.AspNetUsers WHERE NormalizedEmail = 'MANAGING-TEACHER@GBSSG.CH'), (SELECT Id FROM dbo.AspNetRoles WHERE NormalizedName = 'TEACHER')");

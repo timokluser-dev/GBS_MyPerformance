@@ -1,12 +1,21 @@
 <app-page-title [title]="'Lernende'" [showEdit]="false"></app-page-title>
 
-<div class="profession-select mb-4 row">
-    <div class="col-12 col-md-6">
-        <p class="mb-1">Beruf:</p>
-        <select class="form-select" (change)="onProfessionSelected($event)">
-            <option [selected]="profession.name === selectedProfession.name" *ngFor="let profession of apprenticesProfessions">{{profession.name}}</option>
-        </select>
+<ng-container *ngIf="studentsMarkTableData.length > 0">
+    <div class="profession-select mb-4 row">
+        <div class="col-12 col-md-6">
+            <p class="mb-1">Beruf:</p>
+            <select class="form-select" (change)="onProfessionSelected($event)">
+                <option [selected]="profession.name === selectedProfession.name"
+                        *ngFor="let profession of apprenticesProfessions">{{profession.name}}</option>
+            </select>
+        </div>
     </div>
-</div>
 
-<app-students-mark-table [data]="studentsMarkTableData" (detail)="onDetail($event)"></app-students-mark-table>
+    <app-students-mark-table [data]="studentsMarkTableData" (detail)="onDetail($event)"
+                             [ratingCategoriesDefinition]="ratingCategoriesDefinition"></app-students-mark-table>
+</ng-container>
+
+<ng-container *ngIf="studentsMarkTableData.length === 0">
+    <p class="text-muted mt-4">Ihnen wurden (noch) keinen Lernenden zugeteilt. Versuchen Sie es später noch einmal.</p>
+</ng-container>
+

@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-import {RouterModule} from '@angular/router';
+import {NoPreloading, RouterModule} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {environment} from 'src/environments/environment';
 import * as process from 'process';
@@ -25,7 +25,13 @@ import {MarkOverviewPageComponent} from './pages/portals/student';
 import {
   ApprenticesListPageComponent,
   ApprenticesDetailPageComponent,
-} from './pages/portals/trainer/';
+} from './pages/portals/trainer';
+
+import {
+  ClassDetailPageComponent,
+  ClassesOverviewPageComponentComponent,
+  ClassStudentDetailPageComponent,
+} from './pages/portals/teacher';
 
 import {
   EditCalculationPageComponent,
@@ -50,6 +56,7 @@ import {ApiAuthorizationModule} from 'src/api-authorization/api-authorization.mo
 import {AuthorizeInterceptor} from 'src/api-authorization/authorize.interceptor';
 import {ComponentsModule} from './components/components.module';
 import {DirectivesModule} from './directives/directives.module';
+
 //#endregion Modules
 
 @NgModule({
@@ -67,6 +74,9 @@ import {DirectivesModule} from './directives/directives.module';
     EditCalculationPageComponent,
     ApprenticesListPageComponent,
     ApprenticesDetailPageComponent,
+    ClassDetailPageComponent,
+    ClassStudentDetailPageComponent,
+    ClassesOverviewPageComponentComponent,
     BlankPageComponent,
   ],
   imports: [
@@ -168,10 +178,18 @@ import {DirectivesModule} from './directives/directives.module';
               canActivate: [RoleGuard],
               data: {role: AppRoles.TEACHER},
               children: [
-                {path: '', redirectTo: 'home', pathMatch: 'full'},
+                {path: '', redirectTo: 'classes', pathMatch: 'full'},
                 {
-                  path: 'home',
-                  component: BlankPageComponent, // TODO
+                  path: 'classes',
+                  component: ClassesOverviewPageComponentComponent,
+                },
+                {
+                  path: 'class/:class',
+                  component: ClassDetailPageComponent,
+                },
+                {
+                  path: 'class/:class/student/:id',
+                  component: ClassStudentDetailPageComponent,
                 },
               ],
             },
@@ -186,7 +204,7 @@ import {DirectivesModule} from './directives/directives.module';
                   component: SystemManagementPageComponent,
                 },
                 {
-                  path: 'edit-calculation/:id',
+                  path: 'calculation/:id',
                   component: EditCalculationPageComponent,
                 },
                 {
@@ -223,8 +241,10 @@ import {DirectivesModule} from './directives/directives.module';
         {path: '**', redirectTo: '/error/not-found'},
       ],
       {
-        enableTracing: !environment.production && (process.env.ENABLE_TRACING as boolean),
-        onSameUrlNavigation: 'reload',
+        preloadingStrategy: NoPreloading,
+        enableTracing:
+          !environment.production &&
+          ((process.env.ENABLE_TRACING as undefined as boolean) || false),
         errorHandler() {
           // because of error, angular router should not be used
           // @see: https://stackoverflow.com/a/47290078

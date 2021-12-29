@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {EditClickEvent} from '../../../../components/page-title/page-title.component';
-import {TableAction, TableActionEvent} from '../../../../components/table/table.component';
+import {TableAction, TableActionEvent} from '../../../../components/table/table.component.constants';
 import {TableDataType} from '../../../../components/table/table.component.constants';
 
 @Component({

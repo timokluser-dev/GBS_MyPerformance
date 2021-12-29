@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {TableAction, TableActionEvent} from '../../../../components/table/table.component';
+import {TableAction, TableActionEvent} from '../../../../components/table/table.component.constants';
 
 @Component({
   selector: 'app-registration-requests-page',

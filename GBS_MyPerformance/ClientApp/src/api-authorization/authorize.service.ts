@@ -98,7 +98,7 @@ export class AuthorizeService {
       try {
         if (this.popUpDisabled) {
           throw new Error(
-            "Popup disabled. Change 'authorize.service.ts:AuthorizeService.popupDisabled' to false to enable it."
+            'Popup disabled. Change \'authorize.service.ts:AuthorizeService.popupDisabled\' to false to enable it.'
           );
         }
         user = await this.userManager.signinPopup(this.createArguments());
@@ -140,7 +140,7 @@ export class AuthorizeService {
     try {
       if (this.popUpDisabled) {
         throw new Error(
-          "Popup disabled. Change 'authorize.service.ts:AuthorizeService.popupDisabled' to false to enable it."
+          'Popup disabled. Change \'authorize.service.ts:AuthorizeService.popupDisabled\' to false to enable it.'
         );
       }
 

@@ -2,6 +2,12 @@
            [actions]="tableActions" (actionClick)="onTableAction($event)"
            [edit]="false" [create]="false"></app-table>
 
-<p>Abbrev & Full name</p>
+<ng-container *ngIf="ratingCategoriesDefinition">
+    <div class="row mt-4 mb-2">
+        <div class="col-auto" *ngFor="let ratingCategory of ratingCategoriesDefinition">
+            {{ratingCategory.abbreviation}}: {{ratingCategory.name}}
+        </div>
+    </div>
 
-<p>Calculation formula</p>
+    <p>Gesamtnote: {{calculationText}}</p>
+</ng-container>

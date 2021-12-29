@@ -1,3 +1,14 @@
+<div class="page-title__breadcrumbs">
+    <nav *ngIf="showBreadcrumb">
+        <ol class="breadcrumb d-flex justify-content-center">
+            <li class="breadcrumb-item" *ngFor="let breadcrumb of breadcrumbItems; last as isLast;">
+                <a [routerLink]="[breadcrumb.link]" *ngIf="!isLast && breadcrumb.link">{{breadcrumb.name}}</a>
+                <ng-container *ngIf="isLast || !breadcrumb.link">{{breadcrumb.name}}</ng-container>
+            </li>
+        </ol>
+    </nav>
+</div>
+
 <div class="page-title__container row mb-4">
     <div class="page-title__title col-auto align-self-center" *ngIf="showBack">
         <i class="bi bi-arrow-left fs-1 lh-1" (click)="onBackClick()"></i>

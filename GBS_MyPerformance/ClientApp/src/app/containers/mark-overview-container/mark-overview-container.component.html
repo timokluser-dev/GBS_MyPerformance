@@ -13,7 +13,7 @@
 
             <div class="calculation__container mt-4" *ngIf="isOverview">
                 <span>Berechnung der Gesamtnote:</span>
-                <p>{{calculationText}}</p>
+                <p>{{finalCalculationText}}</p>
             </div>
         </div>
 
@@ -23,11 +23,11 @@
             <app-table [data]="overviewTableData" [rawData]="overviewTableData" [mapping]="overviewTableMapping"
                        [edit]="editActive && editMode !== editModes.READ_ONLY"
                        [create]="false"
-                       [editConditionEval]="editConditionEval" class="w-50"></app-table>
+                       [editConditionEval]="editConditionEval"
+                       class="w-50"></app-table>
 
             <div class="rating-category__label mt-1">
-                <p class="fw-lighter">{{selectedRatingCategory.abbreviation}}: {{selectedRatingCategory.name}}
-                    ({{selectedRatingCategory.diplomaFactor * 100}}%)</p>
+                <p class="fw-lighter">{{ratingCategoryCalculationText}}</p>
             </div>
         </div>
     </div>
