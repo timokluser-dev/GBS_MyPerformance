@@ -23,5 +23,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)ApprenticeTrainer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Semester.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Company.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LoginDomain.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EditTimeSpan.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SystemSetting.cs" />
   </ItemGroup>
 </Project>

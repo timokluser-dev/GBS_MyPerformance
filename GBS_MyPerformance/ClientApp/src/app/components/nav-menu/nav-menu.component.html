@@ -1,0 +1,33 @@
+<header class="fixed-top">
+    <nav class="nav navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-0 mb-md-3">
+        <div class="container-fluid">
+
+            <div class="row nav__left" [routerLink]="['/']">
+                <div class="col-auto align-self-center">
+                    <a>
+                        <i class="bi bi-house-door fs-2"></i>
+                    </a>
+                </div>
+                <div class="col px-0 mx-3 align-self-center d-none d-lg-block">
+                    <span class="navbar-brand m-0">MyPerformance</span>
+                </div>
+            </div>
+
+            <button class="navbar-toggler nav__right"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target=".navbar-collapse"
+                    aria-label="Toggle navigation"
+                    [attr.aria-expanded]="isExpanded"
+                    (click)="toggle()"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse mt-md-0" [ngClass]="{show: isExpanded}">
+                <div class="nav__right">
+                    <app-login-menu></app-login-menu>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

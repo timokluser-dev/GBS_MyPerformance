@@ -34,12 +34,12 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [StringLength(7, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(7, ErrorMessage = "Der {0} muss mindestens {2} und darf höchstens {1} Zeichen lang sein.", MinimumLength = 6)]
             [DataType(DataType.Text)]
-            [Display(Name = "Authenticator code")]
+            [Display(Name = "Code")]
             public string TwoFactorCode { get; set; }
 
-            [Display(Name = "Remember this machine")]
+            [Display(Name = "Dieses Gerät merken")]
             public bool RememberMachine { get; set; }
         }
 
@@ -50,7 +50,7 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account
 
             if (user == null)
             {
-                throw new InvalidOperationException($"Unable to load two-factor authentication user.");
+                throw new InvalidOperationException($"Benutzer mit Zwei-Faktor-Authentifizierung kann nicht geladen werden.");
             }
 
             ReturnUrl = returnUrl;
@@ -71,7 +71,7 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
             if (user == null)
             {
-                throw new InvalidOperationException($"Unable to load two-factor authentication user.");
+                throw new InvalidOperationException($"Benutzer mit Zwei-Faktor-Authentifizierung kann nicht geladen werden.");
             }
 
             var authenticatorCode = Input.TwoFactorCode.Replace(" ", string.Empty).Replace("-", string.Empty);
@@ -91,7 +91,7 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account
             else
             {
                 _logger.LogWarning("Invalid authenticator code entered for user with ID '{UserId}'.", user.Id);
-                ModelState.AddModelError(string.Empty, "Invalid authenticator code.");
+                ModelState.AddModelError(string.Empty, "Ungültiger Code");
                 return Page();
             }
         }

@@ -8,6 +8,7 @@ import {ApplicationPaths} from './api-authorization.constants';
 import {HttpClientModule} from '@angular/common/http';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ComponentsModule} from '../app/components/components.module';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     HttpClientModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
+    ComponentsModule,
     RouterModule.forChild([
       {path: ApplicationPaths.Register, component: LoginComponent},
       {path: ApplicationPaths.Profile, component: LoginComponent},

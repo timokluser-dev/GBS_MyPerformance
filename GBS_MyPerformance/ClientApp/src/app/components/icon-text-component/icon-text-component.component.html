@@ -1,0 +1,19 @@
+<div class="icon-text icon-text__container p-md-5 pt-md-0 d-flex justify-content-center">
+    <div>
+        <div class="row icon-text__icon">
+            <div class="col d-flex justify-content-center">
+                <i bind-class="iconClass"></i>
+            </div>
+        </div>
+        <div class="row mt-2 mb-2">
+            <div class="col d-flex justify-content-center text-center">
+                <h4 *ngIf="textContent">{{ textContent }}</h4>
+            </div>
+        </div>
+        <div class="row" *ngIf="showHomeLink">
+            <div class="col d-flex justify-content-center">
+                <a [routerLink]="['/']">Zur Startseite</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -32,6 +32,7 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account.Manage
         {
             [Required]
             [DataType(DataType.Password)]
+            [Display(Name = "Passwort")]
             public string Password { get; set; }
         }
 
@@ -67,18 +68,25 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account.Manage
                 }
             }
 
-            var result = await _userManager.DeleteAsync(user);
-            var userId = await _userManager.GetUserIdAsync(user);
-            if (!result.Succeeded)
-            {
-                throw new InvalidOperationException($"Unexpected error occurred deleting user with ID '{userId}'.");
-            }
+            await DisableUser(user);
+
+            return Redirect("~/Identity/Account/Logout");
+        }
+
+        private async Task DisableUser(ApplicationUser user)
+        {
+            user.PasswordHash = null;
+            await _userManager.UpdateAsync(user);
+
+            await _userManager.SetLockoutEnabledAsync(user, true);
+            var result = await _userManager.SetLockoutEndDateAsync(user, new DateTimeOffset(new DateTime(9999, 12, 31)));
 
             await _signInManager.SignOutAsync();
 
-            _logger.LogInformation("User with ID '{UserId}' deleted themselves.", userId);
-
-            return Redirect("~/");
+            if (result.Succeeded)
+            {
+                _logger.LogInformation("User with ID '{UserId}' disabled themselves.", user.Id);
+            }
         }
     }
 }

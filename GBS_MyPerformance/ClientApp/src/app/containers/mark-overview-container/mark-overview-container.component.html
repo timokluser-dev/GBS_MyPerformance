@@ -1,0 +1,34 @@
+<app-tabs [tabs]="tabs" (tabChange)="onTabChange($event)"></app-tabs>
+
+<section>
+    <div class="row">
+        <div class="col-12 col-md-7 pe-md-5">
+            <h5 class="mt-5 mb-3">{{this.activeRatingCategory}}</h5>
+
+            <app-table [data]="primaryTableData" [rawData]="primaryTableData" [mapping]="primaryTableMapping"
+                       [edit]="editActive && editMode !== editModes.READ_ONLY"
+                       [create]="false"
+                       [editConditionEval]="editConditionEval"
+                       class="w-50"></app-table>
+
+            <div class="calculation__container mt-4" *ngIf="isOverview">
+                <span>Berechnung der Gesamtnote:</span>
+                <p>{{finalCalculationText}}</p>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-5" *ngIf="!isOverview">
+            <h5 class="mt-5 mb-3">Übersicht</h5>
+
+            <app-table [data]="overviewTableData" [rawData]="overviewTableData" [mapping]="overviewTableMapping"
+                       [edit]="editActive && editMode !== editModes.READ_ONLY"
+                       [create]="false"
+                       [editConditionEval]="editConditionEval"
+                       class="w-50"></app-table>
+
+            <div class="rating-category__label mt-1">
+                <p class="fw-lighter">{{ratingCategoryCalculationText}}</p>
+            </div>
+        </div>
+    </div>
+</section>

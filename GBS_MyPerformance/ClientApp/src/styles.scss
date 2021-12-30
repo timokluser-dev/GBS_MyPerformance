@@ -1,0 +1,72 @@
+// Font
+@import url('./assets/fonts/fonts.css');
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+
+// Global Style
+*[ng-reflect-router-link] {
+  cursor: pointer;
+}
+
+.btn-success {
+  color: #ffffff !important;
+}
+
+html,
+body {
+  height: 100vh;
+  margin: 0;
+}
+
+app-root {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+table {
+  td {
+    p {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// scroll in nested tables
+app-table {
+  > .table-container {
+    > .table {
+      > thead {
+        z-index: 9;
+      }
+    }
+  }
+
+  &[ng-reflect-root-table='true'] {
+    > .table-container {
+      > .table {
+        > thead {
+          z-index: 99;
+        }
+      }
+    }
+  }
+}
+
+// Dark Mode Overrides
+@media (prefers-color-scheme: dark) {
+  @import "../node_modules/@timokluser-dev/bootstrap-dark-5/scss/bootstrap-nightfall";
+
+  .help-modal {
+    background-color: $color-contrast-dark !important;
+
+    .title {
+      padding-top: 0 !important;
+    }
+  }
+}

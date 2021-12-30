@@ -1,0 +1,6 @@
+<ul class="nav nav-tabs d-flex justify-content-start mb-4">
+    <li class="nav-item" *ngFor="let tab of tabs">
+        <a class="nav-link fs-6 px-0 mx-3" [class.ms-lg-0]="tab === tabs[0]" [class.active]="tab === activeTab"
+           (click)="onTabClick(tab)">{{tab}}</a>
+    </li>
+</ul>

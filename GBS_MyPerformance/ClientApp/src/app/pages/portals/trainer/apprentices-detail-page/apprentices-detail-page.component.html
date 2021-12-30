@@ -1,0 +1,5 @@
+<app-page-title [title]="apprentice.student.firstName + ' ' + apprentice.student.lastName" [showBack]="true"
+                [showEdit]="false"></app-page-title>
+
+<app-mark-overview-container *ngIf="apprentice" [editActive]="false" [editMode]="editModes.READ_ONLY"
+                             [data]="apprentice"></app-mark-overview-container>

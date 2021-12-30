@@ -1,1 +1,13 @@
-<p>students-mark-table works!</p>
+<app-table [data]="tableData" [mapping]="tableMapping"
+           [actions]="tableActions" (actionClick)="onTableAction($event)"
+           [edit]="false" [create]="false"></app-table>
+
+<ng-container *ngIf="ratingCategoriesDefinition">
+    <div class="row mt-4 mb-2">
+        <div class="col-auto" *ngFor="let ratingCategory of ratingCategoriesDefinition">
+            {{ratingCategory.abbreviation}}: {{ratingCategory.name}}
+        </div>
+    </div>
+
+    <p>Gesamtnote: {{calculationText}}</p>
+</ng-container>

@@ -1,1 +1,76 @@
-<p>table works!</p>
+<div class="table-container">
+    <table class="table">
+        <thead class="sticky-top table-light">
+        <tr>
+            <th scope="col" *ngFor="let col of tableHeaderRow"
+                class="{{ (col.type !== tableDataType.SUBTABLE) ? 'width__' + mappingKeys.length : 'w-auto' }}">{{col.header}}</th>
+
+            <ng-container *ngFor="let action of actions">
+                <th *ngIf="action.display || edit">{{action.name}}</th>
+            </ng-container>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngIf="data && data.length > 0">
+            <tr *ngFor="let row of data">
+                <td class="align-self-center"
+                    *ngFor="let col of mappingKeys"
+                    [class.fw-bolder]="row['textBold'] || col['textBold']"
+                    class="{{ (col.type !== tableDataType.SUBTABLE) ? 'width__' + mappingKeys.length : 'w-auto' }}">
+
+                    <ng-container *ngIf="col.type === tableDataType.SUBTABLE">
+                        <app-table [data]="getValue(col, row, false,row.id)" [rawData]="getValue(col, row, false)"
+                                   [mapping]="col.subMapping"
+                                   [edit]="edit" [create]="true"
+                                   [rootTable]="false"
+                                   [actions]="[{name:'',icon: { iconClass: 'bi bi-x-circle',colorClass: 'text-danger'},event: ('delete-' + col.valueKey)}]"
+                                   (actionClick)="onTableAction($event,row)"
+                        ></app-table>
+
+                    </ng-container>
+
+                    <p *ngIf="!isEditable(col,row) && col.type !== tableDataType.SUBTABLE">{{getValue(col, row, false)}}</p>
+
+                    <div *ngIf="isEditable(col,row) && col.type !== tableDataType.SUBTABLE" class="input-group">
+                        <input *ngIf="!col.lookup" type="{{(col.type) ? col.type : 'text'}}" class="form-control"
+                               value="{{getValue(col, row, true)}}" (change)="onInputChange(row,col.valueKey,$event)">
+
+                        <select *ngIf="col.lookup" class="form-select"
+                                (click)="onSelectChange(row,col.valueKey,$event)"
+                                (selectionchange)="onSelectChange(row,col.valueKey,$event)"
+                                (change)="onSelectChange(row,col.valueKey,$event)">
+                            <option value=""
+                                    *ngIf="getValue(col, row, true) === null || getValue(col, row, true) === ''"
+                                    [selected]="getValue(col, row, true) === null">Auswählen
+                            </option>
+                            <option *ngFor="let option of col.lookup; first as isFirst;"
+                                    [selected]="option.value === getValue(col, row, true)"
+                                    value="{{option.value}}">{{option.name}}</option>
+                        </select>
+                    </div>
+                </td>
+
+                <ng-container *ngFor="let action of visibleActions">
+                    <td class="text-center align-self-center">
+                        <i class="{{action.icon.colorClass}} {{action.icon.iconClass}}"
+                           (click)="onActionClick(action.event,row)"></i>
+                    </td>
+                </ng-container>
+            </tr>
+
+            <tr *ngIf="!data || data.length === 0">
+                <td [attr.colspan]="tableHeaderRow.length + visibleActions.length">
+                    <p class="fst-italic">Keine Einträge</p>
+                </td>
+            </tr>
+
+
+        </ng-container>
+        </tbody>
+    </table>
+
+    <button type="button" *ngIf="edit && create && rawData !== null" class="btn btn-light mb-3" (click)="onNewClick()">
+        <i class="bi bi-plus-circle"></i>
+    </button>
+</div>
+

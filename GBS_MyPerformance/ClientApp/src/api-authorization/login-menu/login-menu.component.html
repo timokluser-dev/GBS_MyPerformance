@@ -1,24 +1,64 @@
-<ul class="navbar-nav" *ngIf="isAuthenticated | async">
-  <li class="nav-item">
-    <a class="nav-link text-dark" [routerLink]="['/authentication/profile']" title="Manage"
-      >Hello {{ userName | async }}</a
-    >
-  </li>
-  <li class="nav-item">
-    <a
-      class="nav-link text-dark"
-      [routerLink]="['/authentication/logout']"
-      [state]="{local: true}"
-      title="Logout"
-      >Logout</a
-    >
-  </li>
+<ul class="login-menu navbar-nav authenticated" *ngIf="isAuthenticated | async">
+    <!-- Admin Menu -->
+    <ng-container *ngIf="(roles | async).includes(appRoles.ADMIN) && appPortal === appPortals.ADMIN">
+        <li class="nav-item mx-3 align-self-md-center">
+            <a class="nav-link position-relative" [routerLink]="['/app/admin/system-management']"
+               title="Rückerfassungsgrenze">
+                Verwaltung
+            </a>
+        </li>
+        <li class="nav-item mx-3 align-self-md-center">
+            <a class="nav-link position-relative" [routerLink]="['/app/admin/manage-users']"
+               title="Benutzer">
+                Benutzer
+            </a>
+        </li>
+        <li class="nav-item mx-3 align-self-md-center">
+            <a class="nav-link position-relative" [routerLink]="['/app/admin/manage-edit-period']"
+               title="Rückerfassungsgrenze">
+                Rückerfassungsgrenze
+            </a>
+        </li>
+        <li class="nav-item mx-3 align-self-md-center">
+            <a class="nav-link position-relative" [routerLink]="['/app/admin/registration-requests']" title="Anfragen">
+                Anfragen
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none d-md-block">
+                {{pendingRequestsCount}}
+                </span>
+            </a>
+        </li>
+    </ng-container>
+
+    <!-- Admin Option for Teachers -->
+    <ng-container *ngIf="(showAdmin | async) && appPortal === appPortals.TEACHER">
+        <li class="nav-item mx-3 align-self-md-center">
+            <a class="nav-link position-relative" [routerLink]="['/app/admin']" title="Administration"
+               [class.disabled]="adminDisabledNoMfa | async">
+                Administration
+            </a>
+        </li>
+    </ng-container>
+
+    <li class="nav-item mx-3 align-self-md-center">
+        <a class="nav-link" [routerLink]="['/authentication/profile']" title="Profil">
+            <!-- Profil -->
+            <i class="bi bi-person-circle fs-3 d-none d-md-block"></i>
+            <p class="d-inline-block d-md-none m-0">Profil</p>
+        </a>
+    </li>
+    <li class="nav-item mx-3 mx-md-0 align-self-md-center">
+        <a class="nav-link" title="Abmelden" [routerLink]="['/authentication/logout']" [state]="{local: true}">
+            <!-- Abmelden -->
+            <i class="bi bi-box-arrow-right fs-3 d-none d-md-block"></i>
+            <p class="d-inline-block d-md-none m-0">Abmelden</p>
+        </a>
+    </li>
 </ul>
-<ul class="navbar-nav" *ngIf="!(isAuthenticated | async)">
-  <li class="nav-item">
-    <a class="nav-link text-dark" [routerLink]="['/authentication/register']">Register</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link text-dark" [routerLink]="['/authentication/login']">Login</a>
-  </li>
+
+<ul class="navbar-nav not-authenticated" *ngIf="!(isAuthenticated | async)">
+    <li class="nav-item mx-3 mx-md-0 align-self-md-center">
+        <a class="nav-link" [routerLink]="['/authentication/login']">
+            <i class="bi bi-box-arrow-in-left fs-3"></i>
+        </a>
+    </li>
 </ul>

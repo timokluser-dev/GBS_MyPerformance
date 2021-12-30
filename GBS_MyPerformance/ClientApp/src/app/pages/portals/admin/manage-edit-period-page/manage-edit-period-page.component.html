@@ -1,0 +1,12 @@
+<app-page-title title="Rückerfassungsgrenze" [showEdit]="true" (editClick)="onEdit($event)"></app-page-title>
+
+<section>
+    <div class="row">
+        <p class="text-muted">Während dieser Zeit können die Lernenden ihre Noten im System erfassen. Bestehende sind
+            davon nicht betroffen und müssen von der LP geändert werden.</p>
+        <div class="col-12 col-md-4">
+            <app-table [mapping]="editPeriodMapping" [data]="editPeriodData" [edit]="isEditMode"
+                       [create]="false"></app-table>
+        </div>
+    </div>
+</section>

@@ -50,9 +50,9 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             [Required]
-            [StringLength(7, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(7, ErrorMessage = "Der {0} muss mindestens {2} und darf höchstens {1} Zeichen lang sein.", MinimumLength = 6)]
             [DataType(DataType.Text)]
-            [Display(Name = "Verification Code")]
+            [Display(Name = "Bestätigungs Code")]
             public string Code { get; set; }
         }
 
@@ -93,7 +93,7 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account.Manage
 
             if (!is2faTokenValid)
             {
-                ModelState.AddModelError("Input.Code", "Verification code is invalid.");
+                ModelState.AddModelError("Input.Code", "Der Code ist ungültig.");
                 await LoadSharedKeyAndQrCodeUriAsync(user);
                 return Page();
             }
@@ -102,7 +102,7 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account.Manage
             var userId = await _userManager.GetUserIdAsync(user);
             _logger.LogInformation("User with ID '{UserId}' has enabled 2FA with an authenticator app.", userId);
 
-            StatusMessage = "Your authenticator app has been verified.";
+            StatusMessage = "Die 2-Faktor-Authentifizierung wurde erfolgreich aktiviert.";
 
             if (await _userManager.CountRecoveryCodesAsync(user) == 0)
             {
