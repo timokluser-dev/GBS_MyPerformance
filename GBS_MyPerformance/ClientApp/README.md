@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.12.
 
-:arror_right: [Angular 8 Docs](https://v8.angular.io/docs)
+:arrow_right: [Angular 8 Docs](https://v8.angular.io/docs)
 
 ## Development server
 
