@@ -45,7 +45,7 @@ export class LoginMenuComponent implements OnInit {
   }
 
   get pendingRequestsCount(): number {
-    return 2;
+    return 5;
   }
 
   /**

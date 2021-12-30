@@ -6,6 +6,7 @@ tbody {
 
 thead {
   background-color: $white;
+
   th {
     font-weight: $font-weight-normal;
     text-transform: capitalize;
@@ -19,7 +20,7 @@ thead {
 }
 
 // helpers for table col width
-@for $i from 1 through 10 {
+@for $i from 1 through 25 {
   $width: 100% / $i;
   .width__#{$i} {
     max-width: $width;

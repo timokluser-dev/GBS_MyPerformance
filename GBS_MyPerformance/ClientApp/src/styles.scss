@@ -37,6 +37,27 @@ table {
   }
 }
 
+// scroll in nested tables
+app-table {
+  > .table-container {
+    > .table {
+      > thead {
+        z-index: 9;
+      }
+    }
+  }
+
+  &[ng-reflect-root-table='true'] {
+    > .table-container {
+      > .table {
+        > thead {
+          z-index: 99;
+        }
+      }
+    }
+  }
+}
+
 // Dark Mode Overrides
 @media (prefers-color-scheme: dark) {
   @import "../node_modules/@timokluser-dev/bootstrap-dark-5/scss/bootstrap-nightfall";

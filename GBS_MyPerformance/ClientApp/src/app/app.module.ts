@@ -208,6 +208,10 @@ import {DirectivesModule} from './directives/directives.module';
                   component: EditCalculationPageComponent,
                 },
                 {
+                  path: 'calculation/:id/update',
+                  component: BlankPageComponent,
+                },
+                {
                   path: 'manage-users',
                   component: ManageUsersPageComponent,
                 },
@@ -241,6 +245,7 @@ import {DirectivesModule} from './directives/directives.module';
         {path: '**', redirectTo: '/error/not-found'},
       ],
       {
+        onSameUrlNavigation: 'reload',
         preloadingStrategy: NoPreloading,
         enableTracing:
           !environment.production &&

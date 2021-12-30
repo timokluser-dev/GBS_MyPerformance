@@ -38,6 +38,5 @@ export class ManageEditPeriodPageComponent implements OnInit {
 
   onEdit($event: EditClickEvent) {
     this.isEditMode = $event.edit;
-    console.log(this.editPeriodData);
   }
 }

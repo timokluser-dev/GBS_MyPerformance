@@ -7,6 +7,7 @@
     <app-table [data]="professionsData" [rawData]="professionsData" [mapping]="professionsMapping"
                [actions]="professionsActions"
                (actionClick)="onProfessionsTableAction($event)"
+               [createAdditionalParams]="{ratingCategories:[],subjects:[]}"
                [edit]="editActive" [create]="true"></app-table>
 </ng-container>
 

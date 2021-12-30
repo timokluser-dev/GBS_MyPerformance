@@ -1,4 +1,19 @@
-<app-page-title [title]="'Gewichtung'" [editActive]="false" [showEdit]="false"
-                [showBack]="true"></app-page-title>
+<app-page-title title="Gewichtung" [editActive]="editActive" [showEdit]="profession !== null"
+                [showBack]="true" (editClick)="onEditClick($event)"></app-page-title>
 
-<h3>{{profession.name}}</h3>
+
+<section *ngIf="profession">
+    <h3 class="mb-4">{{profession.name}}</h3>
+
+    <div>
+        <app-table [data]="professionData" [rawData]="professionData"
+                   [mapping]="professionConfigMapping"
+                   [actions]="tableActions" (actionClick)="onTableAction($event)" [rootTable]="true"
+                   [edit]="editActive" [create]="initialCategoriesCount === professionData.length" [createAdditionalParams]="createAdditionalParams"
+        ></app-table>
+    </div>
+</section>
+
+<section *ngIf="!profession">
+    <p class="text-muted mt-4">Der gewünschte Beruf existiert nicht. Versuchen Sie es später noch einmal.</p>
+</section>
