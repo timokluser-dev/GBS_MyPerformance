@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {data} from '../mock';
 
 @Component({
   selector: 'app-classes-overview-page-component',
@@ -7,7 +8,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ClassesOverviewPageComponentComponent implements OnInit {
   public breadcrumbs = [{name: 'Klassen', link: null}];
-
+  public classes = data;
   constructor() {}
 
   ngOnInit() {}

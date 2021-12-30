@@ -1,1 +1,8 @@
-<p>grid-view works!</p>
+<div class="dashboard">
+    <div *ngFor="let class of classes" class="panel" (click)="onSelectClass(class.name)" >
+        <h2>{{class.name}}</h2>
+        <label>{{class.activeFrom}} - {{class.activeTo}}</label>
+        <label>{{class.students[0].profession.name}}</label>
+        <label>{{class.students.length}} Schüler</label>
+    </div>
+</div>

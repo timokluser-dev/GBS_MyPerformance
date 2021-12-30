@@ -4,6 +4,8 @@ export const data: SchoolClassData[] = [
   {
     id: '37b23f6f-12b7-4e01-9ee3-972bcf22ef79',
     name: 'INA1a_2019',
+    activeFrom: 2014,
+    activeTo: 2024,
     students: [
       {
         student: {
@@ -664,6 +666,8 @@ export const data: SchoolClassData[] = [
   {
     id: '37b23f6f-12b7-4e01-9ee3-972bcf22ef80',
     name: 'INS1a_2019',
+    activeFrom: 2014,
+    activeTo: 2024,
     students: [
       {
         student: {
