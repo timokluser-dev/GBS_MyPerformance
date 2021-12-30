@@ -8,7 +8,7 @@ Run helper scripts using npm-scripts.
 - **Git**
   - Windows: https://git-scm.com/download/win
   - macOS: https://git-scm.com/download/mac
-- **NodeJS** - Version [16.13.0](.nvmrc)
+- **Node.js** - Version [16.13.0](.nvmrc)
   - Windows: https://github.com/coreybutler/nvm-windows/releases/download/1.1.9/nvm-setup.zip
   - macOS: https://github.com/nvm-sh/nvm#install--update-script
 - **dotnet SDK** - Version [3.1.416](global.json)

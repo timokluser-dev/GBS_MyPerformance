@@ -23,7 +23,7 @@
                                    [mapping]="col.subMapping"
                                    [edit]="edit" [create]="true"
                                    [rootTable]="false"
-                                   [actions]="[{name:'Entfernen',icon: { iconClass: 'bi bi-x-circle',colorClass: 'text-danger'},event: ('delete-' + col.valueKey)}]"
+                                   [actions]="[{name:'',icon: { iconClass: 'bi bi-x-circle',colorClass: 'text-danger'},event: ('delete-' + col.valueKey)}]"
                                    (actionClick)="onTableAction($event,row)"
                         ></app-table>
 
