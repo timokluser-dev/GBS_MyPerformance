@@ -1,0 +1,19 @@
+<section>
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-4" *ngFor="let schoolClass of classes">
+            <div class="card h-100" (click)="onSelectClass(schoolClass)">
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col d-flex justify-content-center">
+                            <i class="bi bi-code-slash card__icon"></i>
+                        </div>
+                    </div>
+                    <h5 class="card-title text-center">{{schoolClass.name}}</h5>
+                    <p class="text-center">{{schoolClass.activeFrom}} - {{schoolClass.activeTo}}</p>
+                    <p class="text-center">{{getProfession(schoolClass)}}</p>
+                    <p class="text-muted text-center">{{schoolClass.students.length}} Schüler</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

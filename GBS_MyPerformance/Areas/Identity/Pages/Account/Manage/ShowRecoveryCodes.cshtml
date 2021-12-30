@@ -1,0 +1,31 @@
+﻿@page
+@model ShowRecoveryCodesModel
+@{ ViewData["Title"] = "2FA Wiederherstellungscodes";
+    ViewData["ActivePage"] = "TwoFactorAuthentication"; }
+
+<partial name="_StatusMessage" for="StatusMessage" />
+<h4>@ViewData["Title"]</h4>
+<div class="row">
+    <div class="col-md-12">
+        @for (var row = 0; row < Model.RecoveryCodes.Length; row += 2)
+        {
+<code class="recovery-code">@Model.RecoveryCodes[row]</code><text>&nbsp;</text><code class="recovery-code">@Model.RecoveryCodes[row + 1]</code><br />}
+    </div>
+
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-12">
+        <form id="confirm-codes" method="post" asp-route-returnUrl="@Model.ReturnUrl">
+            <button type="submit" class="btn btn-primary">Ich habe die Codes notiert</button>
+        </form>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col">
+        <p class="text-muted">
+            Gegebenenfalls müssen Sie sich anschliessend erneut in das System einloggen.
+        </p>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+﻿@page
+@model Disable2faModel
+@{
+    ViewData["Title"] = "2-Faktor-Authentifizierung deaktivieren";
+    ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
+}
+
+<partial name="_StatusMessage" for="StatusMessage" />
+<h2>@ViewData["Title"]</h2>
+
+<div class="alert alert-warning" role="alert">
+    <p class="mb-0">
+        Diese Aktion deaktiviert die Sichere Anmeldung mit 2FA.
+    </p>
+</div>
+
+<div>
+    <form method="post" class="form-group">
+        <button class="btn btn-danger" type="submit">2FA deaktivieren</button>
+    </form>
+</div>

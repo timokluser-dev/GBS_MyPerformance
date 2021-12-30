@@ -1,0 +1,57 @@
+﻿@page
+@model TwoFactorAuthenticationModel
+@{
+    ViewData["Title"] = "2-Faktor-Authentifizierung (2FA)";
+    ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
+}
+
+<partial name="_StatusMessage" for="StatusMessage" />
+<h4>@ViewData["Title"]</h4>
+@if (Model.Is2faEnabled)
+{
+    if (Model.RecoveryCodesLeft == 0)
+    {
+        <div class="alert alert-danger">
+            <strong>Sie haben keine Wiederherstellungscodes mehr.</strong>
+            <p>Neue <a asp-page="./GenerateRecoveryCodes">Wiederherstellungscode</a> generieren.</p>
+        </div>
+    }
+    else if (Model.RecoveryCodesLeft == 1)
+    {
+        <div class="alert alert-danger">
+            <strong>Sie haben noch 1 Wiederherstellungscode übrig.</strong>
+            <p>Neue <a asp-page="./GenerateRecoveryCodes">Wiederherstellungscode</a> generieren.</p>
+        </div>
+    }
+    else if (Model.RecoveryCodesLeft <= 3)
+    {
+        <div class="alert alert-warning">
+            <strong>Sie haben noch @Model.RecoveryCodesLeft Wiederherstellungscode übrig.</strong>
+            <p>Neue <a asp-page="./GenerateRecoveryCodes">Wiederherstellungscode</a> generieren.</p>
+        </div>
+    }
+
+    if (Model.IsMachineRemembered)
+    {
+        <form method="post" style="display: inline-block">
+            <button type="submit" class="btn btn-light">Dieses Gerät vergessen</button>
+        </form>
+    }
+    <a asp-page="./Disable2fa" class="btn btn-light">2FA deaktivieren</a>
+    <a asp-page="./GenerateRecoveryCodes" class="btn btn-light">Wiederherstellungscodes zurücksetzen</a>
+}
+
+<h5 class="mt-3">App</h5>
+@if (!Model.HasAuthenticator)
+{
+    <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-light">Neue App hinzufügen</a>
+}
+else
+{
+    <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-light">Weitere App hinzufügen</a>
+    <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="btn btn-light">Apps entfernen</a>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

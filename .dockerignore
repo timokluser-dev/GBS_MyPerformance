@@ -1,0 +1,7 @@
+# ignore all
+/
+/*
+
+# include namespace
+!GBS_MyPerformance*/
+!GBS_MyPerformance*/*

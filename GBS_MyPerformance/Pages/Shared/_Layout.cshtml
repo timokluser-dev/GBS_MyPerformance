@@ -1,0 +1,42 @@
+@using Microsoft.AspNetCore.Hosting
+@using Microsoft.AspNetCore.Mvc.ViewEngines
+@inject IWebHostEnvironment Environment
+@inject ICompositeViewEngine Engine
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GBS_MyPerformance</title>
+    <link rel="stylesheet" href="~/Identity/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Identity/css/site.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
+    <style>
+        body {
+            margin-bottom: 0px
+        }
+    </style>
+</head>
+<body>
+    @if (User.Identity.IsAuthenticated)
+    {
+<header>
+    <nav class="navbar navbar-expand-sm navbar-light navbar-toggleable-sm bg-white border-bottom box-shadow">
+        <div class="container-fluid pl-2 pl-md-4">
+            <a href="~/" style="text-decoration: none"><i class="bi bi-caret-left-fill"></i> Zurück zur Applikation</a>
+        </div>
+    </nav>
+</header>}
+
+    <div class="container-fluid">
+        <main role="main" class="p-2 pt-3 p-md-4">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/Identity/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/Identity/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Identity/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

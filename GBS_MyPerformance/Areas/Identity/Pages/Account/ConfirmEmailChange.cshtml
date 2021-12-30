@@ -1,0 +1,10 @@
+@page
+@model ConfirmEmailChangeModel
+@{
+    ViewData["Title"] = "E-Mail Änderung Bestätigen";
+}
+
+<h1>@ViewData["Title"]</h1>
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<a asp-page="./Login">Anmelden</a>

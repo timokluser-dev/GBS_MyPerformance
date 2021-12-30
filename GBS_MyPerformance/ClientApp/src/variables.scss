@@ -1,0 +1,26 @@
+$font-family-base: 'Roboto', sans-serif;
+$font-family-sans-serif: $font-family-base;
+
+//$primary: #6ea644;
+//$secondary: #414141;
+$body-color: #1A202C;
+$body-bg: #ffffff;
+$success: #00CB5D;
+
+$card-border-radius: 0px;
+$card-bg: none;
+
+$navbar-toggler-border-radius: 0px;
+
+$nav-tabs-border-width: 0px;
+
+$modal-footer-border-width: 0;
+$modal-header-border-width: 0;
+
+$input-focus-box-shadow: none;
+$input-btn-focus-box-shadow: none;
+$input-focus-border-color: 0;
+$input-btn-focus-width: 0;
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";

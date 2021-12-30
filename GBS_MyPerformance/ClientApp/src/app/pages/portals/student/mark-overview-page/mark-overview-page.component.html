@@ -1,0 +1,4 @@
+<app-page-title [title]="'Notenübersicht'" (editClick)="onEditClick($event)" [showEdit]="true"></app-page-title>
+
+<app-mark-overview-container [editActive]="editActive" [editMode]="editModes.NEW_ONLY"
+                             [data]="data"></app-mark-overview-container>
