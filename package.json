@@ -4,7 +4,6 @@
   "description": "GBS_MyPerformance Monorepo",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install",
     "postinstall": "npm run clientapp:install",
     "\n# MONOREPO -------- ": "",
@@ -12,7 +11,7 @@
     "\n# ENV: MAC -------- ": "",
     "mac:vs": "open \"/Applications/Visual Studio.app\" ; open \"./GBS_MyPerformance/GBS_MyPerformance.sln\"",
     "\n# ENV: WINDOWS -------- ": "",
-    "win:vs": "start \"./GBS_MyPerformance/GBS_MyPerformance.sln\"",
+    "win:vs": "start \"\" \"./GBS_MyPerformance/GBS_MyPerformance.sln\"",
     "\n# DOCKER -------- ": "",
     "docker:up": "docker-compose -f ./GBS_MyPerformance.Containers.Dev/docker-compose.yml up -d",
     "docker:down": "docker-compose -f ./GBS_MyPerformance.Containers.Dev/docker-compose.yml down",

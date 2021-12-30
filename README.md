@@ -14,6 +14,8 @@ Use the package manager [npm](https://www.npmjs.com) to install dependencies.
 npm install
 ```
 
+:arrow_right: [Developer Setup](developer-setup.md)
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
