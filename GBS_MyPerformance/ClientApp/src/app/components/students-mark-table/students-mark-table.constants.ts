@@ -35,5 +35,7 @@ export interface StudentData {
 export interface SchoolClassData {
   id: string;
   name: string;
+  activeFrom: number;
+  activeTo: number;
   students: StudentData[];
 }
