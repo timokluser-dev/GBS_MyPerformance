@@ -26,7 +26,7 @@ dotnet tool install --global dotnet-ef
 
 ## Installation
 
-- Windows: use `cmd`
+- Windows: use `Windows PowerShell` **as Admin**
 - macOS: use `zsh` or `bash`
 
 ```bash
@@ -35,17 +35,18 @@ git clone https://github.com/timokluser-dev/GBS_MyPerformance.git
 cd GBS_MyPerformance
 git checkout master
 
-# copy sample files
-cp -n GBS_MyPerformance/appsettings.Development.sample.json GBS_MyPerformance/appsettings.Development.json
-cp -n GBS_MyPerformance/appsettings.sample.json GBS_MyPerformance/appsettings.json
+# copy .sample files
+cp GBS_MyPerformance/appsettings.Development.sample.json GBS_MyPerformance/appsettings.Development.json
+cp GBS_MyPerformance/appsettings.sample.json GBS_MyPerformance/appsettings.json
 
 # activate node version
-nvm install
-nvm use
+nvm install $(cat .nvmrc)
+nvm use $(cat .nvmrc)
 
 # install dependencies
 npm install
-npm run clientapp:install # if failed: cd ./GBS_MyPerformance/ClientApp && npm install
+npm run clientapp:install
+# if failed: cd ./GBS_MyPerformance/ClientApp ; npm install ; cd ../..
 
 # open 'Docker Desktop'
 # Windows: make sure that linux containers are selected
@@ -54,13 +55,14 @@ npm run clientapp:install # if failed: cd ./GBS_MyPerformance/ClientApp && npm i
 npm run docker:up
 
 # run migrations
-dotnet ef database update
+dotnet ef database update -p GBS_MyPerformance
 
 # start visual studio from terminal
 npm run win:vs # npm run mac:vs
 
-# run project and make sure, certificates are installed
-# -> quit project again
+# install certificates
+dotnet dev-certs https --clean
+dotnet dev-certs https --trust
 ```
 
 ## Running
