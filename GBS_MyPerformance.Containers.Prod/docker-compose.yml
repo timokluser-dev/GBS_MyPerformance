@@ -4,7 +4,7 @@ services:
     image: mcr.microsoft.com/mssql/server:2017-CU24-ubuntu-16.04
     environment:
       - ACCEPT_EULA=Y
-      - SA_PASSWORD=Qc8aXdJBABpddZLBvNzFDwmwAtBCSENGG7BVb6r2n7tEKANzpYbEQuQ4AVXLeBcSu8D5tjjMkbnTEeef9ehwx5tepm6jdPHRcUZkpAzCkXwB3vHMj2dfxwj8
+      - SA_PASSWORD=${MSSQL_SA_PASSWORD}
     volumes:
       - sql-data:/var/opt/mssql
     networks:
@@ -50,8 +50,8 @@ services:
   caddy:
     image: caddy:2.4.6-alpine
     environment:
-      - APP_HOST=test.timokluser.ch
-      - TLS_EMAIL=gh@timokluser.ch
+      - APP_HOST=${CADDY_APP_HOST}
+      - TLS_EMAIL=${CADDY_TLS_EMAIL}
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - ./logs:/logs
