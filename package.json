@@ -6,6 +6,10 @@
   "scripts": {
     "prepare": "husky install",
     "postinstall": "npm run clientapp:install && npm run cert:reset",
+    "\n# START -------- ": "",
+    "start": "npm run start:prod",
+    "start:prod": "echo \"Error: no start:prod specified\" && exit 1",
+    "start:dev": "npm run docker:up && npm run db:migrate && npm run backend:start-dev",
     "\n# MONOREPO -------- ": "",
     "clientapp:install": "cd ./GBS_MyPerformance/ClientApp && npm install",
     "\n# ENV: MAC -------- ": "",
@@ -14,9 +18,11 @@
     "win:vs": "start \"\" \"./GBS_MyPerformance/GBS_MyPerformance.sln\"",
     "\n# DOCKER -------- ": "",
     "docker:up": "docker-compose -f ./GBS_MyPerformance.Containers.Dev/docker-compose.yml up -d",
+    "docker:stop": "docker-compose -f ./GBS_MyPerformance.Containers.Dev/docker-compose.yml stop",
     "docker:down": "docker-compose -f ./GBS_MyPerformance.Containers.Dev/docker-compose.yml down",
     "\n# BACKEND (for FE dev) -------- ": "",
     "cert:reset": "dotnet dev-certs https --clean && dotnet dev-certs https --trust",
+    "db:migrate": "dotnet ef -p GBS_MyPerformance database update",
     "backend:start": "dotnet run -p GBS_MyPerformance",
     "backend:start-dev": "dotnet watch -p GBS_MyPerformance run"
   },
