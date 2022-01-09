@@ -1,0 +1,77 @@
+version: "3.3"
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2017-CU24-ubuntu-16.04
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Qc8aXdJBABpddZLBvNzFDwmwAtBCSENGG7BVb6r2n7tEKANzpYbEQuQ4AVXLeBcSu8D5tjjMkbnTEeef9ehwx5tepm6jdPHRcUZkpAzCkXwB3vHMj2dfxwj8
+    volumes:
+      - sql-data:/var/opt/mssql
+    networks:
+      - data
+    hostname: mssql
+    restart: unless-stopped
+  migrations:
+    image: gbs_myperformance-migrations:latest
+    build:
+      context: ../
+      dockerfile: GBS_MyPerformance.Containers.Prod/migrations.Dockerfile
+      network: host
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - DB_HOST=mssql
+      - DB_PORT=1433
+    networks:
+      - local
+      - data
+    depends_on:
+      - mssql
+    hostname: migrations
+    restart: "no"
+  app:
+    image: gbs_myperformance-app:latest
+    build:
+      context: ../
+      dockerfile: GBS_MyPerformance.Containers.Prod/app.Dockerfile
+      network: host
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    volumes:
+      - app-data-keys:/root/.aspnet/DataProtection-Keys
+    networks:
+      - local
+      - data
+    depends_on:
+      - mssql
+      - caddy
+      - migrations
+    hostname: app
+    restart: unless-stopped
+  caddy:
+    image: caddy:2.4.6-alpine
+    environment:
+      - APP_HOST=test.timokluser.ch
+      - TLS_EMAIL=gh@timokluser.ch
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./logs:/logs
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - public
+      - local
+    hostname: caddy
+    restart: unless-stopped
+
+volumes:
+  sql-data: null
+  app-data-keys: null
+
+networks:
+  public:
+    internal: false
+  local:
+    internal: true
+  data:
+    internal: true

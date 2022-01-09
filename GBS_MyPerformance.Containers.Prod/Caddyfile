@@ -1,0 +1,27 @@
+{
+    admin off
+    http_port 80
+    https_port 443
+}
+
+# STAGE: PRODUCTION
+{$APP_HOST:app.localhost} {
+    tls {$TLS_EMAIL:noreply@timokluser.ch}
+
+    log {
+        output file /logs/{$APP_HOST:app.local}_access.log {
+            roll_keep_for 7d
+        }
+        output stdout
+    }
+
+    reverse_proxy {
+        to app:80
+
+        health_uri http://app/api/Health
+        health_port 80
+        health_status 200
+        health_interval 10s
+        health_timeout 20s
+    }
+}
