@@ -1,1 +1,3 @@
-export class BackendStateModel {}
+export class BackendStateModel {
+    isHealthy: boolean;
+}
