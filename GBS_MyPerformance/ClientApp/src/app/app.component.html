@@ -1,4 +1,10 @@
 <app-nav-menu></app-nav-menu>
 <div class="container-fluid p-4 py-2 mt-3">
-    <router-outlet></router-outlet>
+    <router-outlet *ngIf="backendHealthy$ | async"></router-outlet>
+    
+    <div *ngIf="!(backendHealthy$ | async)">
+        <div class="alert alert-danger" role="alert">
+            <p class="m-0 p-0">Keine Verbindung zum Server. Bitte versuchen Sie es später erneut.</p>
+        </div>
+    </div>
 </div>
