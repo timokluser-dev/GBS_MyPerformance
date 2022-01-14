@@ -91,6 +91,7 @@ namespace GBS_MyPerformance
             }
 
             app.UseRouting();
+            ConfigureForReverseProxy(app, env);
 
             app.UseAuthentication();
             app.UseIdentityServer();
@@ -114,6 +115,16 @@ namespace GBS_MyPerformance
                 {
                     spa.UseAngularCliServer(npmScript: "start");
                 }
+            });
+        }
+
+        private static void ConfigureForReverseProxy(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            // see: https://stackoverflow.com/a/67522329
+            app.Use(async (context, next) =>
+            {
+                context.Request.Scheme = "https";
+                await next();
             });
         }
     }
