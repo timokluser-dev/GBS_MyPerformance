@@ -144,8 +144,8 @@ CREATE TABLE dbo.Bewertung
 (
     ID INT NOT NULL IDENTITY(1,1),
     Gewichtung DECIMAL(6,5) NOT NULL,
-    Semester TINYINT NULL,
     RundungsTyp DECIMAL(3,2) NOT NULL,
+    Semester TINYINT NULL,
     FachID INT NOT NULL,
     BewertungGruppeID INT NOT NULL,
 
