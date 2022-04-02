@@ -1,12 +1,12 @@
 -- ---------------------------
--- DATABASE: gbs_myperformance
+-- DATABASE: GBS_MyPerformance
 -- DATE:     2022-03-31
 -- AUTHOR:   Timo Kluser_INA3a
 -- TYPE:     PERFORMANCE TEST
 -- ORDER:    3.
 -- ---------------------------
 
-USE gbs_myperformance;
+USE GBS_MyPerformance;
 GO
 
 -- timer start

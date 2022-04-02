@@ -1,5 +1,5 @@
 -- ---------------------------
--- DATABASE: gbs_myperformance
+-- DATABASE: GBS_MyPerformance
 -- DATE:     2022-03-31
 -- AUTHOR:   Timo Kluser_INA3a
 -- TYPE:     SCHEMA ONLY
@@ -12,22 +12,22 @@ GO
 -- --- INIT DB ---
 
 -- fix: database locked when deleting
-IF EXISTS(SELECT * FROM sys.databases WHERE name = 'gbs_myperformance')
-    ALTER DATABASE gbs_myperformance SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+IF EXISTS(SELECT * FROM sys.databases WHERE name = 'GBS_MyPerformance')
+    ALTER DATABASE GBS_MyPerformance SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 GO
 
-DROP DATABASE IF EXISTS gbs_myperformance;
+DROP DATABASE IF EXISTS GBS_MyPerformance;
 GO
 
 -- COLLATION: German (Switzerland) -> Latin1_General_CI_AS
-CREATE DATABASE gbs_myperformance COLLATE Latin1_General_CI_AS;
+CREATE DATABASE GBS_MyPerformance COLLATE Latin1_General_CI_AS;
 GO
 
-USE gbs_myperformance;
+USE GBS_MyPerformance;
 GO
 
 -- fix: unlock database
-ALTER DATABASE gbs_myperformance SET MULTI_USER;
+ALTER DATABASE GBS_MyPerformance SET MULTI_USER;
 GO
 
 -- --- TABLES ---
@@ -201,7 +201,7 @@ GO
 -- Applikation User: DQL, DML
 IF NOT EXISTS(SELECT * FROM sys.server_principals WHERE name = 'ApplicationUser')
     CREATE LOGIN ApplicationUser WITH PASSWORD = 'GBS_2022', -- CHANGE ME
-        DEFAULT_DATABASE = gbs_myperformance;
+        DEFAULT_DATABASE = GBS_MyPerformance;
 GO
 CREATE USER Application FOR LOGIN ApplicationUser;
 GO
@@ -212,7 +212,7 @@ GO
 -- Technical User: ALL
 IF NOT EXISTS(SELECT * FROM sys.server_principals WHERE name = 'TechnicalUser')
     CREATE LOGIN TechnicalUser WITH PASSWORD = 'GBS_2022', -- CHANGE ME
-        DEFAULT_DATABASE = gbs_myperformance;
+        DEFAULT_DATABASE = GBS_MyPerformance;
 GO
 CREATE USER Technical FOR LOGIN TechnicalUser;
 GO

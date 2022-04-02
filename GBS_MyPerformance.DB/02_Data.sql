@@ -1,12 +1,12 @@
 -- ---------------------------
--- DATABASE: gbs_myperformance
+-- DATABASE: GBS_MyPerformance
 -- DATE:     2022-03-31
 -- AUTHOR:   Timo Kluser_INA3a
 -- TYPE:     DATA ONLY
 -- ORDER:    2.
 -- ---------------------------
 
-USE gbs_myperformance;
+USE GBS_MyPerformance;
 GO
 
 INSERT INTO dbo.Lehrer(Nachname,Vorname,Email) VALUES ('Lehrer','Leonardo','Leonardo.Lehrer@gbssg.ch');
