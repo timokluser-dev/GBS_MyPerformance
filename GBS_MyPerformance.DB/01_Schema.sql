@@ -182,7 +182,7 @@ GO
 CREATE TABLE dbo.Note
 (
     ID INT NOT NULL IDENTITY(1,1),
-    Wert DECIMAL(5,4) NOT NULL,
+    Wert DECIMAL(4,3) NOT NULL,
     BewertungID INT NOT NULL,
     LernenderID INT NOT NULL,
 
