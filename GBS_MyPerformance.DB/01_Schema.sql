@@ -12,7 +12,8 @@ GO
 -- --- INIT DB ---
 
 -- fix: database locked when deleting
-ALTER DATABASE gbs_myperformance SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+IF EXISTS(SELECT * FROM sys.databases WHERE name = 'gbs_myperformance')
+    ALTER DATABASE gbs_myperformance SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 GO
 
 DROP DATABASE IF EXISTS gbs_myperformance;
@@ -198,8 +199,10 @@ GO
 -- --- USERS ---
 
 -- Applikation User: DQL, DML
-CREATE LOGIN ApplicationUser WITH PASSWORD = 'GBS_2022', -- CHANGE ME
-    DEFAULT_DATABASE = gbs_myperformance;
+IF NOT EXISTS(SELECT * FROM sys.server_principals WHERE name = 'ApplicationUser')
+    CREATE LOGIN ApplicationUser WITH PASSWORD = 'GBS_2022', -- CHANGE ME
+        DEFAULT_DATABASE = gbs_myperformance;
+GO
 CREATE USER Application FOR LOGIN ApplicationUser;
 GO
 
@@ -207,8 +210,10 @@ GRANT SELECT, INSERT, UPDATE, DELETE TO Application;
 GO
 
 -- Technical User: ALL
-CREATE LOGIN TechnicalUser WITH PASSWORD = 'GBS_2022', -- CHANGE ME
-    DEFAULT_DATABASE = gbs_myperformance;
+IF NOT EXISTS(SELECT * FROM sys.server_principals WHERE name = 'TechnicalUser')
+    CREATE LOGIN TechnicalUser WITH PASSWORD = 'GBS_2022', -- CHANGE ME
+        DEFAULT_DATABASE = gbs_myperformance;
+GO
 CREATE USER Technical FOR LOGIN TechnicalUser;
 GO
 
