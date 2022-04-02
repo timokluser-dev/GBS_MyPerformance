@@ -128,14 +128,14 @@ CREATE TABLE dbo.BewertungGruppe
     ID INT NOT NULL IDENTITY(1,1),
     Name NVARCHAR(100) NOT NULL,
     ZeugnisGewichtung DECIMAL(6,5) NOT NULL,
-    RundungsTyp DECIMAL(2,1) NOT NULL,
+    RundungsTyp DECIMAL(3,2) NOT NULL,
     BerufID INT NOT NULL,
 
     CONSTRAINT PK_BewertungGruppe PRIMARY KEY (ID),
     CONSTRAINT FK_BerufBewertungGruppe FOREIGN KEY (BerufID) REFERENCES dbo.Beruf(ID),
     CONSTRAINT UQ_BewertungGruppe UNIQUE (Name, BerufID),
 
-    CONSTRAINT CK_RundungsTypBewertungGruppe CHECK (RundungsTyp IN(1,0.5,0.1))
+    CONSTRAINT CK_RundungsTypBewertungGruppe CHECK (RundungsTyp IN(1.0,0.5,0.25,0.1))
 );
 GO
 
@@ -145,7 +145,7 @@ CREATE TABLE dbo.Bewertung
     ID INT NOT NULL IDENTITY(1,1),
     Gewichtung DECIMAL(6,5) NOT NULL,
     Semester TINYINT NULL,
-    RundungsTyp DECIMAL(2,1) NOT NULL,
+    RundungsTyp DECIMAL(3,2) NOT NULL,
     FachID INT NOT NULL,
     BewertungGruppeID INT NOT NULL,
 
@@ -153,7 +153,7 @@ CREATE TABLE dbo.Bewertung
     CONSTRAINT FK_FachBewertung FOREIGN KEY (FachID) REFERENCES dbo.Fach(ID),
     CONSTRAINT FK_BewertungGruppe FOREIGN KEY (BewertungGruppeID) REFERENCES dbo.BewertungGruppe(ID),
 
-    CONSTRAINT CK_RundungsTypBewertung CHECK (RundungsTyp IN(1,0.5,0.1))
+    CONSTRAINT CK_RundungsTypBewertung CHECK (RundungsTyp IN(1.0,0.5,0.25,0.1))
 );
 GO
 
