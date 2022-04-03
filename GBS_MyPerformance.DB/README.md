@@ -10,7 +10,7 @@ Only following DBMS are supported:
 
 ## DB Setup
 
-Execute the SQL script in the following order:
+Execute the SQL scripts in the following order:
 
 1. [Schema.sql](01_Schema.sql)
 2. [Data.sql](02_Data.sql)
