@@ -72,6 +72,7 @@ CREATE TABLE dbo.Beruf
     ID INT NOT NULL IDENTITY(1,1),
     Name NVARCHAR(100) NOT NULL,
     Abteilung NVARCHAR(100) NOT NULL,
+    HatBMS BIT NOT NULL,
     AktivVon DATE NOT NULL,
     AktivBis DATE NULL,
     AnzahlSemester TINYINT NOT NULL,

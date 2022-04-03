@@ -17,7 +17,7 @@ SELECT @LehrerID = ID FROM dbo.Lehrer WHERE Lehrer.Email = 'Leonardo.Lehrer@gbss
 INSERT INTO dbo.Klasse(Name,Eintritt,Austritt,NeuerfassungStart,NeuerfassungEnde,LehrerID) VALUES ('INA1a','2019-08-01','2023-07-31','2022-01-01','2022-01-31',@LehrerID);
 GO
 
-INSERT INTO dbo.Beruf(Name,Abteilung,AktivVon,AktivBis,AnzahlSemester) VALUES ('Informatiker/in EFZ','Technische Berufe','2018-08-01','2024-07-31',8);
+INSERT INTO dbo.Beruf(Name,Abteilung,HatBMS,AktivVon,AktivBis,AnzahlSemester) VALUES ('Informatiker/in EFZ','Technische Berufe',0,'2018-08-01','2024-07-31',8);
 GO
 
 INSERT INTO dbo.Betrieb(Name,PLZ,Ort) VALUES ('Web Agency SG',9000,'St.Gallen');
