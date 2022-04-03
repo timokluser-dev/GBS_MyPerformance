@@ -61,8 +61,8 @@ CREATE TABLE dbo.Klasse
     CONSTRAINT FK_LehrerKlasse FOREIGN KEY (LehrerID) REFERENCES dbo.Lehrer(ID),
     CONSTRAINT UQ_Klasse UNIQUE (Name, Eintritt),
 
-    CONSTRAINT CK_EintrittAustritt CHECK(Eintritt < Austritt),
-    CONSTRAINT CK_Neuerfassung CHECK(NeuerfassungStart < NeuerfassungEnde)
+    CONSTRAINT CK_EintrittAustrittKlasse CHECK(Eintritt < Austritt),
+    CONSTRAINT CK_NeuerfassungKlasse CHECK(NeuerfassungStart < NeuerfassungEnde)
 );
 GO
 
@@ -79,7 +79,7 @@ CREATE TABLE dbo.Beruf
     CONSTRAINT PK_Beruf PRIMARY KEY (ID),
     CONSTRAINT UQ_Beruf UNIQUE (Name, AktivVon),
 
-    CONSTRAINT CK_Aktiv CHECK(AktivVon < AktivBis),
+    CONSTRAINT CK_AktivBeruf CHECK(AktivVon < AktivBis),
 );
 GO
 
@@ -192,7 +192,7 @@ CREATE TABLE dbo.Note
     CONSTRAINT FK_BewertungNote FOREIGN KEY (BewertungID) REFERENCES dbo.Bewertung(ID),
     CONSTRAINT UQ_Note UNIQUE (LernenderID, BewertungID),
 
-    CONSTRAINT CK_Wert CHECK(Wert >= 1.0 AND Wert <= 6.0),
+    CONSTRAINT CK_WertNote CHECK(Wert >= 1.0 AND Wert <= 6.0),
 );
 GO
 
