@@ -20,3 +20,9 @@ Execute the SQL scripts in the following order:
 To test the performance of the DB and the database system.
 
 → [PerformanceTest.sql](03_PerformanceTest.sql)
+
+## DB Backup
+
+A DB backup can be found here:
+
+[GBS_MyPerformance.bak](backup/GBS_MyPerformance.bak)
