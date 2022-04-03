@@ -129,7 +129,7 @@ CREATE TABLE dbo.BewertungGruppe
 (
     ID INT NOT NULL IDENTITY(1,1),
     Name NVARCHAR(100) NOT NULL,
-    ZeugnisGewichtung DECIMAL(6,5) NOT NULL,
+    ZeugnisGewichtung DECIMAL(3,2) NOT NULL,
     RundungsTyp DECIMAL(3,2) NOT NULL,
     BerufID INT NOT NULL,
 
@@ -145,7 +145,7 @@ GO
 CREATE TABLE dbo.Bewertung
 (
     ID INT NOT NULL IDENTITY(1,1),
-    Gewichtung DECIMAL(6,5) NOT NULL,
+    Gewichtung DECIMAL(3,2) NOT NULL,
     RundungsTyp DECIMAL(3,2) NOT NULL,
     Semester TINYINT NULL,
     FachID INT NOT NULL,
