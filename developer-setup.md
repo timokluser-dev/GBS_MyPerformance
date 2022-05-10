@@ -13,7 +13,7 @@ Run helper scripts using npm-scripts.
   - macOS: https://github.com/nvm-sh/nvm#install--update-script
 - **dotnet SDK** - Version [3.1.416](global.json)
   - Windows: https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-3.1.416-windows-x64-installer
-  - macOS: https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-3.1.416-windows-x64-installer
+  - macOS: https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-3.1.416-macos-x64-installer
 - **Docker Desktop**
   - Windows: https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe
   - macOS: https://desktop.docker.com/mac/main/amd64/Docker.dmg
