@@ -11,7 +11,7 @@ namespace GBS_MyPerformance.Data.Migrations
                 name: "Discriminator",
                 table: "AspNetUsers",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: "ApplicationUser");
 
             migrationBuilder.AddColumn<string>(
                 name: "ApprenticeTrainerEmail",
