@@ -28,6 +28,8 @@ namespace GBS_MyPerformance.Data
         public DbSet<SemesterRating> SemesterRatings { get; set; }
         public DbSet<Mark> Marks { get; set; }
         public DbSet<RatingCategory> RatingCategories { get; set; }
+        public DbSet<Configuration> Configurations { get; set; }
+        public DbSet<UserConfiguration> UserConfigurations { get; set; }
 
         #endregion DbSets GBS_MyPerformance
 

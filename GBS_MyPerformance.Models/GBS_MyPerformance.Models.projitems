@@ -25,6 +25,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Company.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LoginDomain.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EditTimeSpan.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SystemSetting.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UserConfiguration.cs" />
   </ItemGroup>
 </Project>

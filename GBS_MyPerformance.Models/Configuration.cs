@@ -3,7 +3,7 @@ using GBS_MyPerformance.Identity.Models;
 
 namespace GBS_MyPerformance.Models
 {
-    public class SystemSetting
+    public class Configuration
     {
         /// <summary>
         /// internal id
@@ -19,12 +19,8 @@ namespace GBS_MyPerformance.Models
         /// (e.g. in JSON format)
         /// </summary>
         public string Value { get; set; }
-        /// <summary>
-        /// if bound to a user, not null
-        /// </summary>
-        public ApplicationUser? User { get; set; }
 
-        public SystemSetting()
+        public Configuration()
         {
         }
     }

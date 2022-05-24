@@ -30,7 +30,7 @@ namespace GBS_MyPerformance.Models
         /// <summary>
         /// id of the responsible class teacher
         /// </summary>
-        public Guid? TeacherId { get; set; }
+        public Guid TeacherId { get; set; }
         /// <summary>
         /// the responsible class teacher
         /// </summary>
