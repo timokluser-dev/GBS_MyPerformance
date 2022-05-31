@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GBS_MyPerformance.Models
 {
@@ -20,6 +21,7 @@ namespace GBS_MyPerformance.Models
         /// <summary>
         /// the id of the Rating Category
         /// </summary>
+        [ForeignKey("RatingCategory")]
         public Guid RatingCategoryId { get; set; }
         /// <summary>
         /// Rating Category, which this rating belongs to

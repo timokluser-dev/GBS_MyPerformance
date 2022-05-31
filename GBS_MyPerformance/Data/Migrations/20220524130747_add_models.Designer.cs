@@ -4,14 +4,16 @@ using GBS_MyPerformance.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GBS_MyPerformance.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220524130747_add_models")]
+    partial class add_models
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,35 +110,9 @@ namespace GBS_MyPerformance.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Companies");
-                });
-
-            modelBuilder.Entity("GBS_MyPerformance.Models.Configuration", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Configurations");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Configuration");
                 });
 
             modelBuilder.Entity("GBS_MyPerformance.Models.Mark", b =>
@@ -278,7 +254,7 @@ namespace GBS_MyPerformance.Data.Migrations
                     b.Property<DateTime>("Starting")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("TeacherId")
+                    b.Property<Guid?>("TeacherId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("TeacherId1")
@@ -604,21 +580,6 @@ namespace GBS_MyPerformance.Data.Migrations
                     b.HasDiscriminator().HasValue("Teacher");
                 });
 
-            modelBuilder.Entity("GBS_MyPerformance.Models.UserConfiguration", b =>
-                {
-                    b.HasBaseType("GBS_MyPerformance.Models.Configuration");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UserId1")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasIndex("UserId1");
-
-                    b.HasDiscriminator().HasValue("UserConfiguration");
-                });
-
             modelBuilder.Entity("GBS_MyPerformance.Models.SemesterRating", b =>
                 {
                     b.HasBaseType("GBS_MyPerformance.Models.Rating");
@@ -783,13 +744,6 @@ namespace GBS_MyPerformance.Data.Migrations
                     b.HasOne("GBS_MyPerformance.Models.SchoolClass", "SchoolClass")
                         .WithMany("Students")
                         .HasForeignKey("SchoolClassId");
-                });
-
-            modelBuilder.Entity("GBS_MyPerformance.Models.UserConfiguration", b =>
-                {
-                    b.HasOne("GBS_MyPerformance.Identity.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("GBS_MyPerformance.Models.SemesterRating", b =>

@@ -10,6 +10,10 @@ namespace GBS_MyPerformance.Models
         /// </summary>
         public Guid Id { get; set; }
         /// <summary>
+        /// name of company
+        /// </summary>
+        public string? Name { get; set; }
+        /// <summary>
         /// all apprentices of this company.
         /// active and inactive once.
         /// </summary>
