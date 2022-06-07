@@ -20,11 +20,16 @@ INSERT INTO dbo.EditTimeSpans(Id, [From], [To]) VALUES(NEWID(), '2013-11-11 13:2
 INSERT INTO dbo.SchoolClasses(Id, Name, Starting, Ending, TeacherId, ProfessionAreaId) VALUES('43c60442-10bc-410d-a6dd-14b8abb8d644', 'INA3a', '2021-11-11 13:23:44', '2023-11-11 13:23:44', '5ABC4082-47B9-4D1D-BB2B-EC4E45363702', 'eb2ecb00-7410-47ab-ab0d-c3b3959893be')
 INSERT INTO dbo.SchoolClasses(Id, Name, Starting, Ending, TeacherId, ProfessionAreaId) VALUES('43c60442-10bc-410d-a6dd-14b8abb8d646', 'INS2a', '2021-11-11 13:23:44', '2023-11-11 13:23:44', '43c60442-10bc-410d-a6dd-14b8abb8d642', 'eb2ecb00-7410-47ab-ab0d-c3b3959893be')
 
+DECLARE @roleTrainer VARCHAR(20) = (SELECT AspNetRoles.Id FROM AspNetRoles WHERE Name = 'Trainer');
+DECLARE @roleStudent VARCHAR(20) = (SELECT AspNetRoles.Id FROM AspNetRoles WHERE Name = 'Student');
+DECLARE @roleAdmin VARCHAR(20) = (SELECT AspNetRoles.Id FROM AspNetRoles WHERE Name = 'Administrator');
+DECLARE @roleTeacher VARCHAR(20) = (SELECT AspNetRoles.Id FROM AspNetRoles WHERE Name = 'Teacher');
+
 --INSERT Realations between USER and ROLE
-INSERT INTO dbo.AspNetUserRoles(UserId, RoleId) VALUES('43c60442-10bc-410d-a6dd-14b8abb8d647', '718B9356-8A00-417F-A402-51E8AECB206B')
-INSERT INTO dbo.AspNetUserRoles(UserId, RoleId) VALUES('43c60442-10bc-410d-a6dd-14b8abb8d643', '718B9356-8A00-417F-A402-51E8AECB206B')
-INSERT INTO dbo.AspNetUserRoles(UserId, RoleId) VALUES('43c60442-10bc-410d-a6dd-14b8abb8d642', '9633A33F-DDFD-457F-8BF1-50B2C20B15FD')
-INSERT INTO dbo.AspNetUserRoles(UserId, RoleId) VALUES('43c60442-10bc-410d-a6dd-14b8abb8d641', '4B3268D5-9671-44CA-A072-38885BFDB246')
+INSERT INTO dbo.AspNetUserRoles(UserId, RoleId) VALUES('43c60442-10bc-410d-a6dd-14b8abb8d647', @roleStudent)
+INSERT INTO dbo.AspNetUserRoles(UserId, RoleId) VALUES('43c60442-10bc-410d-a6dd-14b8abb8d643', @roleStudent)
+INSERT INTO dbo.AspNetUserRoles(UserId, RoleId) VALUES('43c60442-10bc-410d-a6dd-14b8abb8d642', @roleTeacher)
+INSERT INTO dbo.AspNetUserRoles(UserId, RoleId) VALUES('43c60442-10bc-410d-a6dd-14b8abb8d641', @roleTrainer)
 
 --INSERT Students 'Bernhard und Markus'
 INSERT INTO dbo.AspNetUsers(Id, UserName, FirstName, LastName, CompanyId, ProfessionId, NormalizedUserName, Email, NormalizedEmail, EmailConfirmed, PhoneNumberConfirmed, TwoFactorEnabled, LockoutEnabled, AccessFailedCount, SecurityStamp, PasswordHash, SchoolClassId, ApprenticeTrainerId) 
