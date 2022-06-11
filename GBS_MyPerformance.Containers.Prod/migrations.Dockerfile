@@ -4,6 +4,8 @@ SHELL ["/bin/bash", "-c"]
 USER root
 WORKDIR /app
 
+LABEL org.opencontainers.image.source=https://github.com/timokluser-dev/GBS_MyPerformance
+
 # install packages
 RUN apt-get update --allow-insecure-repositories
 RUN apt-get install --allow-unauthenticated -y \

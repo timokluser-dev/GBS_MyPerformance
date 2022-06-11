@@ -24,6 +24,9 @@ RUN dotnet publish -c release -o release --no-cache --no-self-contained
 # https://hub.docker.com/_/microsoft-dotnet-aspnet/
 FROM mcr.microsoft.com/dotnet/aspnet:3.1.22-bullseye-slim
 WORKDIR /app
+
+LABEL org.opencontainers.image.source=https://github.com/timokluser-dev/GBS_MyPerformance
+
 COPY --from=build /build/GBS_MyPerformance/release ./
 
 ENV ASPNETCORE_ENVIRONMENT=Production
