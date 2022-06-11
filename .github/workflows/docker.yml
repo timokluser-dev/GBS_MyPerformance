@@ -5,7 +5,7 @@ on:
       - develop
       - feature/gh-actions
 env:
-  APP_TAG: stable
+  APP_TAG: unstable
   DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
   DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
 jobs:
