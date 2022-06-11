@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   mssql:
-    image: gbs_myperformance-mssql:${APP_TAG}
+    image: ghcr.io/timokluser-dev/gbs_myperformance-mssql:${APP_TAG}
     environment:
       - SA_PASSWORD=${MSSQL_SA_PASSWORD}
     volumes:
@@ -11,7 +11,7 @@ services:
     hostname: mssql
     restart: unless-stopped
   migrations:
-    image: gbs_myperformance-migrations:${APP_TAG}
+    image: ghcr.io/timokluser-dev/gbs_myperformance-migrations:${APP_TAG}
     networks:
       - local
       - data
@@ -20,7 +20,7 @@ services:
     hostname: migrations
     restart: "no"
   app:
-    image: gbs_myperformance-app:${APP_TAG}
+    image: ghcr.io/timokluser-dev/gbs_myperformance-app:${APP_TAG}
     volumes:
       - app-keys:/root/.aspnet/DataProtection-Keys
     networks:
@@ -33,7 +33,7 @@ services:
     hostname: app
     restart: unless-stopped
   caddy:
-    image: gbs_myperformance-caddy:${APP_TAG}
+    image: ghcr.io/timokluser-dev/gbs_myperformance-caddy:${APP_TAG}
     environment:
       - APP_HOST=${CADDY_APP_HOST}
     ports:
