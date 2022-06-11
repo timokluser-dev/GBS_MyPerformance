@@ -1,4 +1,4 @@
-namespace GBS_MyPerformance.Areas.Identity.Pages.Account.OAuth.Models
+namespace GBS_MyPerformance.Helpers.Models
 {
     public class OpenIdUserInfo
     {

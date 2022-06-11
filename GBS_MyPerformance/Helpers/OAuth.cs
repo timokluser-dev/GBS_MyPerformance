@@ -3,7 +3,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
-using GBS_MyPerformance.Areas.Identity.Pages.Account.OAuth.Models;
 using GBS_MyPerformance.Helpers.Models;
 using IdentityServer4.Extensions;
 using Microsoft.Extensions.Configuration;
