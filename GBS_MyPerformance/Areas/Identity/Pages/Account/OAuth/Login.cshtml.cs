@@ -10,14 +10,12 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account.OAuth
     public class Login : PageModel
     {
         private readonly IConfiguration _configuration;
-        private readonly Guid _oAuthState;
 
         [TempData] public string ErrorMessage { get; set; }
 
         public Login(IConfiguration configuration)
         {
             _configuration = configuration;
-            _oAuthState = Guid.NewGuid();
         }
 
         public IActionResult OnGet()

@@ -15,9 +15,9 @@ namespace GBS_MyPerformance.Helpers
         public static bool IsEnabled(IConfiguration configuration)
         {
             return configuration.GetValue<bool>("OAuth:Enabled") &&
-                   !(configuration.GetValue<string>("OAuth:AuthorizeUrl") == null ||
-                     configuration.GetValue<string>("OAuth:ClientId") == null ||
-                     configuration.GetValue<string>("OAuth:RedirectUrl") == null);
+                   !(configuration.GetValue<string>("OAuth:AuthorizeUrl").IsNullOrEmpty() ||
+                     configuration.GetValue<string>("OAuth:ClientId").IsNullOrEmpty() ||
+                     configuration.GetValue<string>("OAuth:RedirectUrl").IsNullOrEmpty());
         }
 
         public static string GetRedirectUrl(IConfiguration configuration, Guid? state = null)
