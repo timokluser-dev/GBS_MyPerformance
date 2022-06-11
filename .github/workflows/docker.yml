@@ -1,0 +1,40 @@
+name: Docker / unstable
+on:
+  push:
+    branches:
+      - develop
+      - feature/gh-actions
+env:
+  APP_TAG: stable
+  DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+  DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
+jobs:
+  docker:
+    name: docker
+    runs-on: self-hosted
+    steps:
+      - name: git checkout
+        uses: actions/checkout@v3
+      - name: docker login
+        run : |
+          docker login ghcr.io -u $DOCKER_REGISTRY_USERNAME -p $DOCKER_REGISTRY_TOKEN
+      - name: docker build
+        run: |
+          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml build
+      - name: docker publish
+        run: |
+          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml push
+
+---
+
+# name: Docker Build unstable
+# on:
+#   push:
+#     branches:
+#       - develop
+# env:
+#   APP_TAG: unstable
+# concurrency: gbs_myperformance
+# ---
+
+# name: Docker Build Version
