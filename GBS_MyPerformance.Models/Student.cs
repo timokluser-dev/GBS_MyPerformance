@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using GBS_MyPerformance.Identity.Models;
 
 namespace GBS_MyPerformance.Models
 {
+    //attempt to map this class to a table
+    [Table("AspNetUsers")]
     public class Student : ApplicationUser
     {
         /// <summary>

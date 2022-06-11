@@ -25,7 +25,11 @@ namespace GBS_MyPerformance.Models
         public DateTime Ending { get; set; }
         /// <summary>
         /// all students of the class
+        /// 
         /// </summary>
+        /// 
+
+        public string einschreibeSchluessel { get; set; }
         public List<Student> Students { get; set; }
         /// <summary>
         /// id of the responsible class teacher

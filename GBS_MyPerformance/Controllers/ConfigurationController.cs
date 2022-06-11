@@ -24,30 +24,59 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/Configuration
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Configuration>>> GetConfigurations()
+        public async Task<IActionResult> Get()
         {
-            return await _context.Configurations.ToListAsync();
+            try
+            {
+                var dataObject = await _context.Set<Configuration>().ToListAsync();
+                if (dataObject == null || dataObject.Count == 0)
+                {
+                    return NotFound();
+                }
+
+                return Ok(dataObject);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // GET: api/Configuration/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Configuration>> GetConfiguration(Guid id)
+        public async Task<IActionResult> GetConfiguration(Guid id)
         {
-            var configuration = await _context.Configurations.FindAsync(id);
+            var dataObject = await _context.Set<Configuration>().Where(n => n.Id.Equals(id)).ToListAsync();
 
-            if (configuration == null)
+            if (dataObject == null)
             {
                 return NotFound();
             }
+            return Ok(dataObject);
+        }
 
-            return configuration;
+        // POST: api/Configuration
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPost]
+        public async Task<IActionResult> Create(Configuration configuration)
+        {
+            if(configuration == null)
+            {
+                return BadRequest();
+            }
+
+            _context.Configurations.Add(configuration);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetConfiguration", new { id = configuration.Id }, configuration);
         }
 
         // PUT: api/Configuration/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutConfiguration(Guid id, Configuration configuration)
+        public async Task<IActionResult> Update(Guid id, Configuration configuration)
         {
             if (id != configuration.Id)
             {
@@ -75,21 +104,11 @@ namespace GBS_MyPerformance.Controllers
             return NoContent();
         }
 
-        // POST: api/Configuration
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<Configuration>> PostConfiguration(Configuration configuration)
-        {
-            _context.Configurations.Add(configuration);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetConfiguration", new { id = configuration.Id }, configuration);
-        }
+       
 
         // DELETE: api/Configuration/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Configuration>> DeleteConfiguration(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             var configuration = await _context.Configurations.FindAsync(id);
             if (configuration == null)
@@ -100,7 +119,7 @@ namespace GBS_MyPerformance.Controllers
             _context.Configurations.Remove(configuration);
             await _context.SaveChangesAsync();
 
-            return configuration;
+            return Ok();
         }
 
         private bool ConfigurationExists(Guid id)

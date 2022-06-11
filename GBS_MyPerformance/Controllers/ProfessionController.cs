@@ -25,31 +25,63 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/Profession
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Profession>>> GetProfessions()
+        public async Task<IActionResult> Get()
         {
-            return await _context.Professions.ToListAsync();
+            try
+            {
+                var dataObject = await _context.Set<Profession>().ToListAsync();
+                if (dataObject == null || dataObject.Count == 0)
+                {
+                    return NotFound();
+                }
+
+                return Ok(dataObject);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // GET: api/Profession/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Profession>> GetProfession(Guid id)
+        public async Task<IActionResult> GetProfession(Guid id)
         {
-            var profession = await _context.Professions.FindAsync(id);
+            var dataObject = await _context.Set<Profession>().Where(n => n.Id.Equals(id)).Include("ProfessionArea").ToListAsync();
 
-            if (profession == null)
+            if (dataObject == null)
             {
                 return NotFound();
             }
-
-            return profession;
+            return Ok(dataObject);
         }
+
+        // POST: api/Profession
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> Create([FromBody] Profession profession)
+        {
+            if (profession == null)
+            {
+                return BadRequest();
+            }
+
+            _context.Set<Profession>().Add(profession);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetProfession", new { id = profession.Id }, profession);
+        }
+
+        
 
         // PUT: api/Profession/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> PutProfession(Guid id, Profession profession)
+        public async Task<IActionResult> Update(Guid id, Profession profession)
         {
             if (id != profession.Id)
             {
@@ -77,23 +109,10 @@ namespace GBS_MyPerformance.Controllers
             return NoContent();
         }
 
-        // POST: api/Profession
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        [Authorize(Roles = "Administrator")]
-        public async Task<ActionResult<Profession>> PostProfession(Profession profession)
-        {
-            _context.Professions.Add(profession);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetProfession", new { id = profession.Id }, profession);
-        }
-
         // DELETE: api/Profession/5
         [HttpDelete("{id}")]
         [Authorize(Roles = "Administrator")]
-        public async Task<ActionResult<Profession>> DeleteProfession(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             var profession = await _context.Professions.FindAsync(id);
             if (profession == null)
@@ -104,7 +123,7 @@ namespace GBS_MyPerformance.Controllers
             _context.Professions.Remove(profession);
             await _context.SaveChangesAsync();
 
-            return profession;
+            return Ok();
         }
 
         private bool ProfessionExists(Guid id)
