@@ -31,7 +31,10 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account
             _logger = logger;
             _configuration = configuration;
 
+            var oAuthProvider = Helpers.OAuth.GetOAuthProvider(_configuration);
             OAuthIsEnabled = Helpers.OAuth.IsEnabled(_configuration);
+            OAuthProviderName = oAuthProvider.Name;
+            OAuthProviderLogo = oAuthProvider.LogoPath;
         }
 
         [BindProperty] public InputModel Input { get; set; }
@@ -42,7 +45,13 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account
 
         [TempData] public string ErrorMessage { get; set; }
 
-        [TempData] public bool OAuthIsEnabled { get; set; }
+        #region OAuth
+
+        [ViewData] public bool OAuthIsEnabled { get; set; }
+        [ViewData] public string OAuthProviderName { get; set; }
+        [ViewData] public string OAuthProviderLogo { get; set; }
+
+        #endregion OAuth
 
         public class InputModel
         {

@@ -1,4 +1,5 @@
 @page
+@using IdentityServer4.Extensions
 @model LoginModel
 
 @{ ViewData["Title"] = "Login"; }
@@ -41,9 +42,12 @@
             @if (Model.OAuthIsEnabled)
             {
                 <div class="form-group">
-                    <a href="./OAuth/Login" class="btn btn-secondary btn-block d-flex align-items-center justify-content-center">
-                        <img src="/img/logo-microsoft.png" alt="Microsoft Logo" style="width: 20px;" class="list-inline-item">
-                        <p class="list-inline-item m-0">Anmeldung mit Microsoft</p>
+                    <a asp-page="./OAuth/Login" class="btn btn-secondary btn-block d-flex align-items-center justify-content-center">
+                        @if (!Model.OAuthProviderLogo.IsNullOrEmpty())
+                        {
+                            <img src="@Model.OAuthProviderLogo" alt="Microsoft Logo" style="width: 20px;" class="list-inline-item">
+                        }
+                        <p class="list-inline-item m-0">Anmeldung mit @Model.OAuthProviderName</p>
                     </a>
                 </div>
             }

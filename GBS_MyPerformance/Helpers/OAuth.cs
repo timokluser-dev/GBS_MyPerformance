@@ -4,6 +4,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 using GBS_MyPerformance.Areas.Identity.Pages.Account.OAuth.Models;
+using GBS_MyPerformance.Helpers.Models;
 using IdentityServer4.Extensions;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -55,6 +56,15 @@ namespace GBS_MyPerformance.Helpers
             }
 
             return JsonConvert.DeserializeObject<OpenIdUserInfo>(response);
+        }
+
+        public static OAuthProvider GetOAuthProvider(IConfiguration configuration)
+        {
+            return new OAuthProvider()
+            {
+                Name = configuration.GetValue<string>("OAuth:ProviderName") ?? "SSO",
+                LogoPath = configuration.GetValue<string>("OAuth:LogoPath")
+            };
         }
     }
 }
