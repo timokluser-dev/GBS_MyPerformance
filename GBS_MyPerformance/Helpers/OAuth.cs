@@ -1,6 +1,12 @@
 using System;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Web;
+using GBS_MyPerformance.Areas.Identity.Pages.Account.OAuth.Models;
+using IdentityServer4.Extensions;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 
 namespace GBS_MyPerformance.Helpers
 {
@@ -27,6 +33,28 @@ namespace GBS_MyPerformance.Helpers
                 $"&redirect_uri={HttpUtility.UrlEncode(configuration.GetValue<string>("OAuth:RedirectUrl"))}" +
                 $"&response_mode=form_post" +
                 $"&scope=openid%20offline_access&state={state}";
+        }
+
+        public static async Task<OpenIdUserInfo> GetOpenIdUserInfo(IConfiguration configuration, HttpClient httpClient,
+            string accessToken)
+        {
+            if (configuration.GetValue<string>("OAuth:OpenIdUserInfoUrl").IsNullOrEmpty())
+            {
+                throw new Exception("openid user info url is not specified");
+            }
+
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+            var httpResponse = await httpClient.GetAsync(configuration.GetValue<string>("OAuth:OpenIdUserInfoUrl"));
+            httpResponse.EnsureSuccessStatusCode();
+            var response = await httpResponse.Content.ReadAsStringAsync();
+
+            if (response.IsNullOrEmpty())
+            {
+                throw new Exception("cannot load openid user profile");
+            }
+
+            return JsonConvert.DeserializeObject<OpenIdUserInfo>(response);
         }
     }
 }
