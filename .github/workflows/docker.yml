@@ -45,6 +45,13 @@ jobs:
       - name: docker publish - app
         run: |
           docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml push app
+  cleanup:
+    name: cleanup
+    runs-on: self-hosted
+    steps:
+      - name: remove built docker images
+        run: |
+          docker image prune --force
 
 # name: Docker Build unstable
 # on:
