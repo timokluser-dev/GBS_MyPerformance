@@ -6,6 +6,7 @@
 node_modules/
 dist/
 bin/
+obj/
 
 # include namespace
 !GBS_MyPerformance*/
