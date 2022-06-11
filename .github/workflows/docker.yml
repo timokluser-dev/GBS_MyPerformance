@@ -48,6 +48,7 @@ jobs:
   cleanup:
     name: cleanup
     runs-on: self-hosted
+    needs: [docker]
     steps:
       - name: remove built docker images
         run: |
