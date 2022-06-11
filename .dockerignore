@@ -2,6 +2,11 @@
 /
 /*
 
+# build files
+node_modules/
+dist/
+bin/
+
 # include namespace
 !GBS_MyPerformance*/
 !GBS_MyPerformance*/*
