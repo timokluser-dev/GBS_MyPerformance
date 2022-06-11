@@ -4,14 +4,10 @@
     https_port 443
 }
 
-# STAGE: PRODUCTION
-{$APP_HOST:app.localhost} {
-    tls {$TLS_EMAIL:noreply@timokluser.ch}
+{$APP_HOST} {
+    tls noreply@gbssg.dev
 
     log {
-        output file /logs/{$APP_HOST:app.localhost}_access.log {
-            roll_keep_for 7d
-        }
         output stdout
     }
 

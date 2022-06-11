@@ -26,6 +26,8 @@ FROM mcr.microsoft.com/dotnet/aspnet:3.1.22-bullseye-slim
 WORKDIR /app
 COPY --from=build /build/GBS_MyPerformance/release ./
 
+ENV ASPNETCORE_ENVIRONMENT=Production
+
 EXPOSE 80
 
 ENTRYPOINT ["dotnet", "GBS_MyPerformance.dll"]

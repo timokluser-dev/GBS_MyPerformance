@@ -1,0 +1,26 @@
+version: "3.3"
+services:
+  mssql:
+    image: gbs_myperformance-mssql:${APP_TAG}
+    build:
+      context: .
+      dockerfile: mssql.Dockerfile
+      network: host
+  migrations:
+    image: gbs_myperformance-migrations:${APP_TAG}
+    build:
+      context: ../
+      dockerfile: GBS_MyPerformance.Containers.Prod/migrations.Dockerfile
+      network: host
+  app:
+    image: gbs_myperformance-app:${APP_TAG}
+    build:
+      context: ../
+      dockerfile: GBS_MyPerformance.Containers.Prod/app.Dockerfile
+      network: host
+  caddy:
+    image: gbs_myperformance-caddy:${APP_TAG}
+    build:
+      context: .
+      dockerfile: caddy.Dockerfile
+      network: host
