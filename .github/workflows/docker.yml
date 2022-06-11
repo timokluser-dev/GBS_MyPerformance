@@ -19,12 +19,32 @@ jobs:
       - name: docker login
         run : |
           docker login ghcr.io -u $DOCKER_REGISTRY_USERNAME -p $DOCKER_REGISTRY_TOKEN
-      - name: docker build
+      # ----- BUILD
+      - name: docker build - mssql
         run: |
-          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml build
-      - name: docker publish
+          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml build mssql
+      - name: docker build - caddy
         run: |
-          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml push
+          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml build caddy
+      - name: docker build - migrations
+        run: |
+          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml build migrations
+      - name: docker build - app
+        run: |
+          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml build app
+      # ----- PUBLISH
+      - name: docker publish - mssql
+        run: |
+          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml push mssql
+      - name: docker publish - caddy
+        run: |
+          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml push caddy
+      - name: docker publish - migrations
+        run: |
+          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml push migrations
+      - name: docker publish - app
+        run: |
+          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml push app
 
 # name: Docker Build unstable
 # on:
