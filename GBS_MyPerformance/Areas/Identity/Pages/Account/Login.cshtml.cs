@@ -1,14 +1,11 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using GBS_MyPerformance.Identity.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -33,30 +30,38 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _configuration = configuration;
+
+            var oAuthProvider = Helpers.OAuth.GetOAuthProvider(_configuration);
+            OAuthIsEnabled = Helpers.OAuth.IsEnabled(_configuration);
+            OAuthProviderName = oAuthProvider.Name;
+            OAuthProviderLogo = oAuthProvider.LogoPath;
         }
 
-        [BindProperty]
-        public InputModel Input { get; set; }
+        [BindProperty] public InputModel Input { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
         public string ReturnUrl { get; set; }
 
-        [TempData]
-        public string ErrorMessage { get; set; }
+        [TempData] public string ErrorMessage { get; set; }
+
+        #region OAuth
+
+        [ViewData] public bool OAuthIsEnabled { get; set; }
+        [ViewData] public string OAuthProviderName { get; set; }
+        [ViewData] public string OAuthProviderLogo { get; set; }
+
+        #endregion OAuth
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
-            public string Email { get; set; }
+            [Required] [EmailAddress] public string Email { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-            [Display(Name = "Angemeldet bleiben")]
-            public bool RememberMe { get; set; } = true;
+            [Display(Name = "Angemeldet bleiben")] public bool RememberMe { get; set; } = true;
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -84,7 +89,8 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe,
+                    lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     // DEV ONLY: Bypass
@@ -96,12 +102,14 @@ namespace GBS_MyPerformance.Areas.Identity.Pages.Account
 
                     _logger.LogInformation("User logged in without 2FA.");
                     // Enforce MFA after every login
-                    return RedirectToPage("./Manage/EnableAuthenticator", new { ReturnUrl = returnUrl });
+                    return RedirectToPage("./Manage/EnableAuthenticator", new {ReturnUrl = returnUrl});
                 }
+
                 if (result.RequiresTwoFactor)
                 {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
+                    return RedirectToPage("./LoginWith2fa", new {ReturnUrl = returnUrl, RememberMe = Input.RememberMe});
                 }
+
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning("User account locked out.");

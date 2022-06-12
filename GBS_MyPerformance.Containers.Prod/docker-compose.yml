@@ -23,6 +23,7 @@ services:
     image: ghcr.io/timokluser-dev/gbs_myperformance-app:${APP_TAG}
     volumes:
       - app-keys:/root/.aspnet/DataProtection-Keys
+      - ./appsettings.json:/app/appsettings.json:ro
     networks:
       - local
       - data
