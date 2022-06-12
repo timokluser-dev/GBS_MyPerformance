@@ -60,4 +60,4 @@ jobs:
     steps:
       - name: remove built docker images
         run: |
-          docker image prune --force
+          docker image prune --filter "label=org.opencontainers.image.source=https://github.com/timokluser-dev/GBS_MyPerformance" -a -f
