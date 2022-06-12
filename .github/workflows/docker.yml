@@ -1,20 +1,27 @@
-name: Docker / unstable
+name: Docker
 on:
-  push:
-    branches:
-      - develop
-      - feature/gh-actions
+  workflow_call:
+    inputs:
+      APP_TAG:
+        required: true
+        type: string
+    secrets:
+      DOCKER_REGISTRY:
+        required: true
+      DOCKER_REGISTRY_USERNAME:
+        required: true
+      DOCKER_REGISTRY_TOKEN:
+        required: true
 env:
-  APP_TAG: unstable
+  APP_TAG: ${{ inputs.APP_TAG }}
+  DOCKER_REGISTRY: ${{ inputs.APP_TAG }}
+  DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+  DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
 concurrency: gbs_myperformance
 jobs:
   docker:
     name: docker
     runs-on: [self-hosted, windows]
-    env:
-      DOCKER_REGISTRY: "ghcr.io"
-      DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
-      DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
     steps:
       - name: git checkout
         uses: actions/checkout@v3
@@ -55,15 +62,3 @@ jobs:
       - name: remove built docker images
         run: |
           docker image prune --force
-
-# name: Docker Build unstable
-# on:
-#   push:
-#     branches:
-#       - develop
-# env:
-#   APP_TAG: unstable
-# concurrency: gbs_myperformance
-# ---
-
-# name: Docker Build Version
