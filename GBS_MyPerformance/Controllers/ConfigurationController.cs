@@ -42,14 +42,6 @@ namespace GBS_MyPerformance.Controllers
             }
         }
 
-                return Ok(dataObject);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
         // GET: api/Configuration/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetConfiguration(Guid id)
@@ -59,19 +51,6 @@ namespace GBS_MyPerformance.Controllers
             if (dataObject == null)
             {
                 return NotFound();
-            }
-            return Ok(dataObject);
-        }
-
-        // POST: api/Configuration
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<IActionResult> Create(Configuration configuration)
-        {
-            if (configuration == null)
-            {
-                return BadRequest();
             }
             return Ok(dataObject);
         }
