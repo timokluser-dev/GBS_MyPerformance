@@ -1,4 +1,4 @@
-name: Docker / ${{ github.ref }}
+name: Docker / version
 on:
   push:
     workflow_dispatch:
@@ -7,7 +7,7 @@ on:
       - feature/gh-actions
     tags:      
       - v*.*.*
-concurrency: gbs_myperformance
+concurrency: gbs_myperformance-version
 jobs:
   docker-stable:
     uses: ./.github/workflows/docker.yml

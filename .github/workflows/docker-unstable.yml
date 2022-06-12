@@ -5,7 +5,7 @@ on:
     branches:
       - develop
       - feature/gh-actions
-concurrency: gbs_myperformance
+concurrency: gbs_myperformance-unstable
 jobs:
   docker-unstable:
     uses: ./.github/workflows/docker.yml
