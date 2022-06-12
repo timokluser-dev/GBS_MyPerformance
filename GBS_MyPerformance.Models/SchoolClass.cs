@@ -23,6 +23,8 @@ namespace GBS_MyPerformance.Models
         /// class will then get archived
         /// </summary>
         public DateTime Ending { get; set; }
+
+        public string einschreibeschluesselCode { get; set; }
         /// <summary>
         /// all students of the class
         /// 

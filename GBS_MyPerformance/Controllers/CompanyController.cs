@@ -46,7 +46,7 @@ namespace GBS_MyPerformance.Controllers
 
             if (dataObject == null)
             {
-                return NotFound();
+                return BadRequest();
             }
             return Ok(dataObject);
         }
