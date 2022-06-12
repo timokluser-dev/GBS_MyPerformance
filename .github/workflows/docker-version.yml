@@ -7,7 +7,7 @@ on:
 concurrency: gbs_myperformance
 jobs:
   docker-stable:
-    uses: ./.github/workflows/docker.yml
+    uses: ./.github/workflows/mixins/docker.yml
     with:
       APP_TAG: ${{ github.ref }}
     secrets:
