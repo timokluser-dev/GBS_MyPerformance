@@ -1,6 +1,7 @@
 name: Docker / unstable
 on:
   push:
+    workflow_dispatch:
     branches:
       - develop
       - feature/gh-actions
