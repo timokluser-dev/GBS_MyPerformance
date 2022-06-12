@@ -17,24 +17,6 @@ jobs:
       DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
       DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
 
-name: Docker / stable
-on:
-  push:
-    branches:
-      - master
-concurrency: gbs_myperformance
-jobs:
-  docker-stable:
-    name: docker
-    runs-on: [self-hosted, windows]
-    uses: ./.github/workflows/docker.yml
-    with:
-      APP_TAG: stable
-    secrets:
-      DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
-      DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
-      DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
-
 # name: Docker Build unstable
 # on:
 #   push:
