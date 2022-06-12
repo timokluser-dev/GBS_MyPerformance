@@ -1,0 +1,16 @@
+name: Docker / version
+on:
+  push:
+    workflow_dispatch:
+    branches:    
+      - refs/tags/v*.*.*
+concurrency: gbs_myperformance-version
+jobs:
+  docker-version:
+    uses: ./.github/workflows/docker.yml
+    with:
+      APP_TAG: ${{ github.ref }}
+    secrets:
+      DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
+      DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+      DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
