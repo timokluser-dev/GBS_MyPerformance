@@ -3,10 +3,7 @@ on:
   push:
     workflow_dispatch:
     branches:    
-      - master
-      - feature/gh-actions
-    tags:      
-      - v*.*.*
+      - refs/tags/v*.*.*
 concurrency: gbs_myperformance-version
 jobs:
   docker-stable:
