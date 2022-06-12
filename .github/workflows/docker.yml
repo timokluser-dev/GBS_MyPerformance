@@ -30,16 +30,16 @@ jobs:
       # ----- BUILD
       - name: docker build - mssql
         run: |
-          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml build mssql
+          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml build mssql --no-cache
       - name: docker build - caddy
         run: |
-          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml build caddy
+          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml build caddy --no-cache
       - name: docker build - migrations
         run: |
-          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml build migrations
+          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml build migrations --no-cache
       - name: docker build - app
         run: |
-          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml build app
+          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml build app --no-cache
       # ----- PUBLISH
       - name: docker publish - mssql
         run: |
