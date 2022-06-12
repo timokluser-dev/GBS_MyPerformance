@@ -4,7 +4,6 @@ on:
     workflow_dispatch:
     branches:
       - develop
-      - feature/gh-actions
 concurrency: gbs_myperformance-unstable
 jobs:
   docker-unstable:

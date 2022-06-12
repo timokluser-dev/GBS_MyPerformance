@@ -3,6 +3,7 @@ on:
   push:
     workflow_dispatch:
     branches:
+      - main
       - master
 concurrency: gbs_myperformance-stable
 jobs:
