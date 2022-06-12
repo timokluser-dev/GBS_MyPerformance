@@ -11,7 +11,7 @@ LABEL org.opencontainers.image.source=https://github.com/timokluser-dev/GBS_MyPe
 
 # install packages
 RUN apt-get update
-RUN apt-get install netcat -y
+RUN apt-get install netcat dos2unix -y
 
 # # --> temp: remove exception again
 # RUN rm -f /etc/apt/apt.conf.d/AllowUnauthenticated.conf
@@ -29,6 +29,8 @@ ENV PATH=$PATH:/root/.dotnet/tools
 
 # add entrypoint
 COPY GBS_MyPerformance.Containers.Prod/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+# fix windows format errors
+RUN dos2unix /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
 
 ENV ASPNETCORE_ENVIRONMENT=Production
