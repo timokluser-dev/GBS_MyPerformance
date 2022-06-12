@@ -1,0 +1,63 @@
+name: Docker
+on:
+  workflow_call:
+    inputs:
+      APP_TAG:
+        required: true
+        type: string
+    secrets:
+      DOCKER_REGISTRY:
+        required: true
+      DOCKER_REGISTRY_USERNAME:
+        required: true
+      DOCKER_REGISTRY_TOKEN:
+        required: true
+env:
+  APP_TAG: ${{ inputs.APP_TAG }}
+  DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
+  DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+  DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
+jobs:
+  docker:
+    name: docker
+    runs-on: [self-hosted, windows]
+    steps:
+      - name: git checkout
+        uses: actions/checkout@v3
+      - name: docker login
+        run : |
+          docker login $env:DOCKER_REGISTRY -u $env:DOCKER_REGISTRY_USERNAME -p $env:DOCKER_REGISTRY_TOKEN
+      # ----- BUILD
+      - name: docker build - mssql
+        run: |
+          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml build mssql --no-cache
+      - name: docker build - caddy
+        run: |
+          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml build caddy --no-cache
+      - name: docker build - migrations
+        run: |
+          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml build migrations --no-cache
+      - name: docker build - app
+        run: |
+          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml build app --no-cache
+      # ----- PUBLISH
+      - name: docker publish - mssql
+        run: |
+          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml push mssql
+      - name: docker publish - caddy
+        run: |
+          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml push caddy
+      - name: docker publish - migrations
+        run: |
+          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml push migrations
+      - name: docker publish - app
+        run: |
+          docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml push app
+  cleanup:
+    name: cleanup
+    runs-on: [self-hosted, windows]
+    needs: [docker]
+    steps:
+      - name: remove built docker images
+        run: |
+          docker image prune --filter "label=org.opencontainers.image.source=https://github.com/timokluser-dev/GBS_MyPerformance" -a -f

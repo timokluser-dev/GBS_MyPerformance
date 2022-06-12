@@ -20,20 +20,19 @@ RUN apt-get install netcat -y
 WORKDIR /app
 COPY . .
 
-# install packages
-RUN apt-get update
-RUN apt-get install -y \
-    netcat
-
 # install dotnet tools
 WORKDIR /app/GBS_MyPerformance
 RUN dotnet restore
 RUN dotnet tool install --global dotnet-ef
 
-ENV PATH $PATH:/root/.dotnet/tools
+ENV PATH=$PATH:/root/.dotnet/tools
 
 # add entrypoint
 COPY GBS_MyPerformance.Containers.Prod/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
+
+ENV ASPNETCORE_ENVIRONMENT=Production
+ENV DB_HOST=mssql
+ENV DB_PORT=1433
 
 ENTRYPOINT ["docker-entrypoint"]
