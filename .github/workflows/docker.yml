@@ -6,20 +6,21 @@ on:
       - feature/gh-actions
 env:
   APP_TAG: unstable
-  DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
-  DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
 concurrency: gbs_myperformance
 jobs:
   docker:
     name: docker
-    runs-on: self-hosted
+    runs-on: [self-hosted, windows]
+    env:
+      DOCKER_REGISTRY: "ghcr.io"
+      DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+      DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
     steps:
       - name: git checkout
         uses: actions/checkout@v3
       - name: docker login
         run : |
-          echo $DOCKER_REGISTRY_USERNAME
-          echo $DOCKER_REGISTRY_TOKEN | docker login ghcr.io -u $DOCKER_REGISTRY_USERNAME --password-stdin
+          docker login $env:DOCKER_REGISTRY -u $env:DOCKER_REGISTRY_USERNAME -p $env:DOCKER_REGISTRY_TOKEN
       # ----- BUILD
       - name: docker build - mssql
         run: |
@@ -48,7 +49,7 @@ jobs:
           docker-compose -f ./GBS_MyPerformance.Containers.Prod/docker-compose.build.yml push app
   cleanup:
     name: cleanup
-    runs-on: self-hosted
+    runs-on: [self-hosted, windows]
     needs: [docker]
     steps:
       - name: remove built docker images
