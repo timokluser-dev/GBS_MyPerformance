@@ -36,10 +36,7 @@ namespace GBS_MyPerformance
                     Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddDefaultIdentity<ApplicationUser>(options =>
-            {
-                options.SignIn.RequireConfirmedAccount = true;
-            })
+            services.AddDefaultIdentity<ApplicationUser>(options => { options.SignIn.RequireConfirmedAccount = true; })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -57,19 +54,15 @@ namespace GBS_MyPerformance
             services.AddControllersWithViews();
             services.AddRazorPages();
             // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
+            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseLiveReload();
-
             if (env.IsDevelopment())
             {
+                app.UseLiveReload();
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }
