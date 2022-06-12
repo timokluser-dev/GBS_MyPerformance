@@ -35,4 +35,4 @@ ENV ASPNETCORE_ENVIRONMENT=Production
 ENV DB_HOST=mssql
 ENV DB_PORT=1433
 
-ENTRYPOINT ["docker-entrypoint"]
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint"]
