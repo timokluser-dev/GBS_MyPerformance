@@ -6,9 +6,15 @@ SHELL ["/bin/bash", "-c"]
 USER root
 WORKDIR /build
 
+# # --> temp: apt-get exception due to image issues
+# RUN echo 'APT::Get::AllowUnauthenticated "true";' > /etc/apt/apt.conf.d/AllowUnauthenticated.conf
+
 # nodejs
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
-RUN apt install nodejs -y
+RUN apt-get install nodejs -y
+
+# # --> temp: remove exception again
+# RUN rm -f /etc/apt/apt.conf.d/AllowUnauthenticated.conf
 
 # copy everything 
 WORKDIR /build

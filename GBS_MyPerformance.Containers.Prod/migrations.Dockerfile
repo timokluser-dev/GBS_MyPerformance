@@ -4,6 +4,18 @@ SHELL ["/bin/bash", "-c"]
 USER root
 WORKDIR /app
 
+LABEL org.opencontainers.image.source=https://github.com/timokluser-dev/GBS_MyPerformance
+
+# # --> temp: apt-get exception due to image issues
+# RUN echo 'APT::Get::AllowUnauthenticated "true";' > /etc/apt/apt.conf.d/AllowUnauthenticated.conf
+
+# install packages
+RUN apt-get update
+RUN apt-get install netcat -y
+
+# # --> temp: remove exception again
+# RUN rm -f /etc/apt/apt.conf.d/AllowUnauthenticated.conf
+
 # copy project
 WORKDIR /app
 COPY . .
