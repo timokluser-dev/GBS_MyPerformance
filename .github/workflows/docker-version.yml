@@ -2,8 +2,8 @@ name: Docker / version
 on:
   push:
     workflow_dispatch:
-    branches:
-      - refs/tags/v*
+    tags:
+      - v*
 concurrency: gbs_myperformance-version
 jobs:
   docker-version:
