@@ -2,6 +2,8 @@ name: Docker / unstable
 on:
   push:
     workflow_dispatch:
+    pull_request:
+      - develop
     branches:
       - develop
 concurrency: gbs_myperformance-unstable
