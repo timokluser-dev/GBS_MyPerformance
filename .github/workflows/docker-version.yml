@@ -4,6 +4,7 @@ on:
     workflow_dispatch:
     branches:    
       - master
+      - feature/gh-actions
     tags:      
       - v*.*.*
 concurrency: gbs_myperformance
