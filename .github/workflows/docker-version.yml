@@ -6,7 +6,7 @@ on:
       - refs/tags/v*.*.*
 concurrency: gbs_myperformance-version
 jobs:
-  docker-stable:
+  docker-version:
     uses: ./.github/workflows/docker.yml
     with:
       APP_TAG: ${{ github.ref }}
