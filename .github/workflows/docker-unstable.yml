@@ -8,7 +8,7 @@ on:
 concurrency: gbs_myperformance
 jobs:
   docker-unstable:
-    uses: ./.github/workflows/mixins/docker.yml
+    uses: ./.github/workflows/docker.yml
     with:
       APP_TAG: unstable
     secrets:
