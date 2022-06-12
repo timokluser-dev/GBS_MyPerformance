@@ -2,7 +2,9 @@ name: Docker / ${{ github.ref }}
 on:
   push:
     workflow_dispatch:
-    tags:        
+    branches:    
+      - master
+    tags:      
       - v*.*.*
 concurrency: gbs_myperformance
 jobs:
