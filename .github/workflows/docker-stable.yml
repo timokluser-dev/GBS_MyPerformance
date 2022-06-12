@@ -6,8 +6,6 @@ on:
 concurrency: gbs_myperformance
 jobs:
   docker-stable:
-    name: docker
-    runs-on: [self-hosted, windows]
     uses: ./.github/workflows/docker.yml
     with:
       APP_TAG: stable
