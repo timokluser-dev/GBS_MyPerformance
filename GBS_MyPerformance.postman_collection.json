@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "ac546811-239d-464e-a73b-5993c67b652b",
+		"name": "GBS_MyPerformance",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "WeatherForecast",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/WeatherForecast",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"WeatherForecast"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "tokenType",
+				"value": "Bearer",
+				"type": "string"
+			},
+			{
+				"key": "accessToken",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "redirect_uri",
+				"value": "https://localhost:5001/authentication/login-callback",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "authorization_code_with_pkce",
+				"type": "string"
+			},
+			{
+				"key": "scope",
+				"value": "GBS_MyPerformanceAPI openid profile",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "GBS_MyPerformance",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "https://localhost:5001/connect/token",
+				"type": "string"
+			},
+			{
+				"key": "authUrl",
+				"value": "https://localhost:5001/connect/authorize",
+				"type": "string"
+			},
+			{
+				"key": "tokenName",
+				"value": "GBS_MyPerformanceAPI",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://localhost:5001/api",
+			"type": "default"
+		}
+	]
+}

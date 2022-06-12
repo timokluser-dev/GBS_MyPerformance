@@ -15,19 +15,23 @@ namespace GBS_MyPerformance.Data
     {
         #region DbSets GBS_MyPerformance
 
-        //public DbSet<Profession> Professions { get; set; }
-        //public DbSet<ProfessionArea> ProfessionAreas { get; set; }
-        //public DbSet<Semester> Semesters { get; set; }
-        //public DbSet<SchoolClass> SchoolClasses { get; set; }
-        //public DbSet<Teacher> Teachers { get; set; }
-        //public DbSet<Student> Students { get; set; }
-        //public DbSet<Company> Companies { get; set; }
-        //public DbSet<ApprenticeTrainer> ApprenticeTrainers { get; set; }
-        //public DbSet<Subject> Subjects { get; set; }
-        //public DbSet<Rating> Ratings { get; set; }
-        //public DbSet<SemesterRating> SemesterRatings { get; set; }
-        //public DbSet<Mark> Marks { get; set; }
-        //public DbSet<RatingCategory> RatingCategories { get; set; }
+        public DbSet<Profession> Professions { get; set; }
+        public DbSet<ProfessionArea> ProfessionAreas { get; set; }
+        public DbSet<Semester> Semesters { get; set; }
+        public DbSet<SchoolClass> SchoolClasses { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<ApprenticeTrainer> ApprenticeTrainers { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
+        public DbSet<SemesterRating> SemesterRatings { get; set; }
+        public DbSet<Mark> Marks { get; set; }
+        public DbSet<RatingCategory> RatingCategories { get; set; }
+        public DbSet<EditTimeSpan> EditTimeSpans { get; set; }
+        public DbSet<LoginDomain> LoginDomains { get; set; }
+        public DbSet<Configuration> Configurations { get; set; }
+        public DbSet<UserConfiguration> UserConfigurations { get; set; }
 
         #endregion DbSets GBS_MyPerformance
 

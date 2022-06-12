@@ -1,0 +1,58 @@
+version: "3.4"
+services:
+  mssql:
+    image: ghcr.io/timokluser-dev/gbs_myperformance-mssql:${APP_TAG}
+    environment:
+      - SA_PASSWORD=${MSSQL_SA_PASSWORD}
+    volumes:
+      - mssql-data:/var/opt/mssql
+    networks:
+      - data
+    hostname: mssql
+    restart: unless-stopped
+  migrations:
+    image: ghcr.io/timokluser-dev/gbs_myperformance-migrations:${APP_TAG}
+    networks:
+      - local
+      - data
+    depends_on:
+      - mssql
+    hostname: migrations
+    restart: "no"
+  app:
+    image: ghcr.io/timokluser-dev/gbs_myperformance-app:${APP_TAG}
+    volumes:
+      - app-keys:/root/.aspnet/DataProtection-Keys
+    networks:
+      - local
+      - data
+    depends_on:
+      - mssql
+      - caddy
+      - migrations
+    hostname: app
+    restart: unless-stopped
+  caddy:
+    image: ghcr.io/timokluser-dev/gbs_myperformance-caddy:${APP_TAG}
+    environment:
+      - APP_HOST=${CADDY_APP_HOST}
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - public
+      - local
+    hostname: caddy
+    restart: unless-stopped
+
+volumes:
+  mssql-data: null
+  app-keys: null
+
+networks:
+  public:
+    internal: false
+  local:
+    internal: true
+  data:
+    internal: true

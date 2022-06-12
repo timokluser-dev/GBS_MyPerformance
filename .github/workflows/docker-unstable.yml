@@ -1,0 +1,28 @@
+name: Docker / unstable
+on:
+  push:
+    workflow_dispatch:
+    branches:
+      - develop
+concurrency: gbs_myperformance-unstable
+jobs:
+  docker-unstable:
+    uses: ./.github/workflows/docker.yml
+    with:
+      APP_TAG: unstable
+    secrets:
+      DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
+      DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+      DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
+
+# name: Docker Build unstable
+# on:
+#   push:
+#     branches:
+#       - develop
+# env:
+#   APP_TAG: unstable
+# concurrency: gbs_myperformance
+# ---
+
+# name: Docker Build Version

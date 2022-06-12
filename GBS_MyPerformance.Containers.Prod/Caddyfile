@@ -1,0 +1,23 @@
+{
+    admin off
+    http_port 80
+    https_port 443
+}
+
+{$APP_HOST} {
+    tls noreply@gbssg.dev
+
+    log {
+        output stdout
+    }
+
+    reverse_proxy {
+        to app:80
+
+        health_uri http://app/api/Health
+        health_port 80
+        health_status 200
+        health_interval 10s
+        health_timeout 20s
+    }
+}

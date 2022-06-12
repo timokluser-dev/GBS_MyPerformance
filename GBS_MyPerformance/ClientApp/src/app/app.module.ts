@@ -56,7 +56,7 @@ import {ApiAuthorizationModule} from 'src/api-authorization/api-authorization.mo
 import {AuthorizeInterceptor} from 'src/api-authorization/authorize.interceptor';
 import {ComponentsModule} from './components/components.module';
 import {DirectivesModule} from './directives/directives.module';
-
+import {StoreModule} from './store/store.module';
 //#endregion Modules
 
 @NgModule({
@@ -87,6 +87,7 @@ import {DirectivesModule} from './directives/directives.module';
     ApiAuthorizationModule,
     ComponentsModule,
     DirectivesModule,
+    StoreModule,
     RouterModule.forRoot(
       [
         {path: '', redirectTo: 'app', pathMatch: 'full'},
