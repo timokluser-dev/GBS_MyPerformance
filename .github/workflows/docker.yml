@@ -17,7 +17,7 @@ env:
   DOCKER_REGISTRY: ${{ inputs.APP_TAG }}
   DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
   DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
-concurrency: gbs_myperformance
+# concurrency: gbs_myperformance
 jobs:
   docker:
     name: docker
