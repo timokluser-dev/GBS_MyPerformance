@@ -19,10 +19,10 @@
     ],
     "paths": {
       "myperformance-client": [
-        "dist/myperformance-client"
+        "projects/dist/myperformance-client"
       ],
       "myperformance-client/*": [
-        "dist/myperformance-client/*"
+        "projects/dist/myperformance-client/*"
       ]
     }
   }
