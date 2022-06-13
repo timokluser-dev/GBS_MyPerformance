@@ -28,7 +28,7 @@ RUN dotnet tool install --global dotnet-ef
 ENV PATH=$PATH:/root/.dotnet/tools
 
 # add entrypoint
-COPY GBS_MyPerformance.Containers.Prod/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+COPY GBS_MyPerformance.Containers.Prod/migrations/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 # fix windows format errors
 RUN dos2unix /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
