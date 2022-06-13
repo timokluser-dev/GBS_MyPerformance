@@ -31,5 +31,3 @@ docker run --rm --net=host -u="$(id -u)" -v ${PWD}:/local swaggerapi/swagger-cod
 # fix: error imports
 find ./src/model/*.ts -type f -exec sed -i '' -e 's|DTODTO|DTO|g' {} \;
 find ./src/api/*.service.ts -type f -exec sed -i '' -e 's|DTODTO|DTO|g' {} \;
-# find ./order-api/src/api/*.service.ts -type f -exec sed -i '' -e 's|/apiApi|/api|' {} \;
-# find ./order-api/src/api/*.service.ts -type f -exec sed -i '' -e 's|ApiApi|Api|' {} \;
