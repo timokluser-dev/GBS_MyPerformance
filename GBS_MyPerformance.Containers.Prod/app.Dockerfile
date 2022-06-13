@@ -40,6 +40,8 @@ RUN apt-get update
 RUN apt-get install dos2unix -y
 
 COPY --from=build /build/GBS_MyPerformance/release ./
+# remove existing appsettings
+RUN rm -f ./appsettings*.json
 
 # add entrypoint
 COPY GBS_MyPerformance.Containers.Prod/app/docker-entrypoint.sh /usr/local/bin/docker-entrypoint

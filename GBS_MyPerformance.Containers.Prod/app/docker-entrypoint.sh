@@ -7,8 +7,8 @@
 function check_appsettings {
     file="/app/appsettings.json"
 
-    if [[ ! -f "/app/appsettings.json" ]]; then
-        echo "/app/appsettings.json does not exist";
+    if [[ ! -f "$file" ]]; then
+        echo "$file does not exist";
         exit 1;
     fi
 }
