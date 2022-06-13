@@ -63,11 +63,11 @@ namespace GBS_MyPerformance
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseSwagger();
-            app.UseSwaggerUI();
-
             if (env.IsDevelopment())
             {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+
                 app.UseLiveReload();
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
