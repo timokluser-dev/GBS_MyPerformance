@@ -52,6 +52,9 @@ namespace GBS_MyPerformance
                 .AddIdentityServerJwt();
 
             services.AddControllersWithViews();
+
+            services.AddSwaggerGen();
+
             services.AddRazorPages();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
@@ -60,6 +63,9 @@ namespace GBS_MyPerformance
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
             if (env.IsDevelopment())
             {
                 app.UseLiveReload();
