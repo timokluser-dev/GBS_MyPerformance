@@ -1,0 +1,22 @@
+# docker-compose: watchtower override
+# will automatically update containers to the latest version
+# -----
+# `docker-compose -f docker-compose.yml -f docker-compose.watchtower.yml up <args>`
+
+version: "3.4"
+services:
+  watchtower:
+    image: containrrr/watchtower:1.4.0
+    environment:
+      - TZ=Europe/Zurich
+      - WATCHTOWER_CLEANUP=false
+      - WATCHTOWER_LABEL_ENABLE=true
+      - WATCHTOWER_SCHEDULE=0 0 0 * * *
+      - WATCHTOWER_TIMEOUT=60s
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - public
+      - local
+    hostname: watchtower
+    restart: unless-stopped

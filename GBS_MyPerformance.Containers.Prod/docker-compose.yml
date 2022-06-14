@@ -8,6 +8,8 @@ services:
       - mssql-data:/var/opt/mssql
     networks:
       - data
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
     hostname: mssql
     restart: unless-stopped
   migrations:
@@ -19,6 +21,8 @@ services:
       - data
     depends_on:
       - mssql
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
     hostname: migrations
     restart: "no"
   app:
@@ -33,6 +37,8 @@ services:
       - mssql
       - caddy
       - migrations
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
     hostname: app
     restart: unless-stopped
   caddy:
@@ -48,6 +54,8 @@ services:
     networks:
       - public
       - local
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
     hostname: caddy
     restart: unless-stopped
 
