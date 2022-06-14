@@ -7,6 +7,7 @@ USER root
 WORKDIR /build
 
 LABEL org.opencontainers.image.source=https://github.com/timokluser-dev/GBS_MyPerformance
+LABEL org.opencontainers.image.description="GBS_MyPerformance: Application containing BE & FE"
 
 # # --> temp: apt-get exception due to image issues
 # RUN echo 'APT::Get::AllowUnauthenticated "true";' > /etc/apt/apt.conf.d/AllowUnauthenticated.conf
