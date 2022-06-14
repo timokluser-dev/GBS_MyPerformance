@@ -12,6 +12,8 @@ services:
     restart: unless-stopped
   migrations:
     image: ghcr.io/timokluser-dev/gbs_myperformance-migrations:${APP_TAG}
+    volumes:
+      - ./appsettings.json:/app/appsettings.json:ro
     networks:
       - local
       - data

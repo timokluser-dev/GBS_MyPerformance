@@ -14,6 +14,10 @@ LABEL org.opencontainers.image.description="GBS_MyPerformance: dotnet ef migrati
 RUN apt-get update
 RUN apt-get install netcat dos2unix -y
 
+# install nodejs
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
+RUN apt-get install nodejs -y
+
 # # --> temp: remove exception again
 # RUN rm -f /etc/apt/apt.conf.d/AllowUnauthenticated.conf
 
