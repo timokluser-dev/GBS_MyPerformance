@@ -1,26 +1,19 @@
-version: "3.3"
+version: "3.4"
 services:
   mssql:
-    image: mcr.microsoft.com/mssql/server:2017-CU24-ubuntu-16.04
+    image: ghcr.io/timokluser-dev/gbs_myperformance-mssql:${APP_TAG}
     environment:
-      - ACCEPT_EULA=Y
       - SA_PASSWORD=${MSSQL_SA_PASSWORD}
     volumes:
-      - sql-data:/var/opt/mssql
+      - mssql-data:/var/opt/mssql
     networks:
       - data
     hostname: mssql
     restart: unless-stopped
   migrations:
-    image: gbs_myperformance-migrations:latest
-    build:
-      context: ../
-      dockerfile: GBS_MyPerformance.Containers.Prod/migrations.Dockerfile
-      network: host
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-      - DB_HOST=mssql
-      - DB_PORT=1433
+    image: ghcr.io/timokluser-dev/gbs_myperformance-migrations:${APP_TAG}
+    volumes:
+      - ./appsettings.json:/app/GBS_MyPerformance/appsettings.json:ro
     networks:
       - local
       - data
@@ -29,15 +22,10 @@ services:
     hostname: migrations
     restart: "no"
   app:
-    image: gbs_myperformance-app:latest
-    build:
-      context: ../
-      dockerfile: GBS_MyPerformance.Containers.Prod/app.Dockerfile
-      network: host
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
+    image: ghcr.io/timokluser-dev/gbs_myperformance-app:${APP_TAG}
     volumes:
-      - app-data-keys:/root/.aspnet/DataProtection-Keys
+      - app-keys:/root/.aspnet/DataProtection-Keys
+      - ./appsettings.json:/app/appsettings.json:ro
     networks:
       - local
       - data
@@ -48,13 +36,9 @@ services:
     hostname: app
     restart: unless-stopped
   caddy:
-    image: caddy:2.4.6-alpine
+    image: ghcr.io/timokluser-dev/gbs_myperformance-caddy:${APP_TAG}
     environment:
       - APP_HOST=${CADDY_APP_HOST}
-      - TLS_EMAIL=${CADDY_TLS_EMAIL}
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - ./logs:/logs
     ports:
       - "80:80"
       - "443:443"
@@ -65,8 +49,8 @@ services:
     restart: unless-stopped
 
 volumes:
-  sql-data: null
-  app-data-keys: null
+  mssql-data: null
+  app-keys: null
 
 networks:
   public:

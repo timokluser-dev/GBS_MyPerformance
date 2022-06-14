@@ -57,6 +57,8 @@ import {AuthorizeInterceptor} from 'src/api-authorization/authorize.interceptor'
 import {ComponentsModule} from './components/components.module';
 import {DirectivesModule} from './directives/directives.module';
 import {StoreModule} from './store/store.module';
+import {ApiModule} from 'myperformance-client';
+import {BackendService} from './services/backend/backend.service';
 //#endregion Modules
 
 @NgModule({
@@ -88,6 +90,7 @@ import {StoreModule} from './store/store.module';
     ComponentsModule,
     DirectivesModule,
     StoreModule,
+    ApiModule.forRoot(BackendService.getApiConfiguration),
     RouterModule.forRoot(
       [
         {path: '', redirectTo: 'app', pathMatch: 'full'},
@@ -250,7 +253,7 @@ import {StoreModule} from './store/store.module';
         preloadingStrategy: NoPreloading,
         enableTracing:
           !environment.production &&
-          ((process.env.ENABLE_TRACING as undefined as boolean) || false),
+          (((process.env.ENABLE_TRACING as undefined) as boolean) || false),
         errorHandler() {
           // because of error, angular router should not be used
           // @see: https://stackoverflow.com/a/47290078
