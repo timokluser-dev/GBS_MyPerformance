@@ -40,7 +40,11 @@ namespace GBS_MyPerformance
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddIdentityServer()
+            services.AddIdentityServer(options =>
+                {
+                    options.IssuerUri = Configuration.GetValue<string>("IdentityServer:IssuerUri") ??
+                                        "https://localhost";
+                })
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
             // Oidc Profile Populator
