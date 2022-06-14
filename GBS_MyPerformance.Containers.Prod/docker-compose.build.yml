@@ -1,0 +1,32 @@
+# docker-compose: build [override]
+# will build images from Dockerfiles
+# -----
+# `docker-compose -f docker-compose.build.yml build <services>`
+# `docker-compose -f docker-compose.yml -f docker-compose.build.yml build <services>`
+
+version: "3.4"
+services:
+  mssql:
+    image: ghcr.io/timokluser-dev/gbs_myperformance-mssql:${APP_TAG}
+    build:
+      context: .
+      dockerfile: mssql.Dockerfile
+      network: host
+  migrations:
+    image: ghcr.io/timokluser-dev/gbs_myperformance-migrations:${APP_TAG}
+    build:
+      context: ../
+      dockerfile: GBS_MyPerformance.Containers.Prod/migrations.Dockerfile
+      network: host
+  app:
+    image: ghcr.io/timokluser-dev/gbs_myperformance-app:${APP_TAG}
+    build:
+      context: ../
+      dockerfile: GBS_MyPerformance.Containers.Prod/app.Dockerfile
+      network: host
+  caddy:
+    image: ghcr.io/timokluser-dev/gbs_myperformance-caddy:${APP_TAG}
+    build:
+      context: .
+      dockerfile: caddy.Dockerfile
+      network: host

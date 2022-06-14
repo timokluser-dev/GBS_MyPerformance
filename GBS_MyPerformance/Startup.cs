@@ -2,12 +2,9 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using GBS_MyPerformance.Data;
-using GBS_MyPerformance.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -39,14 +36,15 @@ namespace GBS_MyPerformance
                     Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddDefaultIdentity<ApplicationUser>(options =>
-            {
-                options.SignIn.RequireConfirmedAccount = true;
-            })
+            services.AddDefaultIdentity<ApplicationUser>(options => { options.SignIn.RequireConfirmedAccount = true; })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddIdentityServer()
+            services.AddIdentityServer(options =>
+                {
+                    options.IssuerUri = Configuration.GetValue<string>("IdentityServer:IssuerUri") ??
+                                        "https://localhost";
+                })
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
             // Oidc Profile Populator
@@ -58,23 +56,26 @@ namespace GBS_MyPerformance
                 .AddIdentityServerJwt();
 
             services.AddControllersWithViews();
+
             //added for object cycle https://stackoverflow.com/questions/59199593/net-core-3-0-possible-object-cycle-was-detected-which-is-not-supported
             services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            services.AddSwaggerGen();
+
             services.AddRazorPages();
             // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
+            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseLiveReload();
-
             if (env.IsDevelopment())
             {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+
+                app.UseLiveReload();
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }

@@ -1,4 +1,5 @@
 @page
+@using IdentityServer4.Extensions
 @model LoginModel
 
 @{ ViewData["Title"] = "Login"; }
@@ -15,12 +16,12 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Input.Email">E-Mail</label>
-                <input asp-for="Input.Email" class="form-control" />
+                <input asp-for="Input.Email" class="form-control"/>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.Password">Passwort</label>
-                <input asp-for="Input.Password" class="form-control" />
+                <input asp-for="Input.Password" class="form-control"/>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             @*<div class="form-group">
@@ -36,8 +37,21 @@
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block">Login</button>
-
             </div>
+
+            @if (Model.OAuthIsEnabled)
+            {
+                <div class="form-group">
+                    <a asp-page="./OAuth/Login" class="btn btn-secondary btn-block d-flex align-items-center justify-content-center">
+                        @if (!Model.OAuthProviderLogo.IsNullOrEmpty())
+                        {
+                            <img src="@Model.OAuthProviderLogo" alt="Microsoft Logo" style="width: 20px;" class="list-inline-item">
+                        }
+                        <p class="list-inline-item m-0">Anmeldung mit @Model.OAuthProviderName</p>
+                    </a>
+                </div>
+            }
+
             <div class="form-group">
                 <p class="d-inline">Sie haben keinen Account?</p>
                 <a class="d-inline" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Registrieren</a>
@@ -70,5 +84,5 @@
 </style>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial"/>
 }
