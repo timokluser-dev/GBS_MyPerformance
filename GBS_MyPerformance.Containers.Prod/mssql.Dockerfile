@@ -4,3 +4,4 @@ LABEL org.opencontainers.image.source=https://github.com/timokluser-dev/GBS_MyPe
 LABEL org.opencontainers.image.description="GBS_MyPerformance: Microsoft SQL-Server 2017"
 
 ENV ACCEPT_EULA=Y
+ENV MSSQL_PID=Standard
