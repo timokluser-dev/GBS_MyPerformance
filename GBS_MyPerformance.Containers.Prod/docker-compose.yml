@@ -39,6 +39,9 @@ services:
     image: ghcr.io/timokluser-dev/gbs_myperformance-caddy:${APP_TAG}
     environment:
       - APP_HOST=${CADDY_APP_HOST}
+    volumes:
+      - caddy-data:/data
+      - caddy-config:/config
     ports:
       - "80:80"
       - "443:443"
@@ -49,8 +52,10 @@ services:
     restart: unless-stopped
 
 volumes:
-  mssql-data: null
-  app-keys: null
+  mssql-data: {}
+  app-keys: {}
+  caddy-data: {}
+  caddy-config: {}
 
 networks:
   public:
