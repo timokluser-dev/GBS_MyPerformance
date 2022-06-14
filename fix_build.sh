@@ -12,7 +12,7 @@ npm run docker:up
 
 nvm use
 
-# npm i
+npm i
 
 chmod +x ./GBS_MyPerformance/ClientApp/projects/build.sh
 
