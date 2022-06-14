@@ -28,7 +28,7 @@ COPY . .
 # install dotnet tools
 WORKDIR /app/GBS_MyPerformance
 RUN dotnet restore
-RUN dotnet tool install --global dotnet-ef
+RUN dotnet tool install --version 6.0.0 --global dotnet-ef
 
 ENV PATH=$PATH:/root/.dotnet/tools
 
