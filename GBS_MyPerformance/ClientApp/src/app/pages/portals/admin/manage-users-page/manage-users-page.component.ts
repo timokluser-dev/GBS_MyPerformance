@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import {Component, Inject, OnInit} from '@angular/core';
 import {EditClickEvent} from '../../../../components/page-title/page-title.component';
 import {TableAction, TableActionEvent} from '../../../../components/table/table.component.constants';
 import {TableDataType} from '../../../../components/table/table.component.constants';
@@ -8,37 +9,50 @@ import {TableDataType} from '../../../../components/table/table.component.consta
   templateUrl: './manage-users-page.component.html',
   styleUrls: ['./manage-users-page.component.scss'],
 })
+
 export class ManageUsersPageComponent implements OnInit {
-  public _users = [
-    {
-      id: 'fbb47b03-78b6-4cb4-a6ff-424c145cfaa0',
-      firstName: 'Schüler',
-      lastName: 'GBS',
-      role: 'Student',
-      email: 'student@gbssg.ch'
-    },
-    {
-      id: 'fbb47b03-78b6-4cb4-a6ff-424c145cfaa1',
-      firstName: 'Lehrer',
-      lastName: 'GBS',
-      role: 'Teacher',
-      email: 'teacher@gbssg.ch'
-    },
-    {
-      id: 'fbb47b03-78b6-4cb4-a6ff-424c145cfaa3',
-      firstName: 'Trainer',
-      lastName: 'COMPANY',
-      role: 'Trainer',
-      email: 'trainer@company.com'
-    },
-    {
-      id: 'fbb47b03-78b6-4cb4-a6ff-424c145cfaa4',
-      firstName: 'Administrator',
-      lastName: 'GBS',
-      role: 'Administrator',
-      email: 'administrator@gbssg.ch'
-    },
-  ];
+  public _users: User[] = [];
+  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+    http.get<User[]>(baseUrl + 'Profession').subscribe(
+        result => {
+            console.log(result)
+        this._users = result;
+      },
+      error => console.error(error)
+    );
+  }
+
+
+  // public _users = [
+  //   {
+  //     id: 'fbb47b03-78b6-4cb4-a6ff-424c145cfaa0',
+  //     firstName: 'Schüler',
+  //     lastName: 'GBS',
+  //     role: 'Student',
+  //     email: 'student@gbssg.ch'
+  //   },
+  //   {
+  //     id: 'fbb47b03-78b6-4cb4-a6ff-424c145cfaa1',
+  //     firstName: 'Lehrer',
+  //     lastName: 'GBS',
+  //     role: 'Teacher',
+  //     email: 'teacher@gbssg.ch'
+  //   },
+  //   {
+  //     id: 'fbb47b03-78b6-4cb4-a6ff-424c145cfaa3',
+  //     firstName: 'Trainer',
+  //     lastName: 'COMPANY',
+  //     role: 'Trainer',
+  //     email: 'trainer@company.com'
+  //   },
+  //   {
+  //     id: 'fbb47b03-78b6-4cb4-a6ff-424c145cfaa4',
+  //     firstName: 'Administrator',
+  //     lastName: 'GBS',
+  //     role: 'Administrator',
+  //     email: 'administrator@gbssg.ch'
+  //   },
+  // ];
   public userMapping = [
     {
       header: 'Name',
@@ -100,8 +114,6 @@ export class ManageUsersPageComponent implements OnInit {
     },
   ];
 
-  constructor() {}
-
   ngOnInit() {}
 
   get tabs(): string[] {
@@ -133,4 +145,12 @@ export class ManageUsersPageComponent implements OnInit {
   deleteUser(obj: any) {
     this._users = this._users.filter(u => u !== obj);
   }
+}
+
+interface User {
+  id: number;
+  firstName: string;
+  lastName: string;
+  role: string;
+  email: string;
 }

@@ -43,18 +43,6 @@ namespace GBS_MyPerformance.Controllers
             }
         }
 
-        // GET: api/EditTimeSpan/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetProfession(Guid id)
-        {
-            var dataObject = await _context.Set<Profession>().Where(n => n.Id.Equals(id)).Include("ProfessionArea").ToListAsync();
-
-            if (dataObject == null)
-            {
-                return NotFound();
-            }
-            return Ok(dataObject);
-        }
 
         // POST: api/EditTimeSpan
         // To protect from overposting attacks, enable the specific properties you want to bind to, for

@@ -56,6 +56,19 @@ namespace GBS_MyPerformance.Controllers
             return Ok(dataObject);
         }
 
+        // GET: api/SchoolClass/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetByID(Guid id)
+        {
+            var dataObject = await _context.Set<SchoolClass>().Where(n => n.Id.Equals(id)).ToListAsync();
+
+            if (dataObject == null)
+            {
+                return NotFound();
+            }
+            return Ok(dataObject);
+        }
+
         // TODO // NOT COMPLETED
         // GET: api/SchoolClass/5/Students
         [HttpGet("{id}/Students")]

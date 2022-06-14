@@ -9,6 +9,7 @@
     <Import_RootNamespace>GBS_MyPerformance.Models</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AspNetUsers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SchoolClass.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Teacher.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Student.cs" />

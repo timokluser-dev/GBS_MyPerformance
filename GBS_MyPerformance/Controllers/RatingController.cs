@@ -30,6 +30,8 @@ namespace GBS_MyPerformance.Controllers
             return await _context.Ratings.ToListAsync();
         }
 
+
+
         // GET: api/Rating/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Rating>> GetRating(Guid id)

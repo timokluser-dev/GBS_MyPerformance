@@ -25,11 +25,23 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/Student
         [HttpGet]
-        [Authorize(Roles = "Student")]
+        //[Authorize(Roles = "Student")]
         public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
         {
-            return await _context.Students.Where(student => student.Email == HttpContext.User.Identity.Name).ToListAsync();
+            // replace studnet with applicationUser 
+            return await _context.Students.FromSqlRaw("SELECT * FROM AspNetUsers us INNER JOIN AspNetUserRoles ur on ur.UserId = us.id INNER JOIN AspNetRoles ro on ro.Id = ur.RoleId where ro.Name = 'Student'").ToListAsync();
+           // return await _context.Students.Where(student => student.Email == HttpContext.User.Identity.Name).ToListAsync();
         }
+
+        //// GET: api/Student
+        //[HttpGet]
+        ////[Authorize(Roles = "Student")]
+        //public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
+        //{
+        //    // replace studnet with applicationUser 
+        //    return await _context.Students.FromSqlRaw("SELECT * FROM dbo.ASPNETUSERS").ToListAsync();
+        //    // return await _context.Students.Where(student => student.Email == HttpContext.User.Identity.Name).ToListAsync();
+        //}
 
         // GET: api/Student/5
         [HttpGet("{id}")]

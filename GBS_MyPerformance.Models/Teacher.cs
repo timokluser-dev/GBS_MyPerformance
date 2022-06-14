@@ -5,7 +5,7 @@ using GBS_MyPerformance.Identity.Models;
 
 namespace GBS_MyPerformance.Models
 {
-    [Table("AspNetUsers")]
+
     public class Teacher : ApplicationUser
     {
         /// <summary>
