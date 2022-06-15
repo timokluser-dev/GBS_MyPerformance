@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {SchoolClassService, WeatherForecastService} from 'myperformance-client';
+import {RatingService, SchoolClassService} from 'myperformance-client';
 import {data} from '../mock';
 
 @Component({
@@ -11,15 +11,15 @@ export class ClassesOverviewPageComponentComponent implements OnInit {
   public breadcrumbs = [{name: 'Klassen', link: null}];
   public classes = data;
 
-  constructor(private api: SchoolClassService, private api2: WeatherForecastService) {}
+  constructor(private api: SchoolClassService, private api2: RatingService) {}
 
   ngOnInit() {
     this.api.apiSchoolClassGet().subscribe(data => {
       console.log(data.map(schoolClass => schoolClass.id));
     });
 
-    this.api2.apiWeatherForecastGet().subscribe(data => {
-      console.log(data.map(weatherForecast => weatherForecast.summary));
+    this.api2.apiRatingGet().subscribe(data => {
+      console.log(data.map(rating => `${rating.id}: ${rating.ratingCategory.name}`));
     });
   }
 }
