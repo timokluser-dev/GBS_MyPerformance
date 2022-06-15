@@ -94,17 +94,17 @@ namespace GBS_MyPerformance.Controllers
             return NoContent();
         }
 
-        // POST: api/EditTimeSpan
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<IActionResult> PostEditTimeSpan(EditTimeSpan editTimeSpan)
-        {
-            _context.EditTimeSpans.Add(editTimeSpan);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetEditTimeSpan", new { id = editTimeSpan.Id }, editTimeSpan);
-        }
+        // // POST: api/EditTimeSpan
+        // // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        // [HttpPost]
+        // public async Task<IActionResult> PostEditTimeSpan(EditTimeSpan editTimeSpan)
+        // {
+        //     _context.EditTimeSpans.Add(editTimeSpan);
+        //     await _context.SaveChangesAsync();
+        //
+        //     return CreatedAtAction("GetEditTimeSpan", new { id = editTimeSpan.Id }, editTimeSpan);
+        // }
 
         // DELETE: api/EditTimeSpan/5
         [HttpDelete("{id}")]

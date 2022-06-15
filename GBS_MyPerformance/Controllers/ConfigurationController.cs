@@ -105,16 +105,16 @@ namespace GBS_MyPerformance.Controllers
         }
 
        
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<Configuration>> PostConfiguration(Configuration configuration)
-        {
-            _context.Configurations.Add(configuration);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetConfiguration", new { id = configuration.Id }, configuration);
-        }
+        // // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        // [HttpPost]
+        // public async Task<ActionResult<Configuration>> PostConfiguration(Configuration configuration)
+        // {
+        //     _context.Configurations.Add(configuration);
+        //     await _context.SaveChangesAsync();
+        //
+        //     return CreatedAtAction("GetConfiguration", new { id = configuration.Id }, configuration);
+        // }
 
         // DELETE: api/Configuration/5
         [HttpDelete("{id}")]
