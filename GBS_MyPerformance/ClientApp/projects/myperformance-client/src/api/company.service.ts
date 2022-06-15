@@ -61,18 +61,15 @@ export class CompanyService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiCompanyGet(observe?: 'body', reportProgress?: boolean): Observable<Array<CompanyDTO>>;
-    public apiCompanyGet(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CompanyDTO>>>;
-    public apiCompanyGet(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CompanyDTO>>>;
+    public apiCompanyGet(observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiCompanyGet(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiCompanyGet(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public apiCompanyGet(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -83,7 +80,7 @@ export class CompanyService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<CompanyDTO>>('get',`${this.basePath}/api/Company`,
+        return this.httpClient.request<any>('get',`${this.basePath}/api/Company`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -100,9 +97,9 @@ export class CompanyService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiCompanyIdDelete(id: string, observe?: 'body', reportProgress?: boolean): Observable<CompanyDTO>;
-    public apiCompanyIdDelete(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CompanyDTO>>;
-    public apiCompanyIdDelete(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CompanyDTO>>;
+    public apiCompanyIdDelete(id: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiCompanyIdDelete(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiCompanyIdDelete(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public apiCompanyIdDelete(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
@@ -113,9 +110,6 @@ export class CompanyService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -126,7 +120,7 @@ export class CompanyService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<CompanyDTO>('delete',`${this.basePath}/api/Company/${encodeURIComponent(String(id))}`,
+        return this.httpClient.request<any>('delete',`${this.basePath}/api/Company/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -143,9 +137,9 @@ export class CompanyService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiCompanyIdGet(id: string, observe?: 'body', reportProgress?: boolean): Observable<CompanyDTO>;
-    public apiCompanyIdGet(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CompanyDTO>>;
-    public apiCompanyIdGet(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CompanyDTO>>;
+    public apiCompanyIdGet(id: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiCompanyIdGet(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiCompanyIdGet(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public apiCompanyIdGet(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
@@ -156,9 +150,6 @@ export class CompanyService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -169,7 +160,7 @@ export class CompanyService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<CompanyDTO>('get',`${this.basePath}/api/Company/${encodeURIComponent(String(id))}`,
+        return this.httpClient.request<any>('get',`${this.basePath}/api/Company/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -209,6 +200,7 @@ export class CompanyService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
+            'application/json-patch+json',
             'application/json',
             'text/json',
             'application/_*+json'
@@ -236,9 +228,9 @@ export class CompanyService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiCompanyPost(body?: CompanyDTO, observe?: 'body', reportProgress?: boolean): Observable<CompanyDTO>;
-    public apiCompanyPost(body?: CompanyDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CompanyDTO>>;
-    public apiCompanyPost(body?: CompanyDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CompanyDTO>>;
+    public apiCompanyPost(body?: CompanyDTO, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiCompanyPost(body?: CompanyDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiCompanyPost(body?: CompanyDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public apiCompanyPost(body?: CompanyDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
@@ -246,9 +238,6 @@ export class CompanyService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -257,6 +246,7 @@ export class CompanyService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
+            'application/json-patch+json',
             'application/json',
             'text/json',
             'application/_*+json'
@@ -266,7 +256,7 @@ export class CompanyService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<CompanyDTO>('post',`${this.basePath}/api/Company`,
+        return this.httpClient.request<any>('post',`${this.basePath}/api/Company`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,

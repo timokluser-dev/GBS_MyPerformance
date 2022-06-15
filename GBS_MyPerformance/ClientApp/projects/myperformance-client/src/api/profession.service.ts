@@ -61,18 +61,15 @@ export class ProfessionService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiProfessionGet(observe?: 'body', reportProgress?: boolean): Observable<Array<ProfessionDTO>>;
-    public apiProfessionGet(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<ProfessionDTO>>>;
-    public apiProfessionGet(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<ProfessionDTO>>>;
+    public apiProfessionGet(observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiProfessionGet(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiProfessionGet(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public apiProfessionGet(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -83,7 +80,7 @@ export class ProfessionService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<ProfessionDTO>>('get',`${this.basePath}/api/Profession`,
+        return this.httpClient.request<any>('get',`${this.basePath}/api/Profession`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -100,9 +97,9 @@ export class ProfessionService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiProfessionIdDelete(id: string, observe?: 'body', reportProgress?: boolean): Observable<ProfessionDTO>;
-    public apiProfessionIdDelete(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProfessionDTO>>;
-    public apiProfessionIdDelete(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProfessionDTO>>;
+    public apiProfessionIdDelete(id: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiProfessionIdDelete(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiProfessionIdDelete(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public apiProfessionIdDelete(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
@@ -113,9 +110,6 @@ export class ProfessionService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -126,7 +120,7 @@ export class ProfessionService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<ProfessionDTO>('delete',`${this.basePath}/api/Profession/${encodeURIComponent(String(id))}`,
+        return this.httpClient.request<any>('delete',`${this.basePath}/api/Profession/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -143,9 +137,9 @@ export class ProfessionService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiProfessionIdGet(id: string, observe?: 'body', reportProgress?: boolean): Observable<ProfessionDTO>;
-    public apiProfessionIdGet(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProfessionDTO>>;
-    public apiProfessionIdGet(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProfessionDTO>>;
+    public apiProfessionIdGet(id: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiProfessionIdGet(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiProfessionIdGet(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public apiProfessionIdGet(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
@@ -156,9 +150,6 @@ export class ProfessionService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -169,7 +160,7 @@ export class ProfessionService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<ProfessionDTO>('get',`${this.basePath}/api/Profession/${encodeURIComponent(String(id))}`,
+        return this.httpClient.request<any>('get',`${this.basePath}/api/Profession/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -209,6 +200,7 @@ export class ProfessionService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
+            'application/json-patch+json',
             'application/json',
             'text/json',
             'application/_*+json'
@@ -236,9 +228,9 @@ export class ProfessionService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiProfessionPost(body?: ProfessionDTO, observe?: 'body', reportProgress?: boolean): Observable<ProfessionDTO>;
-    public apiProfessionPost(body?: ProfessionDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProfessionDTO>>;
-    public apiProfessionPost(body?: ProfessionDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProfessionDTO>>;
+    public apiProfessionPost(body?: ProfessionDTO, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiProfessionPost(body?: ProfessionDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiProfessionPost(body?: ProfessionDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public apiProfessionPost(body?: ProfessionDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
@@ -246,9 +238,6 @@ export class ProfessionService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -257,6 +246,7 @@ export class ProfessionService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
+            'application/json-patch+json',
             'application/json',
             'text/json',
             'application/_*+json'
@@ -266,7 +256,7 @@ export class ProfessionService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<ProfessionDTO>('post',`${this.basePath}/api/Profession`,
+        return this.httpClient.request<any>('post',`${this.basePath}/api/Profession`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,

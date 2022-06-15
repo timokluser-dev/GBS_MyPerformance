@@ -61,18 +61,15 @@ export class ProfessionAreaService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiProfessionAreaGet(observe?: 'body', reportProgress?: boolean): Observable<Array<ProfessionAreaDTO>>;
-    public apiProfessionAreaGet(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<ProfessionAreaDTO>>>;
-    public apiProfessionAreaGet(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<ProfessionAreaDTO>>>;
+    public apiProfessionAreaGet(observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiProfessionAreaGet(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiProfessionAreaGet(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public apiProfessionAreaGet(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -83,7 +80,7 @@ export class ProfessionAreaService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<ProfessionAreaDTO>>('get',`${this.basePath}/api/ProfessionArea`,
+        return this.httpClient.request<any>('get',`${this.basePath}/api/ProfessionArea`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -100,9 +97,9 @@ export class ProfessionAreaService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiProfessionAreaIdDelete(id: string, observe?: 'body', reportProgress?: boolean): Observable<ProfessionAreaDTO>;
-    public apiProfessionAreaIdDelete(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProfessionAreaDTO>>;
-    public apiProfessionAreaIdDelete(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProfessionAreaDTO>>;
+    public apiProfessionAreaIdDelete(id: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiProfessionAreaIdDelete(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiProfessionAreaIdDelete(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public apiProfessionAreaIdDelete(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
@@ -113,9 +110,6 @@ export class ProfessionAreaService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -126,7 +120,7 @@ export class ProfessionAreaService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<ProfessionAreaDTO>('delete',`${this.basePath}/api/ProfessionArea/${encodeURIComponent(String(id))}`,
+        return this.httpClient.request<any>('delete',`${this.basePath}/api/ProfessionArea/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -143,9 +137,9 @@ export class ProfessionAreaService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiProfessionAreaIdGet(id: string, observe?: 'body', reportProgress?: boolean): Observable<ProfessionAreaDTO>;
-    public apiProfessionAreaIdGet(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProfessionAreaDTO>>;
-    public apiProfessionAreaIdGet(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProfessionAreaDTO>>;
+    public apiProfessionAreaIdGet(id: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiProfessionAreaIdGet(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiProfessionAreaIdGet(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public apiProfessionAreaIdGet(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
@@ -156,9 +150,6 @@ export class ProfessionAreaService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -169,7 +160,7 @@ export class ProfessionAreaService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<ProfessionAreaDTO>('get',`${this.basePath}/api/ProfessionArea/${encodeURIComponent(String(id))}`,
+        return this.httpClient.request<any>('get',`${this.basePath}/api/ProfessionArea/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -209,6 +200,7 @@ export class ProfessionAreaService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
+            'application/json-patch+json',
             'application/json',
             'text/json',
             'application/_*+json'
@@ -236,9 +228,9 @@ export class ProfessionAreaService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiProfessionAreaPost(body?: ProfessionAreaDTO, observe?: 'body', reportProgress?: boolean): Observable<ProfessionAreaDTO>;
-    public apiProfessionAreaPost(body?: ProfessionAreaDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProfessionAreaDTO>>;
-    public apiProfessionAreaPost(body?: ProfessionAreaDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProfessionAreaDTO>>;
+    public apiProfessionAreaPost(body?: ProfessionAreaDTO, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiProfessionAreaPost(body?: ProfessionAreaDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiProfessionAreaPost(body?: ProfessionAreaDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public apiProfessionAreaPost(body?: ProfessionAreaDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
@@ -246,9 +238,6 @@ export class ProfessionAreaService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -257,6 +246,7 @@ export class ProfessionAreaService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
+            'application/json-patch+json',
             'application/json',
             'text/json',
             'application/_*+json'
@@ -266,7 +256,7 @@ export class ProfessionAreaService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<ProfessionAreaDTO>('post',`${this.basePath}/api/ProfessionArea`,
+        return this.httpClient.request<any>('post',`${this.basePath}/api/ProfessionArea`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,
