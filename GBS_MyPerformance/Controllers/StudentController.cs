@@ -10,6 +10,7 @@ using GBS_MyPerformance.Models;
 using Microsoft.AspNetCore.Authorization;
 using GBS_MyPerformance.Identity.Models;
 using Microsoft.AspNetCore.Identity;
+using GBS_MyPerformance.Services;
 
 namespace GBS_MyPerformance.Controllers
 {
@@ -45,11 +46,21 @@ namespace GBS_MyPerformance.Controllers
             return await userManager.FindByIdAsync(id);
         }
 
+        // GET: api/Student/GetByLehrmeisterID/id
+        [HttpGet("GetByLehrmeisterID/{id}")]
+        public async Task<ActionResult<ApplicationUser>> GetByLehrmeisterID(string id)
+        {
+            UserService userService = new UserService(_context, userManager);
+
+            return NotFound();
+
+        }
+
         // GET: api/Student/student@gbssg.ch
         [HttpGet("email/{email}")]
         public async Task<ActionResult<ApplicationUser>> GetStudentByEMail(string email)
         {
-            return await userManager.FindByEmailAsync(email);
+           return await userManager.FindByEmailAsync(email);
         }
 
         // PUT: api/Student/5
