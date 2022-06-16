@@ -8,53 +8,47 @@ using Microsoft.EntityFrameworkCore;
 using GBS_MyPerformance.Data;
 using GBS_MyPerformance.Models;
 using Microsoft.AspNetCore.Authorization;
+using GBS_MyPerformance.Identity.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace GBS_MyPerformance.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class StudentController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public StudentController(ApplicationDbContext context)
+        private readonly UserManager<ApplicationUser> userManager;
+
+
+        public StudentController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
+            this.userManager = userManager;
             _context = context;
         }
 
         // GET: api/Student
         [HttpGet]
         //[Authorize(Roles = "Student")]
-        public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
+        public async Task<List<ApplicationUser>> GetStudentsAsync()
         {
-            // replace studnet with applicationUser 
-            return await _context.Students.FromSqlRaw("SELECT * FROM AspNetUsers us INNER JOIN AspNetUserRoles ur on ur.UserId = us.id INNER JOIN AspNetRoles ro on ro.Id = ur.RoleId where ro.Name = 'Student'").ToListAsync();
-           // return await _context.Students.Where(student => student.Email == HttpContext.User.Identity.Name).ToListAsync();
+            return (List<ApplicationUser>)await userManager.GetUsersInRoleAsync("Student");
         }
 
-        //// GET: api/Student
-        //[HttpGet]
-        ////[Authorize(Roles = "Student")]
-        //public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
-        //{
-        //    // replace studnet with applicationUser 
-        //    return await _context.Students.FromSqlRaw("SELECT * FROM dbo.ASPNETUSERS").ToListAsync();
-        //    // return await _context.Students.Where(student => student.Email == HttpContext.User.Identity.Name).ToListAsync();
-        //}
 
         // GET: api/Student/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Student>> GetStudent(string id)
+        [HttpGet("id/{id}")]
+        public async Task<ActionResult<Student>> GetStudentById(string id)
         {
-            var student = await _context.Students.FindAsync(id);
+            return (ActionResult<Student>)await userManager.FindByIdAsync(id);
+        }
 
-            if (student == null)
-            {
-                return NotFound();
-            }
-
-            return student;
+        // GET: api/Student/student@gbssg.ch
+        [HttpGet("email/{email}")]
+        public async Task<ActionResult<Student>> GetStudentByEMail(string email)
+        {
+            return (ActionResult<Student>)await userManager.FindByEmailAsync(email);
         }
 
         // PUT: api/Student/5
