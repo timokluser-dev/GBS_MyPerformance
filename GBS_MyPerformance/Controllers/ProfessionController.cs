@@ -29,7 +29,7 @@ namespace GBS_MyPerformance.Controllers
         {
             try
             {
-                var dataObject = await _context.Set<Profession>().ToListAsync();
+                var dataObject = await _context.Set<Profession>().Include("ProfessionArea").ToListAsync();
                 if (dataObject == null || dataObject.Count == 0)
                 {
                     return NotFound();

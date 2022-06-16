@@ -25,10 +25,29 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/Rating
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Rating>>> GetRatings()
+        public async Task<IActionResult> GetRatings()
         {
-            return await _context.Ratings.ToListAsync();
+            var dataObject = await _context.Set<Rating>().ToListAsync();
+            if(dataObject == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(dataObject);
         }
+
+        ////Get: api/Rating/ByStudentID/5
+        //[HttpGet("ByStudentID{studentid}")]
+        //public async Task<IActionResult> GetByStudentID(Guid studentid)
+        //{
+        //    var dataObject = await _context.Set<Rating>().Where(n => n..Equals(id)).Include("ProfessionArea").ToListAsync();
+
+        //    if (dataObject == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(dataObject);
+        //}
 
 
 
