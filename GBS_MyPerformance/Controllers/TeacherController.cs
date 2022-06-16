@@ -33,7 +33,7 @@ namespace GBS_MyPerformance.Controllers
         //[Authorize(Roles = "Student")]
         public async Task<List<ApplicationUser>> Get()
         {
-            return (List<ApplicationUser>)await userManager.GetUsersInRoleAsync("Student");
+            return (List<ApplicationUser>)await userManager.GetUsersInRoleAsync("Teacher");
         }
 
         // GET: api/Teacher/5
