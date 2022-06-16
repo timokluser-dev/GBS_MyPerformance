@@ -4,7 +4,6 @@
   "description": "GBS_MyPerformance Monorepo",
   "private": true,
   "scripts": {
-    "prepare": "husky install",
     "postinstall": "npm run clientapp:install && npm run cert:reset",
     "\n# START -------- ": "",
     "start": "npm run start:prod",
