@@ -22,7 +22,7 @@ namespace GBS_MyPerformance.Controllers
 
         private readonly UserManager<ApplicationUser> userManager;
 
-        public TeacherController(ApplicationDbContext context)
+        public TeacherController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             this.userManager = userManager;
             _context = context;
@@ -33,7 +33,7 @@ namespace GBS_MyPerformance.Controllers
         //[Authorize(Roles = "Student")]
         public async Task<List<ApplicationUser>> Get()
         {
-            return (List<ApplicationUser>)await userManager.GetUsersInRoleAsync("Teacher");
+            return (List<ApplicationUser>)await userManager.GetUsersInRoleAsync("Student");
         }
 
         // GET: api/Teacher/5
