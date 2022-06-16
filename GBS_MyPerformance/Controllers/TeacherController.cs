@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using GBS_MyPerformance.Data;
 using GBS_MyPerformance.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using GBS_MyPerformance.Identity.Models;
 
 namespace GBS_MyPerformance.Controllers
 {
@@ -18,19 +20,27 @@ namespace GBS_MyPerformance.Controllers
     {
         private readonly ApplicationDbContext _context;
 
+        private readonly UserManager<ApplicationUser> userManager;
+
         public TeacherController(ApplicationDbContext context)
         {
+            this.userManager = userManager;
             _context = context;
         }
 
-        // GET: api/Student
+        // GET: api/teacher
         [HttpGet]
         //[Authorize(Roles = "Student")]
-        public async Task<ActionResult<IEnumerable<Teacher>>> GetStudents()
+        public async Task<List<ApplicationUser>> Get()
         {
+            return (List<ApplicationUser>)await userManager.GetUsersInRoleAsync("Teacher");
+        }
 
-            return await _context.Teachers.FromSqlRaw("SELECT * FROM dbo.ASPNETUSERS where Username ='daniel@gbssg.ch'").ToListAsync();
-            // return await _context.Students.Where(student => student.Email == HttpContext.User.Identity.Name).ToListAsync();
+        // GET: api/Teacher/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Teacher>> GetByID(string id)
+        {
+            return (ActionResult<Teacher>)await userManager.FindByIdAsync(id);
         }
     }
      

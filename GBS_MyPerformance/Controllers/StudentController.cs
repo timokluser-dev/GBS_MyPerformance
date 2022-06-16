@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace GBS_MyPerformance.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class StudentController : ControllerBase
@@ -31,24 +32,24 @@ namespace GBS_MyPerformance.Controllers
         // GET: api/Student
         [HttpGet]
         //[Authorize(Roles = "Student")]
-        public async Task<List<ApplicationUser>> GetStudentsAsync()
+        public async Task<List<ApplicationUser>> Get()
         {
             return (List<ApplicationUser>)await userManager.GetUsersInRoleAsync("Student");
         }
 
 
         // GET: api/Student/5
-        [HttpGet("id/{id}")]
-        public async Task<ActionResult<Student>> GetStudentById(string id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ApplicationUser>> GetByID(string id)
         {
-            return (ActionResult<Student>)await userManager.FindByIdAsync(id);
+            return await userManager.FindByIdAsync(id);
         }
 
         // GET: api/Student/student@gbssg.ch
         [HttpGet("email/{email}")]
-        public async Task<ActionResult<Student>> GetStudentByEMail(string email)
+        public async Task<ActionResult<ApplicationUser>> GetStudentByEMail(string email)
         {
-            return (ActionResult<Student>)await userManager.FindByEmailAsync(email);
+            return await userManager.FindByEmailAsync(email);
         }
 
         // PUT: api/Student/5
