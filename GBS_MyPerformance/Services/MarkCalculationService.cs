@@ -36,7 +36,7 @@ namespace GBS_MyPerformance.Services
             var ratingCategoryId = _context.Entry(ratingCategory).Property(u => u.Id).CurrentValue;
 
             var faNoteObjekt = _context.Marks.Where(n => n.RatingId.Equals(ratingCategoryId) && n.StudentId.Equals(studentId)).First();
-            double faNote = (double)_context.Entry(faNoteObjekt).Property(u => u.Rating).CurrentValue;
+            double faNote = faNoteObjekt.Value;
             if (faNoteObjekt == null)
             {
                 return 0;
@@ -60,7 +60,7 @@ namespace GBS_MyPerformance.Services
 
             for(int i = 0; i > abuMarks.Count(); i++)
             {
-                double singleMark = (double)_context.Entry(abuMarks[i]).Property(u => u.Rating).CurrentValue;
+                double singleMark = abuMarks[i].Value;
                 sumMarks = sumMarks + singleMark;
             }
 
@@ -84,7 +84,7 @@ namespace GBS_MyPerformance.Services
 
             for (int i = 0; i > egkMarks.Count(); i++)
             {
-                double singleMark = (double)_context.Entry(egkMarks[i]).Property(u => u.Rating).CurrentValue;
+                double singleMark = egkMarks[i].Value;
                 sumMarks = sumMarks + singleMark;
             }
 
@@ -107,7 +107,7 @@ namespace GBS_MyPerformance.Services
 
             for (int i = 0; i > uekMarks.Count(); i++)
             {
-                double singleMark = (double)_context.Entry(uekMarks[i]).Property(u => u.Rating).CurrentValue;
+                double singleMark = uekMarks[i].Value;
                 sumMarks = sumMarks + singleMark;
             }
 
@@ -130,7 +130,7 @@ namespace GBS_MyPerformance.Services
 
             for (int i = 0; i > ikMarks.Count(); i++)
             {
-                double singleMark = (double)_context.Entry(ikMarks[i]).Property(u => u.Rating).CurrentValue;
+                double singleMark = ikMarks[i].Value;
                 sumMarks = sumMarks + singleMark;
             }
 
