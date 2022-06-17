@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import {Component, Inject, OnInit} from '@angular/core';
+import { UserConfigurationService } from 'myperformance-client';
 import {EditClickEvent} from '../../../../components/page-title/page-title.component';
 import {TableAction, TableActionEvent} from '../../../../components/table/table.component.constants';
 import {TableDataType} from '../../../../components/table/table.component.constants';
@@ -12,47 +13,23 @@ import {TableDataType} from '../../../../components/table/table.component.consta
 
 export class ManageUsersPageComponent implements OnInit {
   public _users: User[] = [];
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<User[]>(baseUrl + 'Profession').subscribe(
-        result => {
-            console.log(result)
-        this._users = result;
-      },
-      error => console.error(error)
-    );
+  constructor(private userConfigurationApi: UserConfigurationService) {}
+
+  ngOnInit() {
+    this.userConfigurationApi.apiUserConfigurationGet().subscribe(data => {
+      console.log("users");
+      console.log(data);
+    });
   }
 
 
-  // public _users = [
-  //   {
-  //     id: 'fbb47b03-78b6-4cb4-a6ff-424c145cfaa0',
+  // id: 'fbb47b03-78b6-4cb4-a6ff-424c145cfaa0',
   //     firstName: 'Schüler',
   //     lastName: 'GBS',
   //     role: 'Student',
   //     email: 'student@gbssg.ch'
-  //   },
-  //   {
-  //     id: 'fbb47b03-78b6-4cb4-a6ff-424c145cfaa1',
-  //     firstName: 'Lehrer',
-  //     lastName: 'GBS',
-  //     role: 'Teacher',
-  //     email: 'teacher@gbssg.ch'
-  //   },
-  //   {
-  //     id: 'fbb47b03-78b6-4cb4-a6ff-424c145cfaa3',
-  //     firstName: 'Trainer',
-  //     lastName: 'COMPANY',
-  //     role: 'Trainer',
-  //     email: 'trainer@company.com'
-  //   },
-  //   {
-  //     id: 'fbb47b03-78b6-4cb4-a6ff-424c145cfaa4',
-  //     firstName: 'Administrator',
-  //     lastName: 'GBS',
-  //     role: 'Administrator',
-  //     email: 'administrator@gbssg.ch'
-  //   },
-  // ];
+
+
   public userMapping = [
     {
       header: 'Name',
@@ -113,8 +90,6 @@ export class ManageUsersPageComponent implements OnInit {
       event: 'delete-user',
     },
   ];
-
-  ngOnInit() {}
 
   get tabs(): string[] {
     return this.filters.map(f => f.name);
