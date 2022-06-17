@@ -25,6 +25,7 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/SemesterRating
         [HttpGet]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<IEnumerable<SemesterRating>>> GetSemesterRatings()
         {
             return await _context.SemesterRatings.ToListAsync();
@@ -32,6 +33,7 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/SemesterRating/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<SemesterRating>> GetSemesterRating(Guid id)
         {
             var semesterRating = await _context.SemesterRatings.FindAsync(id);
@@ -48,6 +50,7 @@ namespace GBS_MyPerformance.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<IActionResult> PutSemesterRating(Guid id, SemesterRating semesterRating)
         {
             if (id != semesterRating.Id)
@@ -80,6 +83,7 @@ namespace GBS_MyPerformance.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<SemesterRating>> PostSemesterRating(SemesterRating semesterRating)
         {
             _context.SemesterRatings.Add(semesterRating);
@@ -90,6 +94,7 @@ namespace GBS_MyPerformance.Controllers
 
         // DELETE: api/SemesterRating/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<SemesterRating>> DeleteSemesterRating(Guid id)
         {
             var semesterRating = await _context.SemesterRatings.FindAsync(id);

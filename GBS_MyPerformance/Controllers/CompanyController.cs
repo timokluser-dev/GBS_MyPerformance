@@ -20,6 +20,7 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/Company
         [HttpGet]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<IActionResult> Get()
         {
             try
@@ -40,6 +41,7 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/Company/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<IActionResult> GetCompany(Guid id)
         {
             var dataObject = await _context.Set<Profession>().Where(n => n.Id.Equals(id)).ToListAsync();
@@ -55,6 +57,7 @@ namespace GBS_MyPerformance.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create(Company company)
         {
             if(company == null)
@@ -72,6 +75,7 @@ namespace GBS_MyPerformance.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Update(Guid id, Company company)
         {
             if (id != company.Id)
@@ -104,6 +108,7 @@ namespace GBS_MyPerformance.Controllers
 
         // DELETE: api/Company/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var company = await _context.Companies.FindAsync(id);

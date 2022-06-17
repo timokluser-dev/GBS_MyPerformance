@@ -25,6 +25,7 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/Profession
         [HttpGet]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<IActionResult> Get()
         {
             try
@@ -45,6 +46,7 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/Profession/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<IActionResult> GetProfession(Guid id)
         {
             var dataObject = await _context.Set<Profession>().Where(n => n.Id.Equals(id)).Include("ProfessionArea").ToListAsync();

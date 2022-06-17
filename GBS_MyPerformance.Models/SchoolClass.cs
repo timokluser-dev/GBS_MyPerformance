@@ -31,7 +31,7 @@ namespace GBS_MyPerformance.Models
         /// </summary>
         /// 
 
-        public string einschreibeSchluessel { get; set; }
+        public string einschreibeSchluesse { get; set; }
         public List<Student> Students { get; set; }
         /// <summary>
         /// id of the responsible class teacher

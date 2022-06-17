@@ -25,6 +25,7 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/SchoolClass
         [HttpGet]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<IActionResult> Get()
         {
             try
@@ -45,6 +46,7 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/SchoolClass/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<IActionResult> GetByID(Guid id)
         {
             var dataObject = await _context.Set<SchoolClass>().Where(n => n.Id.Equals(id)).ToListAsync();
@@ -56,35 +58,7 @@ namespace GBS_MyPerformance.Controllers
             return Ok(dataObject);
         }
 
-        //// GET: api/SchoolClass/5
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetByID(Guid id)
-        //{
-        //    var dataObject = await _context.Set<SchoolClass>().Where(n => n.Id.Equals(id)).ToListAsync();
-
-        //    if (dataObject == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(dataObject);
-        //}
-
-        // TODO // NOT COMPLETED
-        // GET: api/SchoolClass/5/Students
-        [HttpGet("{id}/Students")]
-        public async Task<IActionResult> GetClassByIDWithStudents(Guid id)
-        {
-            var dataObject = await _context.Set<SchoolClass>().Where(n => n.Id.Equals(id)).Include("Students").ToListAsync();
-
-            if (dataObject == null)
-            {
-                return NotFound();
-            }
-            return Ok(dataObject);
-        }
-
-        // GET: api/SchoolClass/5/Student/5
-        // TODO
+     
 
         // POST: api/SchoolClass
         // To protect from overposting attacks, enable the specific properties you want to bind to, for

@@ -24,13 +24,14 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/UserConfiguration
         [HttpGet]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<IEnumerable<UserConfiguration>>> GetUserConfigurations()
         {
             return await _context.UserConfigurations.Where(userConfiguration => userConfiguration.User.Email == HttpContext.User.Identity.Name).ToListAsync();
         }
 
         // GET: api/UserConfiguration/5
-        [HttpGet("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<UserConfiguration>> GetUserConfiguration(Guid id)
         {
             var userConfiguration = await _context.UserConfigurations.FindAsync(id);
@@ -46,7 +47,7 @@ namespace GBS_MyPerformance.Controllers
         // PUT: api/UserConfiguration/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<IActionResult> PutUserConfiguration(Guid id, UserConfiguration userConfiguration)
         {
             if (id != userConfiguration.Id)
@@ -79,6 +80,7 @@ namespace GBS_MyPerformance.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<UserConfiguration>> PostUserConfiguration(UserConfiguration userConfiguration)
         {
             _context.UserConfigurations.Add(userConfiguration);
@@ -89,6 +91,7 @@ namespace GBS_MyPerformance.Controllers
 
         // DELETE: api/UserConfiguration/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<UserConfiguration>> DeleteUserConfiguration(Guid id)
         {
             var userConfiguration = await _context.UserConfigurations.FindAsync(id);

@@ -318,7 +318,7 @@ namespace GBS_MyPerformance.Data.Migrations
                     b.Property<string>("TeacherId1")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("einschreibeSchluessel")
+                    b.Property<string>("einschreibeSchluesse")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("einschreibeschluesselCode")

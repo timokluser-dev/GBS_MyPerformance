@@ -25,6 +25,7 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/EditTimeSpan
         [HttpGet]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<IActionResult> Get()
         {
             try
@@ -43,7 +44,7 @@ namespace GBS_MyPerformance.Controllers
             }
         }
 
-
+        //Wont be used
         // POST: api/EditTimeSpan
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
@@ -66,6 +67,7 @@ namespace GBS_MyPerformance.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Update(Guid id, EditTimeSpan editTimeSpan)
         {
             if (id != editTimeSpan.Id)
@@ -94,20 +96,12 @@ namespace GBS_MyPerformance.Controllers
             return NoContent();
         }
 
-        // // POST: api/EditTimeSpan
+        //wont be used
         // // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        // [HttpPost]
-        // public async Task<IActionResult> PostEditTimeSpan(EditTimeSpan editTimeSpan)
-        // {
-        //     _context.EditTimeSpans.Add(editTimeSpan);
-        //     await _context.SaveChangesAsync();
-        //
-        //     return CreatedAtAction("GetEditTimeSpan", new { id = editTimeSpan.Id }, editTimeSpan);
-        // }
-
         // DELETE: api/EditTimeSpan/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var editTimeSpan = await _context.EditTimeSpans.FindAsync(id);
