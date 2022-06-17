@@ -41,6 +41,14 @@ export class ManageEditPeriodPageComponent implements OnInit {
   public isEditMode = false;
 
   onEdit($event: EditClickEvent) {
+    if ($event.edit == false) {
+      console.log("store now")
+      // this.editPeriodData[0].from = '21';
+      console.log(this.editPeriodData[0]);
+      this.editTimeSpanApi.apiEditTimeSpanIdPut('395cb59a-3d30-416b-ae6b-323e5a2bd833', this.editPeriodData[0]).subscribe(data => {
+        console.log(data);
+      });
+    }
     this.isEditMode = $event.edit;
   }
 }

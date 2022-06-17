@@ -118,6 +118,7 @@ export class ManageUsersPageComponent implements OnInit {
   }
 
   deleteUser(obj: any) {
+    // todo: use service
     this._users = this._users.filter(u => u !== obj);
   }
 }
