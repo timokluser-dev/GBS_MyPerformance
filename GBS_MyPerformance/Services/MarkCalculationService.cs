@@ -35,14 +35,14 @@ namespace GBS_MyPerformance.Services
         //    var ratingCategory = _context.RatingCategories.Where(n => n.Name.Contains("FA")).FirstOrDefault(); 
         //    var ratingCategoryId = _context.Entry(ratingCategory).Property(u => u.Id).CurrentValue;
 
-            var faNoteObjekt = _context.Marks.Where(n => n.RatingId.Equals(ratingCategoryId) && n.StudentId.Equals(studentId)).First();
-            double faNote = faNoteObjekt.Value;
-            if (faNoteObjekt == null)
-            {
-                return 0;
-            }
-            return faNote;
-        }
+        //     var faNoteObjekt = _context.Marks.Where(n => n.RatingId.Equals(ratingCategoryId) && n.StudentId.Equals(studentId)).First();
+        //     double faNote = faNoteObjekt.Value;
+        //     if (faNoteObjekt == null)
+        //     {
+        //         return 0;
+        //     }
+        //     return faNote;
+        // }
 
         //private double getAbuDurchschnitt(Guid studentId)
         //{
@@ -58,11 +58,11 @@ namespace GBS_MyPerformance.Services
 
         //    double sumMarks = 0;
 
-            for(int i = 0; i > abuMarks.Count(); i++)
-            {
-                double singleMark = abuMarks[i].Value;
-                sumMarks = sumMarks + singleMark;
-            }
+            // for(int i = 0; i > abuMarks.Count(); i++)
+            // {
+            //     double singleMark = abuMarks[i].Value;
+            //     sumMarks = sumMarks + singleMark;
+            // }
 
         //    return sumMarks / abuMarks.Count();
 
@@ -82,11 +82,11 @@ namespace GBS_MyPerformance.Services
 
         //    double sumMarks = 0;
 
-            for (int i = 0; i > egkMarks.Count(); i++)
-            {
-                double singleMark = egkMarks[i].Value;
-                sumMarks = sumMarks + singleMark;
-            }
+            // for (int i = 0; i > egkMarks.Count(); i++)
+            // {
+            //     double singleMark = egkMarks[i].Value;
+            //     sumMarks = sumMarks + singleMark;
+            // }
 
         //    return sumMarks / egkMarks.Count();
         //}
@@ -105,11 +105,11 @@ namespace GBS_MyPerformance.Services
 
         //    double sumMarks = 0;
 
-            for (int i = 0; i > uekMarks.Count(); i++)
-            {
-                double singleMark = uekMarks[i].Value;
-                sumMarks = sumMarks + singleMark;
-            }
+            // for (int i = 0; i > uekMarks.Count(); i++)
+            // {
+            //     double singleMark = uekMarks[i].Value;
+            //     sumMarks = sumMarks + singleMark;
+            // }
 
         //    return sumMarks / uekMarks.Count();
         //}
@@ -128,11 +128,11 @@ namespace GBS_MyPerformance.Services
 
         //    double sumMarks = 0;
 
-            for (int i = 0; i > ikMarks.Count(); i++)
-            {
-                double singleMark = ikMarks[i].Value;
-                sumMarks = sumMarks + singleMark;
-            }
+            // for (int i = 0; i > ikMarks.Count(); i++)
+            // {
+            //     double singleMark = ikMarks[i].Value;
+            //     sumMarks = sumMarks + singleMark;
+            // }
 
         //    return sumMarks / ikMarks.Count();
         //}
