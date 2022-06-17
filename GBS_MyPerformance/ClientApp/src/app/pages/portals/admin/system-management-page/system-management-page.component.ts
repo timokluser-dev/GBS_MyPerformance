@@ -43,7 +43,7 @@ export class SystemManagementPageComponent implements OnInit {
   public professionArea: ProfessionAreaDTO;
   public class: SchoolClassDTO;
   public teacher: TeacherDTO;
-  public domain: LoginDomainDTO;
+  public domain: /*LoginDomainDTO*/any;
 
   constructor(
     private professionApi: ProfessionService,
@@ -127,8 +127,13 @@ export class SystemManagementPageComponent implements OnInit {
         this.domain = {
           id: d.id,
           domain: d.domain,
-          role: d.role,
         };
+        switch (d.role) {
+          case 1: this.domain.role = 'Teacher'; break;
+          case 2: this.domain.role = 'Trainer'; break;
+          case 3: this.domain.role = 'Student'; break;
+          case 4: this.domain.role = 'Administrator'; break;
+        }
         this.data.domains.push(this.domain);
       });
     });
@@ -267,7 +272,8 @@ export class SystemManagementPageComponent implements OnInit {
   public appRoles = AppRoles;
 
   getDomainsForRole(role: AppRoles): any[] {
-    return this.data.domains.filter(d => d.forRole === role);
+    // console.log(this.data.domains.filter(d => d.forRole === role));
+    return this.data.domains.filter(d => d.role === role);
   }
 
   get professionsData(): any[] {
