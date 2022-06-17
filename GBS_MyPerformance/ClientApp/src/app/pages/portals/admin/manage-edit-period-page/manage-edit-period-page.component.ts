@@ -9,19 +9,13 @@ import {TableDataType} from '../../../../components/table/table.component.consta
   styleUrls: ['./manage-edit-period-page.component.scss'],
 })
 export class ManageEditPeriodPageComponent implements OnInit {
-  public editPeriodData: EditTimeSpanDTO[] = [
-    {
-      id: '00000000-0000-0000-0000-000000000001',
-      from: null,
-      to: null,
-    },
-  ];
+  public editPeriodData: EditTimeSpanDTO[] = [];
 
   constructor(private editTimeSpanApi: EditTimeSpanService) {}
 
   ngOnInit() {
     this.editTimeSpanApi.apiEditTimeSpanGet().subscribe(data => {
-      this.editPeriodData[0] = data;
+      this.editPeriodData[0] = data[0];
     });
   }
 
@@ -46,10 +40,11 @@ export class ManageEditPeriodPageComponent implements OnInit {
 
   onEdit($event: EditClickEvent) {
     if ($event.edit == false) {
-      // this.editPeriodData[0].from = '2023-9-10T13:23:44'; // todo: get get inserted date
-      // this.editPeriodData[0].to = '2023-12-21T13:23:44'; // todo: get get inserted date
-      this.editTimeSpanApi.apiEditTimeSpanIdPut(this.editPeriodData[0].id, this.editPeriodData[0]);
+      this.editTimeSpanApi
+        .apiEditTimeSpanIdPut(this.editPeriodData[0].id, this.editPeriodData[0])
+        .subscribe(_ => (this.isEditMode = false));
+    } else {
+      this.isEditMode = $event.edit;
     }
-    this.isEditMode = $event.edit;
   }
 }
