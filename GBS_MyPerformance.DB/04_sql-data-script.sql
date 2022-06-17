@@ -1,5 +1,3 @@
---TODO Einschreibeschlüssel für SchoolClasses 
-
 USE GBS_MyPerformance
 --INSERT ProfessionAreas
 INSERT INTO dbo.ProfessionAreas(Id, Name) 
