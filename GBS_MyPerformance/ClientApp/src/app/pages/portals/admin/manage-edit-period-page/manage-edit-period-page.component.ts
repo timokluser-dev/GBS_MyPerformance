@@ -9,12 +9,19 @@ import {TableDataType} from '../../../../components/table/table.component.consta
   styleUrls: ['./manage-edit-period-page.component.scss'],
 })
 export class ManageEditPeriodPageComponent implements OnInit {
-  public editPeriodData: EditTimeSpanDTO;
+  public editPeriodData: EditTimeSpanDTO[] = [
+    {
+      id: '00000000-0000-0000-0000-000000000001',
+      from: null,
+      to: null,
+    },
+  ];
 
   constructor(private editTimeSpanApi: EditTimeSpanService) {}
+
   ngOnInit() {
     this.editTimeSpanApi.apiEditTimeSpanGet().subscribe(data => {
-      this.editPeriodData = data;
+      this.editPeriodData[0] = data;
     });
   }
 
