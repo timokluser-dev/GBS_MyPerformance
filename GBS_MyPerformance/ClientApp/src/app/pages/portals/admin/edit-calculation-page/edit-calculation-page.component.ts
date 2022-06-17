@@ -17,6 +17,8 @@ export class EditCalculationPageComponent implements OnInit {
     public editActive = false;
     public initialCategoriesCount: number;
 
+    // ratings are stored in profession
+
     public _partialRoundingTypeMapping: TableMapping = {
         header: 'Rundung',
         valueKey: 'roundingType',

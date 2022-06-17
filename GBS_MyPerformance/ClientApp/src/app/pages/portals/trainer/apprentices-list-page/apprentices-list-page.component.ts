@@ -3,6 +3,7 @@ import {StudentData} from '../../../../components/students-mark-table/students-m
 import {Router} from '@angular/router';
 import {AppPortals} from '../../../../constants/app-portals.constants';
 import {data} from '../mock';
+import {CompanyService, StudentService} from 'myperformance-client';
 
 @Component({
   selector: 'app-apprentices-list-page',
@@ -16,9 +17,17 @@ export class ApprenticesListPageComponent implements OnInit {
     name: string;
   };
 
-  constructor(private router: Router) {}
+  constructor(private studentApi: StudentService, private companyApi: CompanyService, private router: Router) {}
 
   ngOnInit() {
+    // this.studentApi.apiStudentIdGet('4EA6E71F-00FD-4FC1-ADBD-58CBCF8560FB').subscribe(data => {
+    //   console.log(data);
+    // });
+
+    // this.companyApi.apiCompanyGet().subscribe(data => {
+    //   console.log(data);
+    // });
+
     try {
       const previous = JSON.parse(sessionStorage.getItem('selected-profession'));
       this.selectedProfession = previous.name

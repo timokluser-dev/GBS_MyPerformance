@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {EditTimeSpanService} from 'myperformance-client';
+import {EditTimeSpanDTO, EditTimeSpanService} from 'myperformance-client';
 import {EditClickEvent} from '../../../../components/page-title/page-title.component';
 import {TableDataType} from '../../../../components/table/table.component.constants';
 
@@ -9,15 +9,19 @@ import {TableDataType} from '../../../../components/table/table.component.consta
   styleUrls: ['./manage-edit-period-page.component.scss'],
 })
 export class ManageEditPeriodPageComponent implements OnInit {
-  public editPeriodData = [];
+  public editPeriodData: EditTimeSpanDTO[] = [
+    {
+      id: '00000000-0000-0000-0000-000000000001',
+      from: null,
+      to: null,
+    },
+  ];
 
   constructor(private editTimeSpanApi: EditTimeSpanService) {}
+
   ngOnInit() {
     this.editTimeSpanApi.apiEditTimeSpanGet().subscribe(data => {
-      this.editPeriodData.push({
-        from: data[0].from,
-        to: data[0].to,
-      });
+      this.editPeriodData[0] = data;
     });
   }
 
@@ -37,10 +41,15 @@ export class ManageEditPeriodPageComponent implements OnInit {
       inputType: 'date',
     },
   ];
-  
+
   public isEditMode = false;
 
   onEdit($event: EditClickEvent) {
+    if ($event.edit == false) {
+      // this.editPeriodData[0].from = '2023-9-10T13:23:44'; // todo: get get inserted date
+      // this.editPeriodData[0].to = '2023-12-21T13:23:44'; // todo: get get inserted date
+      this.editTimeSpanApi.apiEditTimeSpanIdPut(this.editPeriodData[0].id, this.editPeriodData[0]);
+    }
     this.isEditMode = $event.edit;
   }
 }

@@ -7,6 +7,49 @@ import {TableAction, TableActionEvent} from '../../../../components/table/table.
   styleUrls: ['./registration-requests-page.component.scss'],
 })
 export class RegistrationRequestsPageComponent implements OnInit {
+
+  public requests = [
+    // {
+    //   date: '10.12.2021',
+    //   user: {
+    //     id: '8d4c90c8-97fb-4d5c-85a5-be9303c78132',
+    //     email: 'max.mustermann@edu.gbssg.ch',
+    //   },
+    // },
+    // {
+    //   date: '10.12.2021',
+    //   user: {
+    //     id: '8d4c90c8-97fb-4d5c-85a5-be9303c78133',
+    //     email: 'max.mustermann@edu.gbssg.ch',
+    //   },
+    // },
+    // {
+    //   date: '10.12.2021',
+    //   user: {
+    //     id: '8d4c90c8-97fb-4d5c-85a5-be9303c78134',
+    //     email: 'max.mustermann@edu.gbssg.ch',
+    //   },
+    // },
+    // {
+    //   date: '10.12.2021',
+    //   user: {
+    //     id: '8d4c90c8-97fb-4d5c-85a5-be9303c78135',
+    //     email: 'max.mustermann@edu.gbssg.ch',
+    //   },
+    // },
+    // {
+    //   date: '09.12.2021',
+    //   user: {
+    //     id: '8d4c90c8-97fb-4d5c-85a5-be9303c78136',
+    //     email: 'john.doe@edu.gbssg.ch',
+    //   },
+    // },
+  ];
+
+  constructor() {}
+
+  ngOnInit() {}
+
   public tableActions: TableAction[] = [
     {
       name: 'Ablehnen',
@@ -27,43 +70,7 @@ export class RegistrationRequestsPageComponent implements OnInit {
       display: true,
     },
   ];
-  public requests = [
-    {
-      date: '10.12.2021',
-      user: {
-        id: '8d4c90c8-97fb-4d5c-85a5-be9303c78132',
-        email: 'max.mustermann@edu.gbssg.ch',
-      },
-    },
-    {
-      date: '10.12.2021',
-      user: {
-        id: '8d4c90c8-97fb-4d5c-85a5-be9303c78133',
-        email: 'max.mustermann@edu.gbssg.ch',
-      },
-    },
-    {
-      date: '10.12.2021',
-      user: {
-        id: '8d4c90c8-97fb-4d5c-85a5-be9303c78134',
-        email: 'max.mustermann@edu.gbssg.ch',
-      },
-    },
-    {
-      date: '10.12.2021',
-      user: {
-        id: '8d4c90c8-97fb-4d5c-85a5-be9303c78135',
-        email: 'max.mustermann@edu.gbssg.ch',
-      },
-    },
-    {
-      date: '09.12.2021',
-      user: {
-        id: '8d4c90c8-97fb-4d5c-85a5-be9303c78136',
-        email: 'john.doe@edu.gbssg.ch',
-      },
-    },
-  ];
+
   public requestsMapping = [
     {
       header: 'Datum',
@@ -87,9 +94,7 @@ export class RegistrationRequestsPageComponent implements OnInit {
     data: null,
   };
 
-  constructor() {}
-
-  ngOnInit() {}
+  
 
   get requestsResult(): any[] {
     return this.requests.filter(r => r.user.email.includes(this.search));
