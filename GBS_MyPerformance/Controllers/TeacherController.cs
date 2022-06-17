@@ -38,9 +38,9 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/Teacher/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Teacher>> GetByID(string id)
+        public async Task<ActionResult<ApplicationUser>> GetByID(string id)
         {
-            return (ActionResult<Teacher>)await userManager.FindByIdAsync(id);
+            return (ActionResult<ApplicationUser>)await userManager.FindByIdAsync(id);
         }
     }
      

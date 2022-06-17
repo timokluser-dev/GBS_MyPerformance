@@ -182,11 +182,11 @@ namespace GBS_MyPerformance.Data.Migrations
                     b.Property<Guid>("RatingId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("StudentApprenticeTrainerEmail")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<Guid>("StudentId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("StudentId1")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<double>("Value")
                         .HasColumnType("float");
@@ -195,7 +195,7 @@ namespace GBS_MyPerformance.Data.Migrations
 
                     b.HasIndex("RatingId");
 
-                    b.HasIndex("StudentApprenticeTrainerEmail");
+                    b.HasIndex("StudentId1");
 
                     b.ToTable("Marks");
                 });
@@ -318,7 +318,7 @@ namespace GBS_MyPerformance.Data.Migrations
                     b.Property<string>("TeacherId1")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("einschreibeSchluessel")
+                    b.Property<string>("einschreibeSchluesse")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("einschreibeschluesselCode")
@@ -350,44 +350,6 @@ namespace GBS_MyPerformance.Data.Migrations
                     b.HasIndex("ProfessionId");
 
                     b.ToTable("Semesters");
-                });
-
-            modelBuilder.Entity("GBS_MyPerformance.Models.Student", b =>
-                {
-                    b.Property<string>("ApprenticeTrainerEmail")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid?>("ApprenticeTrainerId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ApprenticeTrainerId1")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid?>("CompanyId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ProfessionId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("SchoolClassId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("ApprenticeTrainerEmail");
-
-                    b.HasIndex("ApprenticeTrainerId1");
-
-                    b.HasIndex("CompanyId");
-
-                    b.HasIndex("ProfessionId");
-
-                    b.HasIndex("SchoolClassId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("GBS_MyPerformance.Models.Subject", b =>
@@ -642,11 +604,42 @@ namespace GBS_MyPerformance.Data.Migrations
                     b.HasDiscriminator().HasValue("ApprenticeTrainer");
                 });
 
-            modelBuilder.Entity("GBS_MyPerformance.Models.Teacher", b =>
+            modelBuilder.Entity("GBS_MyPerformance.Models.Student", b =>
                 {
                     b.HasBaseType("GBS_MyPerformance.Identity.Models.ApplicationUser");
 
-                    b.ToTable("AspNetUsers");
+                    b.Property<string>("ApprenticeTrainerEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("ApprenticeTrainerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ApprenticeTrainerId1")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid?>("CompanyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProfessionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("SchoolClassId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasIndex("ApprenticeTrainerId1");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("ProfessionId");
+
+                    b.HasIndex("SchoolClassId");
+
+                    b.HasDiscriminator().HasValue("Student");
+                });
+
+            modelBuilder.Entity("GBS_MyPerformance.Models.Teacher", b =>
+                {
+                    b.HasBaseType("GBS_MyPerformance.Identity.Models.ApplicationUser");
 
                     b.HasDiscriminator().HasValue("Teacher");
                 });
@@ -693,7 +686,7 @@ namespace GBS_MyPerformance.Data.Migrations
 
                     b.HasOne("GBS_MyPerformance.Models.Student", "Student")
                         .WithMany("Marks")
-                        .HasForeignKey("StudentApprenticeTrainerEmail");
+                        .HasForeignKey("StudentId1");
                 });
 
             modelBuilder.Entity("GBS_MyPerformance.Models.Profession", b =>
@@ -749,31 +742,6 @@ namespace GBS_MyPerformance.Data.Migrations
                         .HasForeignKey("ProfessionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("GBS_MyPerformance.Models.Student", b =>
-                {
-                    b.HasOne("GBS_MyPerformance.Models.ApprenticeTrainer", "ApprenticeTrainer")
-                        .WithMany("Apprentices")
-                        .HasForeignKey("ApprenticeTrainerId1");
-
-                    b.HasOne("GBS_MyPerformance.Models.Company", "Company")
-                        .WithMany("Apprentices")
-                        .HasForeignKey("CompanyId");
-
-                    b.HasOne("GBS_MyPerformance.Models.Profession", "Profession")
-                        .WithMany("Students")
-                        .HasForeignKey("ProfessionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GBS_MyPerformance.Models.SchoolClass", "SchoolClass")
-                        .WithMany("Students")
-                        .HasForeignKey("SchoolClassId");
-
-                    b.HasOne("GBS_MyPerformance.Identity.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("GBS_MyPerformance.Models.Subject", b =>
@@ -834,6 +802,27 @@ namespace GBS_MyPerformance.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("GBS_MyPerformance.Models.Student", b =>
+                {
+                    b.HasOne("GBS_MyPerformance.Models.ApprenticeTrainer", "ApprenticeTrainer")
+                        .WithMany("Apprentices")
+                        .HasForeignKey("ApprenticeTrainerId1");
+
+                    b.HasOne("GBS_MyPerformance.Models.Company", "Company")
+                        .WithMany("Apprentices")
+                        .HasForeignKey("CompanyId");
+
+                    b.HasOne("GBS_MyPerformance.Models.Profession", "Profession")
+                        .WithMany("Students")
+                        .HasForeignKey("ProfessionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GBS_MyPerformance.Models.SchoolClass", "SchoolClass")
+                        .WithMany("Students")
+                        .HasForeignKey("SchoolClassId");
                 });
 
             modelBuilder.Entity("GBS_MyPerformance.Models.UserConfiguration", b =>

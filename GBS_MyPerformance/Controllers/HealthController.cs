@@ -7,6 +7,7 @@ namespace GBS_MyPerformance.Controllers
     [Route("api/[controller]")]
     public class HealthController : ControllerBase
     {
+        //to check if connection between frontend and backend is available
         // GET: api/Health
         [HttpGet]
         public IActionResult Get()

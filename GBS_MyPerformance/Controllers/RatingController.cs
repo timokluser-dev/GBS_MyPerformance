@@ -25,6 +25,7 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/Rating
         [HttpGet]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<IActionResult> GetRatings()
         {
             var dataObject = await _context.Set<Rating>().ToListAsync();
@@ -53,6 +54,7 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/Rating/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<Rating>> GetRating(Guid id)
         {
             var rating = await _context.Ratings.FindAsync(id);
@@ -69,6 +71,7 @@ namespace GBS_MyPerformance.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<IActionResult> PutRating(Guid id, Rating rating)
         {
             if (id != rating.Id)
@@ -101,6 +104,7 @@ namespace GBS_MyPerformance.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<Rating>> PostRating(Rating rating)
         {
             _context.Ratings.Add(rating);
@@ -111,6 +115,7 @@ namespace GBS_MyPerformance.Controllers
 
         // DELETE: api/Rating/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<Rating>> DeleteRating(Guid id)
         {
             var rating = await _context.Ratings.FindAsync(id);

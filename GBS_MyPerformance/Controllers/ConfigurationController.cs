@@ -24,6 +24,7 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/Configuration
         [HttpGet]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<IActionResult> Get()
         {
             try
@@ -44,6 +45,7 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/Configuration/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<IActionResult> GetConfiguration(Guid id)
         {
             var dataObject = await _context.Set<Configuration>().Where(n => n.Id.Equals(id)).ToListAsync();
@@ -59,6 +61,7 @@ namespace GBS_MyPerformance.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<IActionResult> Create(Configuration configuration)
         {
             if(configuration == null)
@@ -76,6 +79,7 @@ namespace GBS_MyPerformance.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<IActionResult> Update(Guid id, Configuration configuration)
         {
             if (id != configuration.Id)
@@ -118,6 +122,7 @@ namespace GBS_MyPerformance.Controllers
 
         // DELETE: api/Configuration/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var configuration = await _context.Configurations.FindAsync(id);

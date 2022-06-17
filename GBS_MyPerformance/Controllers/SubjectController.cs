@@ -25,6 +25,7 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/Subject
         [HttpGet]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<IEnumerable<Subject>>> GetSubjects()
         {
             return await _context.Subjects.ToListAsync();
@@ -32,6 +33,7 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/Subject/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<Subject>> GetSubject(Guid id)
         {
             var subject = await _context.Subjects.FindAsync(id);
@@ -48,6 +50,7 @@ namespace GBS_MyPerformance.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> PutSubject(Guid id, Subject subject)
         {
             if (id != subject.Id)
@@ -80,6 +83,7 @@ namespace GBS_MyPerformance.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<Subject>> PostSubject(Subject subject)
         {
             _context.Subjects.Add(subject);
@@ -90,6 +94,7 @@ namespace GBS_MyPerformance.Controllers
 
         // DELETE: api/Subject/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<Subject>> DeleteSubject(Guid id)
         {
             var subject = await _context.Subjects.FindAsync(id);

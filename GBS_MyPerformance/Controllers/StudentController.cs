@@ -32,7 +32,7 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/Student
         [HttpGet]
-        //[Authorize(Roles = "Student")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<List<ApplicationUser>> Get()
         {
             return (List<ApplicationUser>)await userManager.GetUsersInRoleAsync("Student");
@@ -40,24 +40,15 @@ namespace GBS_MyPerformance.Controllers
 
 
         // GET: api/Student/5
-        [HttpGet("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<ApplicationUser>> GetByID(string id)
         {
             return await userManager.FindByIdAsync(id);
         }
 
-        // GET: api/Student/GetByLehrmeisterID/id
-        [HttpGet("GetByLehrmeisterID/{id}")]
-        public async Task<ActionResult<ApplicationUser>> GetByLehrmeisterID(string id)
-        {
-            UserService userService = new UserService(_context, userManager);
-
-            return NotFound();
-
-        }
-
         // GET: api/Student/student@gbssg.ch
         [HttpGet("email/{email}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<ApplicationUser>> GetStudentByEMail(string email)
         {
            return await userManager.FindByEmailAsync(email);

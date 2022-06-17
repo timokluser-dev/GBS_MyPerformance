@@ -25,6 +25,7 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/RatingCategory
         [HttpGet]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<IEnumerable<RatingCategory>>> GetRatingCategories()
         {
             return await _context.RatingCategories.ToListAsync();
@@ -32,6 +33,7 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/RatingCategory/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<RatingCategory>> GetRatingCategory(Guid id)
         {
             var ratingCategory = await _context.RatingCategories.FindAsync(id);
@@ -48,6 +50,7 @@ namespace GBS_MyPerformance.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> PutRatingCategory(Guid id, RatingCategory ratingCategory)
         {
             if (id != ratingCategory.Id)
@@ -80,6 +83,7 @@ namespace GBS_MyPerformance.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<RatingCategory>> PostRatingCategory(RatingCategory ratingCategory)
         {
             _context.RatingCategories.Add(ratingCategory);
@@ -90,6 +94,7 @@ namespace GBS_MyPerformance.Controllers
 
         // DELETE: api/RatingCategory/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<RatingCategory>> DeleteRatingCategory(Guid id)
         {
             var ratingCategory = await _context.RatingCategories.FindAsync(id);
