@@ -13,6 +13,9 @@ const providers = [{provide: 'BASE_URL', useFactory: getBaseUrl, deps: []}];
 
 if (environment.production) {
   enableProductionMode();
+  // override console log
+  window &&
+    (window.console.log = window.console.debug = window.console.table = window.console.warn = () => {});
 }
 
 platformBrowserDynamic(providers)
