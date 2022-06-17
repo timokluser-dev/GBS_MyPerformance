@@ -12,6 +12,8 @@ services:
     restart: unless-stopped
   migrations:
     image: ghcr.io/timokluser-dev/gbs_myperformance-migrations:${APP_TAG}
+    volumes:
+      - ./appsettings.json:/app/GBS_MyPerformance/appsettings.json:ro
     networks:
       - local
       - data
@@ -23,6 +25,7 @@ services:
     image: ghcr.io/timokluser-dev/gbs_myperformance-app:${APP_TAG}
     volumes:
       - app-keys:/root/.aspnet/DataProtection-Keys
+      - ./appsettings.json:/app/appsettings.json:ro
     networks:
       - local
       - data
@@ -36,6 +39,9 @@ services:
     image: ghcr.io/timokluser-dev/gbs_myperformance-caddy:${APP_TAG}
     environment:
       - APP_HOST=${CADDY_APP_HOST}
+    volumes:
+      - caddy-data:/data
+      - caddy-config:/config
     ports:
       - "80:80"
       - "443:443"
@@ -46,8 +52,10 @@ services:
     restart: unless-stopped
 
 volumes:
-  mssql-data: null
-  app-keys: null
+  mssql-data: {}
+  app-keys: {}
+  caddy-data: {}
+  caddy-config: {}
 
 networks:
   public:

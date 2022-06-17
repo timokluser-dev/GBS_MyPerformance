@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using GBS_MyPerformance.Identity.Models;
 
 namespace GBS_MyPerformance.Models
 {
+
     public class Teacher : ApplicationUser
     {
         /// <summary>

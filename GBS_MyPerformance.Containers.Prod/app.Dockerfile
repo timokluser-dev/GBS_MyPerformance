@@ -34,11 +34,24 @@ FROM mcr.microsoft.com/dotnet/aspnet:3.1.22-bullseye-slim
 WORKDIR /app
 
 LABEL org.opencontainers.image.source=https://github.com/timokluser-dev/GBS_MyPerformance
+LABEL org.opencontainers.image.description="GBS_MyPerformance: Application containing BE & FE"
+
+# install packages
+RUN apt-get update
+RUN apt-get install dos2unix -y
 
 COPY --from=build /build/GBS_MyPerformance/release ./
+# remove existing appsettings
+RUN rm -f ./appsettings*.json
+
+# add entrypoint
+COPY GBS_MyPerformance.Containers.Prod/app/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+# fix windows format errors
+RUN dos2unix /usr/local/bin/docker-entrypoint
+RUN chmod +x /usr/local/bin/docker-entrypoint
 
 ENV ASPNETCORE_ENVIRONMENT=Production
 
 EXPOSE 80
 
-ENTRYPOINT ["dotnet", "GBS_MyPerformance.dll"]
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint"]

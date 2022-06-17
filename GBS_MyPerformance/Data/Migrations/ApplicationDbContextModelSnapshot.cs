@@ -318,6 +318,12 @@ namespace GBS_MyPerformance.Data.Migrations
                     b.Property<string>("TeacherId1")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("einschreibeSchluesse")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("einschreibeschluesselCode")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProfessionAreaId");
@@ -686,7 +692,7 @@ namespace GBS_MyPerformance.Data.Migrations
             modelBuilder.Entity("GBS_MyPerformance.Models.Profession", b =>
                 {
                     b.HasOne("GBS_MyPerformance.Models.ProfessionArea", "ProfessionArea")
-                        .WithMany("Professions")
+                        .WithMany()
                         .HasForeignKey("ProfessionAreaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -719,7 +725,7 @@ namespace GBS_MyPerformance.Data.Migrations
             modelBuilder.Entity("GBS_MyPerformance.Models.SchoolClass", b =>
                 {
                     b.HasOne("GBS_MyPerformance.Models.ProfessionArea", "ProfessionArea")
-                        .WithMany("SchoolClasses")
+                        .WithMany()
                         .HasForeignKey("ProfessionAreaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

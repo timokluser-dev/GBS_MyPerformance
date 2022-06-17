@@ -25,37 +25,65 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/SchoolClass
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SchoolClass>>> GetSchoolClasses()
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
+        public async Task<IActionResult> Get()
         {
-            return await _context.SchoolClasses.ToListAsync();
+            try
+            {
+                var dataObject = await _context.Set<SchoolClass>().Include("ProfessionArea").Include("Teacher").ToListAsync();
+                if (dataObject == null || dataObject.Count == 0)
+                {
+                    return NotFound();
+                }
+
+                return Ok(dataObject);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // GET: api/SchoolClass/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<SchoolClass>> GetSchoolClass(Guid id)
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
+        public async Task<IActionResult> GetByID(Guid id)
         {
-            var schoolClass = await _context.SchoolClasses.FindAsync(id);
+            var dataObject = await _context.Set<SchoolClass>().Where(n => n.Id.Equals(id)).ToListAsync();
 
-            if (schoolClass == null)
+            if (dataObject == null)
             {
                 return NotFound();
             }
-
-            return schoolClass;
+            return Ok(dataObject);
         }
-        
-        // GET: api/SchoolClass/5/Students
-        // TODO
-        
-        // GET: api/SchoolClass/5/Student/5
-        // TODO
+
+     
+
+        // POST: api/SchoolClass
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public async Task<ActionResult<SchoolClass>> Create([FromBody]SchoolClass schoolClass)
+        {
+            if(schoolClass == null)
+            {
+                return BadRequest();
+            }
+
+            _context.SchoolClasses.Add(schoolClass);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetSchoolClass", new { id = schoolClass.Id }, schoolClass);
+        }
 
         // PUT: api/SchoolClass/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> PutSchoolClass(Guid id, SchoolClass schoolClass)
+        public async Task<IActionResult> Update(Guid id, SchoolClass schoolClass)
         {
             if (id != schoolClass.Id)
             {
@@ -83,23 +111,12 @@ namespace GBS_MyPerformance.Controllers
             return NoContent();
         }
 
-        // POST: api/SchoolClass
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        [Authorize(Roles = "Administrator")]
-        public async Task<ActionResult<SchoolClass>> PostSchoolClass(SchoolClass schoolClass)
-        {
-            _context.SchoolClasses.Add(schoolClass);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetSchoolClass", new { id = schoolClass.Id }, schoolClass);
-        }
+        
 
         // DELETE: api/SchoolClass/5
         [HttpDelete("{id}")]
         [Authorize(Roles = "Administrator")]
-        public async Task<ActionResult<SchoolClass>> DeleteSchoolClass(Guid id)
+        public async Task<ActionResult<SchoolClass>> Delete(Guid id)
         {
             var schoolClass = await _context.SchoolClasses.FindAsync(id);
             if (schoolClass == null)
@@ -110,7 +127,7 @@ namespace GBS_MyPerformance.Controllers
             _context.SchoolClasses.Remove(schoolClass);
             await _context.SaveChangesAsync();
 
-            return schoolClass;
+            return Ok();
         }
 
         private bool SchoolClassExists(Guid id)

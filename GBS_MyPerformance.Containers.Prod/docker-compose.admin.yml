@@ -1,0 +1,12 @@
+# docker-compose: admin / maintenance override
+# will expose mssql
+# -----
+# `docker-compose -f docker-compose.yml -f docker-compose.admin.yml up <args>`
+
+version: "3.4"
+services:
+  mssql:
+    networks:
+      - public
+    ports:
+      - 14331:1433

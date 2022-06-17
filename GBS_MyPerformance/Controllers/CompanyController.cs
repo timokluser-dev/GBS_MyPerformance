@@ -18,37 +18,65 @@ namespace GBS_MyPerformance.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        public CompanyController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
         // GET: api/Company
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Company>>> GetCompanies()
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
+        public async Task<IActionResult> Get()
         {
-            return await _context.Companies.ToListAsync();
+            try
+            {
+                var dataObject = await _context.Set<Company>().ToListAsync();
+                if (dataObject == null || dataObject.Count == 0)
+                {
+                    return NotFound();
+                }
+
+                return Ok(dataObject);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // GET: api/Company/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Company>> GetCompany(Guid id)
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
+        public async Task<IActionResult> GetCompany(Guid id)
         {
-            var company = await _context.Companies.FindAsync(id);
+            var dataObject = await _context.Set<Profession>().Where(n => n.Id.Equals(id)).ToListAsync();
 
-            if (company == null)
+            if (dataObject == null)
             {
-                return NotFound();
+                return BadRequest();
+            }
+            return Ok(dataObject);
+        }
+
+        // POST: api/Company
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> Create(Company company)
+        {
+            if(company == null)
+            {
+                return BadRequest();
             }
 
-            return company;
+            _context.Companies.Add(company);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetCompany", new { id = company.Id }, company);
         }
 
         // PUT: api/Company/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCompany(Guid id, Company company)
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> Update(Guid id, Company company)
         {
             if (id != company.Id)
             {
@@ -76,21 +104,12 @@ namespace GBS_MyPerformance.Controllers
             return NoContent();
         }
 
-        // POST: api/Company
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<Company>> PostCompany(Company company)
-        {
-            _context.Companies.Add(company);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetCompany", new { id = company.Id }, company);
-        }
+        
 
         // DELETE: api/Company/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Company>> DeleteCompany(Guid id)
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> Delete(Guid id)
         {
             var company = await _context.Companies.FindAsync(id);
             if (company == null)
@@ -101,7 +120,7 @@ namespace GBS_MyPerformance.Controllers
             _context.Companies.Remove(company);
             await _context.SaveChangesAsync();
 
-            return company;
+            return Ok();
         }
 
         private bool CompanyExists(Guid id)

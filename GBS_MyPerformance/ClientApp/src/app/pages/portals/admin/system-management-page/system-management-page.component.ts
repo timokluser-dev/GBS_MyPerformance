@@ -8,6 +8,18 @@ import {
 import {Router} from '@angular/router';
 import {AppRoles} from '../../../../constants/app-roles.constants';
 import {AppPortals} from '../../../../constants/app-portals.constants';
+import {
+  LoginDomainDTO,
+  LoginDomainService,
+  ProfessionAreaDTO,
+  ProfessionAreaService,
+  ProfessionDTO,
+  ProfessionService,
+  SchoolClassDTO,
+  SchoolClassService,
+  TeacherDTO,
+  TeacherService,
+} from 'myperformance-client';
 import {data} from '../mock';
 
 @Component({
@@ -19,7 +31,113 @@ export class SystemManagementPageComponent implements OnInit {
   public editActive = false;
   public tabs = ['Lehrgänge', 'Klassen', 'Registrierung'];
   public activeTab = this.tabs[0];
-  public data = data;
+
+  public data = {
+    professions: [],
+    professionArea: [],
+    classes: [],
+    teachers: [],
+    domains: [],
+  };
+  public profession: ProfessionDTO;
+  public professionArea: ProfessionAreaDTO;
+  public class: SchoolClassDTO;
+  public teacher: TeacherDTO;
+  public domain: /*LoginDomainDTO*/any;
+
+  constructor(
+    private professionApi: ProfessionService,
+    private professionAreaApi: ProfessionAreaService,
+    private schoolClassApi: SchoolClassService,
+    private teacherApi: TeacherService,
+    private loginDomainApi: LoginDomainService,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    this.professionApi.apiProfessionGet().subscribe(data => {
+      data.forEach(p => {
+        this.profession = {
+          id: p.id,
+          name: p.name,
+          diplomaRoundingType: p.diplomaRoundingType,
+          professionArea: {
+            name: p.professionArea.name,
+          },
+          professionAreaId: p.professionAreaId,
+          activeFrom: p.activeFrom.substr(0, p.activeFrom.indexOf('-')),
+          activeTo: p.activeTo.substr(0, p.activeTo.indexOf('-')),
+          students: [], //Array<StudentDTO>
+          semesters: [], // Array<SemesterDTO>
+        };
+        this.data.professions.push(this.profession);
+
+        // this.teacher {
+
+        // }
+
+        // teacher.id
+
+        this.data.teachers.push(this.teacher);
+      });
+    });
+
+    this.schoolClassApi.apiSchoolClassGet().subscribe(data => {
+      data.forEach(c => {
+        this.class = {
+          id: c.id,
+          name: c.name,
+          starting: c.starting.substr(0, c.starting.indexOf('-')),
+          ending: c.ending.substr(0, c.ending.indexOf('-')),
+          einschreibeSchluessel: c.einschreibeSchluessel,
+          professionArea: c.professionArea,
+          // todo: api should return teachers
+          teacher: {
+            firstName: "Max",
+            lastName: "Mustermann"
+          }
+        };
+        this.data.classes.push(this.class);
+      });
+    });
+
+    // maybe not needed
+    this.professionAreaApi.apiProfessionAreaGet().subscribe(data => {
+      console.log(data);
+      data.forEach(c => {
+        console.log(c);
+        this.professionArea = {};
+        this.data.professionArea.push(this.professionArea);
+      });
+    });
+
+    // this.teacherApi.apiTeacherGet().subscribe(data => {
+    //   console.log('teacher request1');
+    //   console.log(data);
+    //   // data.forEach(c => {
+    //   //   this.domain = {
+
+    //   //   };
+    //   //   this.data.domains.push(this.domain);
+    //   // });
+    // });
+
+    this.loginDomainApi.apiLoginDomainGet().subscribe(data => {
+      data.forEach(d => {
+        this.domain = {
+          id: d.id,
+          domain: d.domain,
+        };
+        switch (d.role) {
+          case 1: this.domain.role = 'Teacher'; break;
+          case 2: this.domain.role = 'Trainer'; break;
+          case 3: this.domain.role = 'Student'; break;
+          case 4: this.domain.role = 'Administrator'; break;
+        }
+        this.data.domains.push(this.domain);
+      });
+    });
+  }
 
   //#region Professions Table
   public professionsMapping: TableMapping[] = [
@@ -80,7 +198,7 @@ export class SystemManagementPageComponent implements OnInit {
     },
     {
       header: 'Beruf',
-      valueKey: 'profession.name',
+      valueKey: 'professionArea.name',
       editable: true,
       type: TableDataType.STRING,
       lookup: [...this.data.professions.map(p => ({name: p.name, value: p.name}))],
@@ -99,7 +217,7 @@ export class SystemManagementPageComponent implements OnInit {
     },
     {
       header: 'Einschreibeschlüssel',
-      valueKey: 'key',
+      valueKey: 'einschreibeSchluessel',
       editable: true,
       type: TableDataType.STRING,
     },
@@ -111,7 +229,7 @@ export class SystemManagementPageComponent implements OnInit {
     },
     {
       header: 'Klassen-Lehrperson',
-      valueKey: 'teacher.fullName',
+      valueKey: 'teacher.lastName',
       editable: true,
       type: TableDataType.STRING,
       lookup: [...this.data.teachers.map(t => ({name: t.fullName, value: t.fullName}))],
@@ -153,12 +271,9 @@ export class SystemManagementPageComponent implements OnInit {
   // enum mapping
   public appRoles = AppRoles;
 
-  constructor(private router: Router) {}
-
-  ngOnInit() {}
-
   getDomainsForRole(role: AppRoles): any[] {
-    return this.data.domains.filter(d => d.forRole === role);
+    // console.log(this.data.domains.filter(d => d.forRole === role));
+    return this.data.domains.filter(d => d.role === role);
   }
 
   get professionsData(): any[] {

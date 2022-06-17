@@ -1,15 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.810.14
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GBS_MyPerformance", "GBS_MyPerformance.csproj", "{CBC96FAE-DE1B-4B2B-925C-FE8A8EDE5B61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GBS_MyPerformance", "GBS_MyPerformance.csproj", "{CBC96FAE-DE1B-4B2B-925C-FE8A8EDE5B61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GBS_MyPerformance.Tests", "..\GBS_MyPerformance.Tests\GBS_MyPerformance.Tests.csproj", "{3867C001-A5CF-4DC3-976A-B5D77361B618}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GBS_MyPerformance.Tests", "..\GBS_MyPerformance.Tests\GBS_MyPerformance.Tests.csproj", "{3867C001-A5CF-4DC3-976A-B5D77361B618}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "GBS_MyPerformance.Models", "..\GBS_MyPerformance.Models\GBS_MyPerformance.Models.shproj", "{6EA7CA07-92DC-4FB6-8CA9-532279BA0229}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\GBS_MyPerformance.Models\GBS_MyPerformance.Models.projitems*{3867c001-a5cf-4dc3-976a-b5d77361b618}*SharedItemsImports = 5
+		..\GBS_MyPerformance.Models\GBS_MyPerformance.Models.projitems*{6ea7ca07-92dc-4fb6-8ca9-532279ba0229}*SharedItemsImports = 13
+		..\GBS_MyPerformance.Models\GBS_MyPerformance.Models.projitems*{cbc96fae-de1b-4b2b-925c-fe8a8ede5b61}*SharedItemsImports = 5
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

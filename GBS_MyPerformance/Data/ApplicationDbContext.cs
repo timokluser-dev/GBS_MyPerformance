@@ -21,6 +21,11 @@ namespace GBS_MyPerformance.Data
         public DbSet<SchoolClass> SchoolClasses { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Student> Students { get; set; }
+
+       // public DbSet<AspNetUsers> AspNetUsers { get; set; }
+       public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+        
         public DbSet<Company> Companies { get; set; }
         public DbSet<ApprenticeTrainer> ApprenticeTrainers { get; set; }
         public DbSet<Subject> Subjects { get; set; }
@@ -40,5 +45,17 @@ namespace GBS_MyPerformance.Data
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+        }
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    //Changing Database table name to Metadata
+        //    modelBuilder.Entity<Teacher>()
+        //        .ToTable("AspNetUsers");
+        //}
     }
 }

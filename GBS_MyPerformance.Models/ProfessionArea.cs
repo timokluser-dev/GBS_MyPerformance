@@ -16,11 +16,11 @@ namespace GBS_MyPerformance.Models
         /// <summary>
         /// all professions to this area
         /// </summary>
-        public List<Profession> Professions { get; set; }
+        //public List<Profession> Professions { get; set; }
         /// <summary>
         /// all school classes corresponding to this area
         /// </summary>
-        public List<SchoolClass> SchoolClasses { get; set; }
+        //public List<SchoolClass> SchoolClasses { get; set; }
         /// <summary>
         /// all subjects for this area
         /// </summary>

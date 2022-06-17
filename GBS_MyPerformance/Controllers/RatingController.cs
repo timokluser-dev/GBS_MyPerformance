@@ -25,13 +25,36 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/Rating
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Rating>>> GetRatings()
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
+        public async Task<IActionResult> GetRatings()
         {
-            return await _context.Ratings.ToListAsync();
+            var dataObject = await _context.Set<Rating>().ToListAsync();
+            if(dataObject == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(dataObject);
         }
+
+        ////Get: api/Rating/ByStudentID/5
+        //[HttpGet("ByStudentID{studentid}")]
+        //public async Task<IActionResult> GetByStudentID(Guid studentid)
+        //{
+        //    var dataObject = await _context.Set<Rating>().Where(n => n..Equals(id)).Include("ProfessionArea").ToListAsync();
+
+        //    if (dataObject == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(dataObject);
+        //}
+
+
 
         // GET: api/Rating/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<Rating>> GetRating(Guid id)
         {
             var rating = await _context.Ratings.FindAsync(id);
@@ -48,6 +71,7 @@ namespace GBS_MyPerformance.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<IActionResult> PutRating(Guid id, Rating rating)
         {
             if (id != rating.Id)
@@ -80,6 +104,7 @@ namespace GBS_MyPerformance.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<Rating>> PostRating(Rating rating)
         {
             _context.Ratings.Add(rating);
@@ -90,6 +115,7 @@ namespace GBS_MyPerformance.Controllers
 
         // DELETE: api/Rating/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<Rating>> DeleteRating(Guid id)
         {
             var rating = await _context.Ratings.FindAsync(id);

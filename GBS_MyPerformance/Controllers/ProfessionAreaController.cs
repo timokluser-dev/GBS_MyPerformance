@@ -26,23 +26,55 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/ProfessionArea
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProfessionArea>>> GetProfessionAreas()
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
+        public async Task<IActionResult> Get()
         {
-            return await _context.ProfessionAreas.ToListAsync();
+            try
+            {
+                var dataObject = await _context.Set<ProfessionArea>().ToListAsync();
+                if (dataObject == null || dataObject.Count == 0)
+                {
+                    return NotFound();
+                }
+
+                return Ok(dataObject);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        // GET: api/ProfessionArea/5
+        // GET: api/Profession/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProfessionArea>> GetProfessionArea(Guid id)
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
+        public async Task<IActionResult> GetProfessionArea(Guid id)
         {
-            var professionArea = await _context.ProfessionAreas.FindAsync(id);
+            var dataObject = await _context.Set<ProfessionArea>().Where(n => n.Id.Equals(id)).ToListAsync();
 
-            if (professionArea == null)
+            if (dataObject == null)
             {
                 return NotFound();
             }
+            return Ok(dataObject);
+        }
 
-            return professionArea;
+        // POST: api/ProfessionArea
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> Create(ProfessionArea professionArea)
+        {
+            if(professionArea == null)
+            {
+                return BadRequest();
+            }
+
+            _context.ProfessionAreas.Add(professionArea);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetProfessionArea", new { id = professionArea.Id }, professionArea);
         }
 
         // PUT: api/ProfessionArea/5
@@ -50,7 +82,7 @@ namespace GBS_MyPerformance.Controllers
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> PutProfessionArea(Guid id, ProfessionArea professionArea)
+        public async Task<IActionResult> Update(Guid id, ProfessionArea professionArea)
         {
             if (id != professionArea.Id)
             {
@@ -78,23 +110,12 @@ namespace GBS_MyPerformance.Controllers
             return NoContent();
         }
 
-        // POST: api/ProfessionArea
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        [Authorize(Roles = "Administrator")]
-        public async Task<ActionResult<ProfessionArea>> PostProfessionArea(ProfessionArea professionArea)
-        {
-            _context.ProfessionAreas.Add(professionArea);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetProfessionArea", new { id = professionArea.Id }, professionArea);
-        }
+        
 
         // DELETE: api/ProfessionArea/5
         [HttpDelete("{id}")]
         [Authorize(Roles = "Administrator")]
-        public async Task<ActionResult<ProfessionArea>> DeleteProfessionArea(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             var professionArea = await _context.ProfessionAreas.FindAsync(id);
             if (professionArea == null)
@@ -105,7 +126,7 @@ namespace GBS_MyPerformance.Controllers
             _context.ProfessionAreas.Remove(professionArea);
             await _context.SaveChangesAsync();
 
-            return professionArea;
+            return Ok();
         }
 
         private bool ProfessionAreaExists(Guid id)
