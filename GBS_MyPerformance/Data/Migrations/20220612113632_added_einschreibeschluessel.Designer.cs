@@ -4,14 +4,16 @@ using GBS_MyPerformance.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GBS_MyPerformance.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220612113632_added_einschreibeschluessel")]
+    partial class added_einschreibeschluessel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -318,9 +320,6 @@ namespace GBS_MyPerformance.Data.Migrations
                     b.Property<string>("TeacherId1")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("einschreibeSchluesse")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("einschreibeschluesselCode")
                         .HasColumnType("nvarchar(max)");
 
@@ -601,6 +600,8 @@ namespace GBS_MyPerformance.Data.Migrations
                 {
                     b.HasBaseType("GBS_MyPerformance.Identity.Models.ApplicationUser");
 
+                    b.ToTable("AspNetUsers");
+
                     b.HasDiscriminator().HasValue("ApprenticeTrainer");
                 });
 
@@ -634,12 +635,16 @@ namespace GBS_MyPerformance.Data.Migrations
 
                     b.HasIndex("SchoolClassId");
 
+                    b.ToTable("AspNetUsers");
+
                     b.HasDiscriminator().HasValue("Student");
                 });
 
             modelBuilder.Entity("GBS_MyPerformance.Models.Teacher", b =>
                 {
                     b.HasBaseType("GBS_MyPerformance.Identity.Models.ApplicationUser");
+
+                    b.ToTable("AspNetUsers");
 
                     b.HasDiscriminator().HasValue("Teacher");
                 });
@@ -692,7 +697,7 @@ namespace GBS_MyPerformance.Data.Migrations
             modelBuilder.Entity("GBS_MyPerformance.Models.Profession", b =>
                 {
                     b.HasOne("GBS_MyPerformance.Models.ProfessionArea", "ProfessionArea")
-                        .WithMany()
+                        .WithMany("Professions")
                         .HasForeignKey("ProfessionAreaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -725,7 +730,7 @@ namespace GBS_MyPerformance.Data.Migrations
             modelBuilder.Entity("GBS_MyPerformance.Models.SchoolClass", b =>
                 {
                     b.HasOne("GBS_MyPerformance.Models.ProfessionArea", "ProfessionArea")
-                        .WithMany()
+                        .WithMany("SchoolClasses")
                         .HasForeignKey("ProfessionAreaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

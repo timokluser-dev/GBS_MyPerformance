@@ -10,6 +10,8 @@ npm run docker:down
 
 npm run docker:up
 
+npm run db:migrate
+
 nvm use
 
 npm i

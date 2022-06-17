@@ -19,8 +19,8 @@ import { SemesterService } from './api/semester.service';
 import { SemesterRatingService } from './api/semesterRating.service';
 import { StudentService } from './api/student.service';
 import { SubjectService } from './api/subject.service';
+import { TeacherService } from './api/teacher.service';
 import { UserConfigurationService } from './api/userConfiguration.service';
-import { WeatherForecastService } from './api/weatherForecast.service';
 
 @NgModule({
   imports:      [],
@@ -43,8 +43,8 @@ import { WeatherForecastService } from './api/weatherForecast.service';
     SemesterRatingService,
     StudentService,
     SubjectService,
-    UserConfigurationService,
-    WeatherForecastService ]
+    TeacherService,
+    UserConfigurationService ]
 })
 export class ApiModule {
     public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders<ApiModule> {

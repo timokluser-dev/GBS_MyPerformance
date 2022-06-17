@@ -18,6 +18,8 @@ export interface SchoolClassDTO {
     name?: string;
     starting?: Date;
     ending?: Date;
+    einschreibeschluesselCode?: string;
+    einschreibeSchluessel?: string;
     students?: Array<StudentDTO>;
     teacherId?: string;
     teacher?: TeacherDTO;

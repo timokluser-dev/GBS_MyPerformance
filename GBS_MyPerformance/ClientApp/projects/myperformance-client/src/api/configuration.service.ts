@@ -61,18 +61,15 @@ export class ConfigurationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiConfigurationGet(observe?: 'body', reportProgress?: boolean): Observable<Array<ConfigurationDTO>>;
-    public apiConfigurationGet(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<ConfigurationDTO>>>;
-    public apiConfigurationGet(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<ConfigurationDTO>>>;
+    public apiConfigurationGet(observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiConfigurationGet(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiConfigurationGet(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public apiConfigurationGet(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -83,7 +80,7 @@ export class ConfigurationService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<ConfigurationDTO>>('get',`${this.basePath}/api/Configuration`,
+        return this.httpClient.request<any>('get',`${this.basePath}/api/Configuration`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -100,9 +97,9 @@ export class ConfigurationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiConfigurationIdDelete(id: string, observe?: 'body', reportProgress?: boolean): Observable<ConfigurationDTO>;
-    public apiConfigurationIdDelete(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ConfigurationDTO>>;
-    public apiConfigurationIdDelete(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ConfigurationDTO>>;
+    public apiConfigurationIdDelete(id: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiConfigurationIdDelete(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiConfigurationIdDelete(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public apiConfigurationIdDelete(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
@@ -113,9 +110,6 @@ export class ConfigurationService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -126,7 +120,7 @@ export class ConfigurationService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<ConfigurationDTO>('delete',`${this.basePath}/api/Configuration/${encodeURIComponent(String(id))}`,
+        return this.httpClient.request<any>('delete',`${this.basePath}/api/Configuration/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -143,9 +137,9 @@ export class ConfigurationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiConfigurationIdGet(id: string, observe?: 'body', reportProgress?: boolean): Observable<ConfigurationDTO>;
-    public apiConfigurationIdGet(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ConfigurationDTO>>;
-    public apiConfigurationIdGet(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ConfigurationDTO>>;
+    public apiConfigurationIdGet(id: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiConfigurationIdGet(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiConfigurationIdGet(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public apiConfigurationIdGet(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
@@ -156,9 +150,6 @@ export class ConfigurationService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -169,7 +160,7 @@ export class ConfigurationService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<ConfigurationDTO>('get',`${this.basePath}/api/Configuration/${encodeURIComponent(String(id))}`,
+        return this.httpClient.request<any>('get',`${this.basePath}/api/Configuration/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -209,6 +200,7 @@ export class ConfigurationService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
+            'application/json-patch+json',
             'application/json',
             'text/json',
             'application/_*+json'
@@ -236,9 +228,9 @@ export class ConfigurationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiConfigurationPost(body?: ConfigurationDTO, observe?: 'body', reportProgress?: boolean): Observable<ConfigurationDTO>;
-    public apiConfigurationPost(body?: ConfigurationDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ConfigurationDTO>>;
-    public apiConfigurationPost(body?: ConfigurationDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ConfigurationDTO>>;
+    public apiConfigurationPost(body?: ConfigurationDTO, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiConfigurationPost(body?: ConfigurationDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiConfigurationPost(body?: ConfigurationDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public apiConfigurationPost(body?: ConfigurationDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
@@ -246,9 +238,6 @@ export class ConfigurationService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -257,6 +246,7 @@ export class ConfigurationService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
+            'application/json-patch+json',
             'application/json',
             'text/json',
             'application/_*+json'
@@ -266,7 +256,7 @@ export class ConfigurationService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<ConfigurationDTO>('post',`${this.basePath}/api/Configuration`,
+        return this.httpClient.request<any>('post',`${this.basePath}/api/Configuration`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,

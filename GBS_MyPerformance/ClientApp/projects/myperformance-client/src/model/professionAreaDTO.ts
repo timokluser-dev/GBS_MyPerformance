@@ -9,14 +9,10 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { ProfessionDTO } from './professionDTO';
-import { SchoolClassDTO } from './schoolClassDTO';
 import { SubjectDTO } from './subjectDTO';
 
 export interface ProfessionAreaDTO { 
     id?: string;
     name?: string;
-    professions?: Array<ProfessionDTO>;
-    schoolClasses?: Array<SchoolClassDTO>;
     subjects?: Array<SubjectDTO>;
 }

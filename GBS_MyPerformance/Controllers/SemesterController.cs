@@ -25,13 +25,14 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/Semester
         [HttpGet]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<IEnumerable<Semester>>> GetSemesters()
         {
             return await _context.Semesters.ToListAsync();
         }
 
         // GET: api/Semester/5
-        [HttpGet("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<Semester>> GetSemester(Guid id)
         {
             var semester = await _context.Semesters.FindAsync(id);
@@ -48,6 +49,7 @@ namespace GBS_MyPerformance.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> PutSemester(Guid id, Semester semester)
         {
             if (id != semester.Id)
@@ -80,6 +82,7 @@ namespace GBS_MyPerformance.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<Semester>> PostSemester(Semester semester)
         {
             _context.Semesters.Add(semester);
@@ -90,6 +93,7 @@ namespace GBS_MyPerformance.Controllers
 
         // DELETE: api/Semester/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<Semester>> DeleteSemester(Guid id)
         {
             var semester = await _context.Semesters.FindAsync(id);

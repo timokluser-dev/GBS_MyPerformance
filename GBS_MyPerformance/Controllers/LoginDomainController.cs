@@ -25,6 +25,7 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/LoginDomain
         [HttpGet]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<IEnumerable<LoginDomain>>> GetLoginDomains()
         {
             return await _context.LoginDomains.ToListAsync();
@@ -32,6 +33,7 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/LoginDomain/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<LoginDomain>> GetLoginDomain(Guid id)
         {
             var loginDomain = await _context.LoginDomains.FindAsync(id);
@@ -48,6 +50,7 @@ namespace GBS_MyPerformance.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> PutLoginDomain(Guid id, LoginDomain loginDomain)
         {
             if (id != loginDomain.Id)
@@ -80,6 +83,7 @@ namespace GBS_MyPerformance.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<LoginDomain>> PostLoginDomain(LoginDomain loginDomain)
         {
             _context.LoginDomains.Add(loginDomain);
@@ -90,6 +94,7 @@ namespace GBS_MyPerformance.Controllers
 
         // DELETE: api/LoginDomain/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<LoginDomain>> DeleteLoginDomain(Guid id)
         {
             var loginDomain = await _context.LoginDomains.FindAsync(id);

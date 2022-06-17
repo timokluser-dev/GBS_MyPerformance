@@ -61,18 +61,15 @@ export class EditTimeSpanService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiEditTimeSpanGet(observe?: 'body', reportProgress?: boolean): Observable<Array<EditTimeSpanDTO>>;
-    public apiEditTimeSpanGet(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<EditTimeSpanDTO>>>;
-    public apiEditTimeSpanGet(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<EditTimeSpanDTO>>>;
+    public apiEditTimeSpanGet(observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiEditTimeSpanGet(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiEditTimeSpanGet(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public apiEditTimeSpanGet(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -83,7 +80,7 @@ export class EditTimeSpanService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<EditTimeSpanDTO>>('get',`${this.basePath}/api/EditTimeSpan`,
+        return this.httpClient.request<any>('get',`${this.basePath}/api/EditTimeSpan`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -100,9 +97,9 @@ export class EditTimeSpanService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiEditTimeSpanIdDelete(id: string, observe?: 'body', reportProgress?: boolean): Observable<EditTimeSpanDTO>;
-    public apiEditTimeSpanIdDelete(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<EditTimeSpanDTO>>;
-    public apiEditTimeSpanIdDelete(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<EditTimeSpanDTO>>;
+    public apiEditTimeSpanIdDelete(id: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiEditTimeSpanIdDelete(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiEditTimeSpanIdDelete(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public apiEditTimeSpanIdDelete(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
@@ -113,9 +110,6 @@ export class EditTimeSpanService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -126,50 +120,7 @@ export class EditTimeSpanService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<EditTimeSpanDTO>('delete',`${this.basePath}/api/EditTimeSpan/${encodeURIComponent(String(id))}`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * 
-     * 
-     * @param id 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public apiEditTimeSpanIdGet(id: string, observe?: 'body', reportProgress?: boolean): Observable<EditTimeSpanDTO>;
-    public apiEditTimeSpanIdGet(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<EditTimeSpanDTO>>;
-    public apiEditTimeSpanIdGet(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<EditTimeSpanDTO>>;
-    public apiEditTimeSpanIdGet(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling apiEditTimeSpanIdGet.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<EditTimeSpanDTO>('get',`${this.basePath}/api/EditTimeSpan/${encodeURIComponent(String(id))}`,
+        return this.httpClient.request<any>('delete',`${this.basePath}/api/EditTimeSpan/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -209,6 +160,7 @@ export class EditTimeSpanService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
+            'application/json-patch+json',
             'application/json',
             'text/json',
             'application/_*+json'
@@ -236,9 +188,9 @@ export class EditTimeSpanService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiEditTimeSpanPost(body?: EditTimeSpanDTO, observe?: 'body', reportProgress?: boolean): Observable<EditTimeSpanDTO>;
-    public apiEditTimeSpanPost(body?: EditTimeSpanDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<EditTimeSpanDTO>>;
-    public apiEditTimeSpanPost(body?: EditTimeSpanDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<EditTimeSpanDTO>>;
+    public apiEditTimeSpanPost(body?: EditTimeSpanDTO, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiEditTimeSpanPost(body?: EditTimeSpanDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiEditTimeSpanPost(body?: EditTimeSpanDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public apiEditTimeSpanPost(body?: EditTimeSpanDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
@@ -246,9 +198,6 @@ export class EditTimeSpanService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -257,6 +206,7 @@ export class EditTimeSpanService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
+            'application/json-patch+json',
             'application/json',
             'text/json',
             'application/_*+json'
@@ -266,7 +216,7 @@ export class EditTimeSpanService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<EditTimeSpanDTO>('post',`${this.basePath}/api/EditTimeSpan`,
+        return this.httpClient.request<any>('post',`${this.basePath}/api/EditTimeSpan`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,

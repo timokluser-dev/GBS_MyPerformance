@@ -61,18 +61,15 @@ export class SchoolClassService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiSchoolClassGet(observe?: 'body', reportProgress?: boolean): Observable<Array<SchoolClassDTO>>;
-    public apiSchoolClassGet(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<SchoolClassDTO>>>;
-    public apiSchoolClassGet(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<SchoolClassDTO>>>;
+    public apiSchoolClassGet(observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiSchoolClassGet(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiSchoolClassGet(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public apiSchoolClassGet(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -83,7 +80,7 @@ export class SchoolClassService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<SchoolClassDTO>>('get',`${this.basePath}/api/SchoolClass`,
+        return this.httpClient.request<any>('get',`${this.basePath}/api/SchoolClass`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -143,9 +140,9 @@ export class SchoolClassService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiSchoolClassIdGet(id: string, observe?: 'body', reportProgress?: boolean): Observable<SchoolClassDTO>;
-    public apiSchoolClassIdGet(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SchoolClassDTO>>;
-    public apiSchoolClassIdGet(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SchoolClassDTO>>;
+    public apiSchoolClassIdGet(id: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiSchoolClassIdGet(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiSchoolClassIdGet(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public apiSchoolClassIdGet(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
@@ -156,9 +153,6 @@ export class SchoolClassService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -169,7 +163,7 @@ export class SchoolClassService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<SchoolClassDTO>('get',`${this.basePath}/api/SchoolClass/${encodeURIComponent(String(id))}`,
+        return this.httpClient.request<any>('get',`${this.basePath}/api/SchoolClass/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -209,6 +203,7 @@ export class SchoolClassService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
+            'application/json-patch+json',
             'application/json',
             'text/json',
             'application/_*+json'
@@ -221,6 +216,46 @@ export class SchoolClassService {
         return this.httpClient.request<any>('put',`${this.basePath}/api/SchoolClass/${encodeURIComponent(String(id))}`,
             {
                 body: body,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public apiSchoolClassIdStudentsGet(id: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiSchoolClassIdStudentsGet(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiSchoolClassIdStudentsGet(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public apiSchoolClassIdStudentsGet(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling apiSchoolClassIdStudentsGet.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<any>('get',`${this.basePath}/api/SchoolClass/${encodeURIComponent(String(id))}/Students`,
+            {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -257,6 +292,7 @@ export class SchoolClassService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
+            'application/json-patch+json',
             'application/json',
             'text/json',
             'application/_*+json'

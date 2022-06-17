@@ -61,18 +61,15 @@ export class RatingService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiRatingGet(observe?: 'body', reportProgress?: boolean): Observable<Array<RatingDTO>>;
-    public apiRatingGet(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<RatingDTO>>>;
-    public apiRatingGet(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<RatingDTO>>>;
+    public apiRatingGet(observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiRatingGet(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiRatingGet(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public apiRatingGet(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -83,7 +80,7 @@ export class RatingService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<RatingDTO>>('get',`${this.basePath}/api/Rating`,
+        return this.httpClient.request<any>('get',`${this.basePath}/api/Rating`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -209,6 +206,7 @@ export class RatingService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
+            'application/json-patch+json',
             'application/json',
             'text/json',
             'application/_*+json'
@@ -257,6 +255,7 @@ export class RatingService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
+            'application/json-patch+json',
             'application/json',
             'text/json',
             'application/_*+json'

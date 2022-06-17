@@ -25,6 +25,7 @@ namespace GBS_MyPerformance.Controllers
 
         // GET: api/Mark/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<Mark>> GetMark(Guid id)
         {
             var mark = await _context.Marks.FindAsync(id);
@@ -37,12 +38,67 @@ namespace GBS_MyPerformance.Controllers
             return mark;
         }
 
+        // GET: api/Mark
+        [HttpGet]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
+        public async Task<IActionResult> Get()
+        {
+            var mark = await _context.Marks.ToListAsync();
+
+            if (mark == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(mark);
+        }
+
+        // GET: api/Mark/Student/5
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
+        [HttpGet("Student/{id}")]
+        public async Task<IActionResult> GetByStudentID(Guid id)
+        {
+            var dataObject = await _context.Set<Mark>().Where(n => n.StudentId.Equals(id)).ToListAsync();
+
+            if (dataObject == null || dataObject.Count() == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(dataObject);
+        }
+
+        // POST: api/Mark
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPost]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
+        public async Task<IActionResult> Create(Mark mark)
+        {
+            if(mark == null)
+            {
+                return BadRequest();
+            }
+
+            _context.Marks.Add(mark);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetMark", new { id = mark.Id }, mark);
+        }
+
+
         // PUT: api/Mark/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMark(Guid id, Mark mark)
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
+        public async Task<IActionResult> Update(Guid id, Mark mark)
         {
+            if(mark == null)
+            {
+                return BadRequest();
+            }
+            
             if (id != mark.Id)
             {
                 return BadRequest();
@@ -69,20 +125,11 @@ namespace GBS_MyPerformance.Controllers
             return NoContent();
         }
 
-        // POST: api/Mark
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<Mark>> PostMark(Mark mark)
-        {
-            _context.Marks.Add(mark);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetMark", new { id = mark.Id }, mark);
-        }
+        
 
         // DELETE: api/Mark/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
         public async Task<ActionResult<Mark>> DeleteMark(Guid id)
         {
             var mark = await _context.Marks.FindAsync(id);

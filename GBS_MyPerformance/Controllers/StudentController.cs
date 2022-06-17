@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using GBS_MyPerformance.Data;
 using GBS_MyPerformance.Models;
 using Microsoft.AspNetCore.Authorization;
+using GBS_MyPerformance.Identity.Models;
+using Microsoft.AspNetCore.Identity;
+using GBS_MyPerformance.Services;
 
 namespace GBS_MyPerformance.Controllers
 {
@@ -18,31 +21,37 @@ namespace GBS_MyPerformance.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        public StudentController(ApplicationDbContext context)
+        private readonly UserManager<ApplicationUser> userManager;
+
+
+        public StudentController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
+            this.userManager = userManager;
             _context = context;
         }
 
         // GET: api/Student
         [HttpGet]
-        [Authorize(Roles = "Student")]
-        public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
+        public async Task<List<ApplicationUser>> Get()
         {
-            return await _context.Students.Where(student => student.Email == HttpContext.User.Identity.Name).ToListAsync();
+            return (List<ApplicationUser>)await userManager.GetUsersInRoleAsync("Student");
         }
 
+
         // GET: api/Student/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Student>> GetStudent(string id)
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
+        public async Task<ActionResult<ApplicationUser>> GetByID(string id)
         {
-            var student = await _context.Students.FindAsync(id);
+            return await userManager.FindByIdAsync(id);
+        }
 
-            if (student == null)
-            {
-                return NotFound();
-            }
-
-            return student;
+        // GET: api/Student/student@gbssg.ch
+        [HttpGet("email/{email}")]
+        [Authorize(Roles = "Student,Trainer, Administrator, Teacher")]
+        public async Task<ActionResult<ApplicationUser>> GetStudentByEMail(string email)
+        {
+           return await userManager.FindByEmailAsync(email);
         }
 
         // PUT: api/Student/5

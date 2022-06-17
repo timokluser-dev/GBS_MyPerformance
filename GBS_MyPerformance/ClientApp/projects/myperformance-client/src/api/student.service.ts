@@ -17,6 +17,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
+import { ApplicationUserDTO } from '../model/applicationUserDTO';
 import { StudentDTO } from '../model/studentDTO';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -58,12 +59,55 @@ export class StudentService {
     /**
      * 
      * 
+     * @param email 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiStudentGet(observe?: 'body', reportProgress?: boolean): Observable<Array<StudentDTO>>;
-    public apiStudentGet(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<StudentDTO>>>;
-    public apiStudentGet(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<StudentDTO>>>;
+    public apiStudentEmailEmailGet(email: string, observe?: 'body', reportProgress?: boolean): Observable<ApplicationUserDTO>;
+    public apiStudentEmailEmailGet(email: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ApplicationUserDTO>>;
+    public apiStudentEmailEmailGet(email: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ApplicationUserDTO>>;
+    public apiStudentEmailEmailGet(email: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (email === null || email === undefined) {
+            throw new Error('Required parameter email was null or undefined when calling apiStudentEmailEmailGet.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'text/plain',
+            'application/json',
+            'text/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<ApplicationUserDTO>('get',`${this.basePath}/api/Student/email/${encodeURIComponent(String(email))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public apiStudentGet(observe?: 'body', reportProgress?: boolean): Observable<Array<ApplicationUserDTO>>;
+    public apiStudentGet(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<ApplicationUserDTO>>>;
+    public apiStudentGet(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<ApplicationUserDTO>>>;
     public apiStudentGet(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -83,7 +127,50 @@ export class StudentService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<StudentDTO>>('get',`${this.basePath}/api/Student`,
+        return this.httpClient.request<Array<ApplicationUserDTO>>('get',`${this.basePath}/api/Student`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public apiStudentGetByLehrmeisterIDIdGet(id: string, observe?: 'body', reportProgress?: boolean): Observable<ApplicationUserDTO>;
+    public apiStudentGetByLehrmeisterIDIdGet(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ApplicationUserDTO>>;
+    public apiStudentGetByLehrmeisterIDIdGet(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ApplicationUserDTO>>;
+    public apiStudentGetByLehrmeisterIDIdGet(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling apiStudentGetByLehrmeisterIDIdGet.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'text/plain',
+            'application/json',
+            'text/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<ApplicationUserDTO>('get',`${this.basePath}/api/Student/GetByLehrmeisterID/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -143,9 +230,9 @@ export class StudentService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiStudentIdGet(id: string, observe?: 'body', reportProgress?: boolean): Observable<StudentDTO>;
-    public apiStudentIdGet(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<StudentDTO>>;
-    public apiStudentIdGet(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<StudentDTO>>;
+    public apiStudentIdGet(id: string, observe?: 'body', reportProgress?: boolean): Observable<ApplicationUserDTO>;
+    public apiStudentIdGet(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ApplicationUserDTO>>;
+    public apiStudentIdGet(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ApplicationUserDTO>>;
     public apiStudentIdGet(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
@@ -169,7 +256,7 @@ export class StudentService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<StudentDTO>('get',`${this.basePath}/api/Student/${encodeURIComponent(String(id))}`,
+        return this.httpClient.request<ApplicationUserDTO>('get',`${this.basePath}/api/Student/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -209,6 +296,7 @@ export class StudentService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
+            'application/json-patch+json',
             'application/json',
             'text/json',
             'application/_*+json'
@@ -257,6 +345,7 @@ export class StudentService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
+            'application/json-patch+json',
             'application/json',
             'text/json',
             'application/_*+json'

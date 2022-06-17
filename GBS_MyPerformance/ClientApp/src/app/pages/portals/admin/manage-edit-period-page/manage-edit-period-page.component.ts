@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {EditTimeSpanDTO, EditTimeSpanService} from 'myperformance-client';
 import {EditClickEvent} from '../../../../components/page-title/page-title.component';
 import {TableDataType} from '../../../../components/table/table.component.constants';
 
@@ -8,6 +9,16 @@ import {TableDataType} from '../../../../components/table/table.component.consta
   styleUrls: ['./manage-edit-period-page.component.scss'],
 })
 export class ManageEditPeriodPageComponent implements OnInit {
+  public editPeriodData: EditTimeSpanDTO[] = [];
+
+  constructor(private editTimeSpanApi: EditTimeSpanService) {}
+
+  ngOnInit() {
+    this.editTimeSpanApi.apiEditTimeSpanGet().subscribe(data => {
+      this.editPeriodData[0] = data[0];
+    });
+  }
+
   public editPeriodMapping = [
     {
       header: 'Von',
@@ -24,19 +35,16 @@ export class ManageEditPeriodPageComponent implements OnInit {
       inputType: 'date',
     },
   ];
-  public editPeriodData = [
-    {
-      from: '2021-12-02',
-      to: '2021-12-15',
-    },
-  ];
+
   public isEditMode = false;
 
-  constructor() {}
-
-  ngOnInit() {}
-
   onEdit($event: EditClickEvent) {
-    this.isEditMode = $event.edit;
+    if ($event.edit == false) {
+      this.editTimeSpanApi
+        .apiEditTimeSpanIdPut(this.editPeriodData[0].id, this.editPeriodData[0])
+        .subscribe(_ => (this.isEditMode = false));
+    } else {
+      this.isEditMode = $event.edit;
+    }
   }
 }

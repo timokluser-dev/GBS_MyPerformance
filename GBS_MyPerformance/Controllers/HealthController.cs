@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GBS_MyPerformance.Controllers
@@ -11,6 +7,7 @@ namespace GBS_MyPerformance.Controllers
     [Route("api/[controller]")]
     public class HealthController : ControllerBase
     {
+        //to check if connection between frontend and backend is available
         // GET: api/Health
         [HttpGet]
         public IActionResult Get()

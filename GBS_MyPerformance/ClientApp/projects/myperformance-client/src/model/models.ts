@@ -18,4 +18,3 @@ export * from './subjectDTO';
 export * from './teacherDTO';
 export * from './userConfigurationDTO';
 export * from './userRolesDTO';
-export * from './weatherForecastDTO';
